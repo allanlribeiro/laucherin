@@ -1,0 +1,782 @@
+[
+  {
+    "id": "598",
+    "name": "1. FC Union Berlin",
+    "league": "Alemanha"
+  },
+  {
+    "id": "131",
+    "name": "Bayer Leverkusen",
+    "league": "Alemanha"
+  },
+  {
+    "id": "132",
+    "name": "Bayern Munich",
+    "league": "Alemanha"
+  },
+  {
+    "id": "124",
+    "name": "Borussia Dortmund",
+    "league": "Alemanha"
+  },
+  {
+    "id": "268",
+    "name": "Borussia Mönchengladbach",
+    "league": "Alemanha"
+  },
+  {
+    "id": "125",
+    "name": "Eintracht Frankfurt",
+    "league": "Alemanha"
+  },
+  {
+    "id": "3841",
+    "name": "FC Augsburg",
+    "league": "Alemanha"
+  },
+  {
+    "id": "122",
+    "name": "FC Cologne",
+    "league": "Alemanha"
+  },
+  {
+    "id": "127",
+    "name": "Hamburg SV",
+    "league": "Alemanha"
+  },
+  {
+    "id": "2950",
+    "name": "Mainz",
+    "league": "Alemanha"
+  },
+  {
+    "id": "11420",
+    "name": "RB Leipzig",
+    "league": "Alemanha"
+  },
+  {
+    "id": "126",
+    "name": "SC Freiburg",
+    "league": "Alemanha"
+  },
+  {
+    "id": "3307",
+    "name": "SC Paderborn 07",
+    "league": "Alemanha"
+  },
+  {
+    "id": "10388",
+    "name": "SV Elversberg",
+    "league": "Alemanha"
+  },
+  {
+    "id": "133",
+    "name": "Schalke 04",
+    "league": "Alemanha"
+  },
+  {
+    "id": "7911",
+    "name": "TSG Hoffenheim",
+    "league": "Alemanha"
+  },
+  {
+    "id": "134",
+    "name": "VfB Stuttgart",
+    "league": "Alemanha"
+  },
+  {
+    "id": "137",
+    "name": "Werder Bremen",
+    "league": "Alemanha"
+  },
+  {
+    "id": "3458",
+    "name": "Athletico-PR",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "7632",
+    "name": "Atlético-MG",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "9967",
+    "name": "Bahia",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "6086",
+    "name": "Botafogo",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "9318",
+    "name": "Chapecoense",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "874",
+    "name": "Corinthians",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "3456",
+    "name": "Coritiba",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "2022",
+    "name": "Cruzeiro",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "819",
+    "name": "Flamengo",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "3445",
+    "name": "Fluminense",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "6273",
+    "name": "Grêmio",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "1936",
+    "name": "Internacional",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "9169",
+    "name": "Mirassol",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "2029",
+    "name": "Palmeiras",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "6079",
+    "name": "Red Bull Bragantino",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "4936",
+    "name": "Remo",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "2674",
+    "name": "Santos",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "2026",
+    "name": "São Paulo",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "3454",
+    "name": "Vasco da Gama",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "3457",
+    "name": "Vitória",
+    "league": "Brasil · Série A"
+  },
+  {
+    "id": "6154",
+    "name": "América Mineiro",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "20851",
+    "name": "Athletic",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "10357",
+    "name": "Atlético Goianiense",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "9966",
+    "name": "Avaí",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "10281",
+    "name": "Botafogo-SP",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "9970",
+    "name": "CRB",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "9969",
+    "name": "Ceará",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "9971",
+    "name": "Criciúma",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "17313",
+    "name": "Cuiabá",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "6272",
+    "name": "Fortaleza",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "3395",
+    "name": "Goiás",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "6270",
+    "name": "Juventude",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "17333",
+    "name": "Londrina",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "18127",
+    "name": "Novorizontino",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "7633",
+    "name": "Náutico",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "18187",
+    "name": "Operário PR",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "3459",
+    "name": "Ponte Preta",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "7635",
+    "name": "Sport",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "11268",
+    "name": "São Bernardo",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "131554",
+    "name": "TBD Away",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "131556",
+    "name": "TBD Home",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "9973",
+    "name": "Vila Nova",
+    "league": "Brasil · Série B"
+  },
+  {
+    "id": "96",
+    "name": "Alavés",
+    "league": "Espanha"
+  },
+  {
+    "id": "93",
+    "name": "Athletic Club",
+    "league": "Espanha"
+  },
+  {
+    "id": "1068",
+    "name": "Atlético Madrid",
+    "league": "Espanha"
+  },
+  {
+    "id": "83",
+    "name": "Barcelona",
+    "league": "Espanha"
+  },
+  {
+    "id": "85",
+    "name": "Celta Vigo",
+    "league": "Espanha"
+  },
+  {
+    "id": "90",
+    "name": "Deportivo",
+    "league": "Espanha"
+  },
+  {
+    "id": "3751",
+    "name": "Elche",
+    "league": "Espanha"
+  },
+  {
+    "id": "88",
+    "name": "Espanyol",
+    "league": "Espanha"
+  },
+  {
+    "id": "2922",
+    "name": "Getafe",
+    "league": "Espanha"
+  },
+  {
+    "id": "1538",
+    "name": "Levante",
+    "league": "Espanha"
+  },
+  {
+    "id": "99",
+    "name": "Málaga",
+    "league": "Espanha"
+  },
+  {
+    "id": "97",
+    "name": "Osasuna",
+    "league": "Espanha"
+  },
+  {
+    "id": "87",
+    "name": "Racing Santander",
+    "league": "Espanha"
+  },
+  {
+    "id": "101",
+    "name": "Rayo Vallecano",
+    "league": "Espanha"
+  },
+  {
+    "id": "244",
+    "name": "Real Betis",
+    "league": "Espanha"
+  },
+  {
+    "id": "86",
+    "name": "Real Madrid",
+    "league": "Espanha"
+  },
+  {
+    "id": "89",
+    "name": "Real Sociedad",
+    "league": "Espanha"
+  },
+  {
+    "id": "243",
+    "name": "Sevilla",
+    "league": "Espanha"
+  },
+  {
+    "id": "94",
+    "name": "Valencia",
+    "league": "Espanha"
+  },
+  {
+    "id": "102",
+    "name": "Villarreal",
+    "league": "Espanha"
+  },
+  {
+    "id": "172",
+    "name": "AJ Auxerre",
+    "league": "França"
+  },
+  {
+    "id": "174",
+    "name": "AS Monaco",
+    "league": "França"
+  },
+  {
+    "id": "7868",
+    "name": "Angers",
+    "league": "França"
+  },
+  {
+    "id": "6997",
+    "name": "Brest",
+    "league": "França"
+  },
+  {
+    "id": "3236",
+    "name": "Le Havre AC",
+    "league": "França"
+  },
+  {
+    "id": "2697",
+    "name": "Le Mans",
+    "league": "França"
+  },
+  {
+    "id": "175",
+    "name": "Lens",
+    "league": "França"
+  },
+  {
+    "id": "166",
+    "name": "Lille",
+    "league": "França"
+  },
+  {
+    "id": "273",
+    "name": "Lorient",
+    "league": "França"
+  },
+  {
+    "id": "167",
+    "name": "Lyon",
+    "league": "França"
+  },
+  {
+    "id": "176",
+    "name": "Marseille",
+    "league": "França"
+  },
+  {
+    "id": "2502",
+    "name": "Nice",
+    "league": "França"
+  },
+  {
+    "id": "6851",
+    "name": "Paris FC",
+    "league": "França"
+  },
+  {
+    "id": "160",
+    "name": "Paris Saint-Germain",
+    "league": "França"
+  },
+  {
+    "id": "169",
+    "name": "Stade Rennais",
+    "league": "França"
+  },
+  {
+    "id": "180",
+    "name": "Strasbourg",
+    "league": "França"
+  },
+  {
+    "id": "179",
+    "name": "Toulouse",
+    "league": "França"
+  },
+  {
+    "id": "170",
+    "name": "Troyes",
+    "league": "França"
+  },
+  {
+    "id": "349",
+    "name": "AFC Bournemouth",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "359",
+    "name": "Arsenal",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "362",
+    "name": "Aston Villa",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "337",
+    "name": "Brentford",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "331",
+    "name": "Brighton & Hove Albion",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "363",
+    "name": "Chelsea",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "388",
+    "name": "Coventry City",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "384",
+    "name": "Crystal Palace",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "368",
+    "name": "Everton",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "370",
+    "name": "Fulham",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "306",
+    "name": "Hull City",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "373",
+    "name": "Ipswich Town",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "357",
+    "name": "Leeds United",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "364",
+    "name": "Liverpool",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "382",
+    "name": "Manchester City",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "360",
+    "name": "Manchester United",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "361",
+    "name": "Newcastle United",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "393",
+    "name": "Nottingham Forest",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "366",
+    "name": "Sunderland",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "367",
+    "name": "Tottenham Hotspur",
+    "league": "Inglaterra"
+  },
+  {
+    "id": "103",
+    "name": "AC Milan",
+    "league": "Itália"
+  },
+  {
+    "id": "104",
+    "name": "AS Roma",
+    "league": "Itália"
+  },
+  {
+    "id": "105",
+    "name": "Atalanta",
+    "league": "Itália"
+  },
+  {
+    "id": "107",
+    "name": "Bologna",
+    "league": "Itália"
+  },
+  {
+    "id": "2925",
+    "name": "Cagliari",
+    "league": "Itália"
+  },
+  {
+    "id": "2572",
+    "name": "Como",
+    "league": "Itália"
+  },
+  {
+    "id": "109",
+    "name": "Fiorentina",
+    "league": "Itália"
+  },
+  {
+    "id": "4057",
+    "name": "Frosinone",
+    "league": "Itália"
+  },
+  {
+    "id": "3263",
+    "name": "Genoa",
+    "league": "Itália"
+  },
+  {
+    "id": "110",
+    "name": "Internazionale",
+    "league": "Itália"
+  },
+  {
+    "id": "111",
+    "name": "Juventus",
+    "league": "Itália"
+  },
+  {
+    "id": "112",
+    "name": "Lazio",
+    "league": "Itália"
+  },
+  {
+    "id": "113",
+    "name": "Lecce",
+    "league": "Itália"
+  },
+  {
+    "id": "4007",
+    "name": "Monza",
+    "league": "Itália"
+  },
+  {
+    "id": "114",
+    "name": "Napoli",
+    "league": "Itália"
+  },
+  {
+    "id": "115",
+    "name": "Parma",
+    "league": "Itália"
+  },
+  {
+    "id": "3997",
+    "name": "Sassuolo",
+    "league": "Itália"
+  },
+  {
+    "id": "239",
+    "name": "Torino",
+    "league": "Itália"
+  },
+  {
+    "id": "118",
+    "name": "Udinese",
+    "league": "Itália"
+  },
+  {
+    "id": "17530",
+    "name": "Venezia",
+    "league": "Itália"
+  },
+  {
+    "id": "21607",
+    "name": "Académico de Viseu",
+    "league": "Portugal"
+  },
+  {
+    "id": "21613",
+    "name": "Alverca",
+    "league": "Portugal"
+  },
+  {
+    "id": "15784",
+    "name": "Arouca",
+    "league": "Portugal"
+  },
+  {
+    "id": "1929",
+    "name": "Benfica",
+    "league": "Portugal"
+  },
+  {
+    "id": "2994",
+    "name": "Braga",
+    "league": "Portugal"
+  },
+  {
+    "id": "3472",
+    "name": "C.D. Nacional",
+    "league": "Portugal"
+  },
+  {
+    "id": "21581",
+    "name": "Casa Pia",
+    "league": "Portugal"
+  },
+  {
+    "id": "12216",
+    "name": "Estoril",
+    "league": "Portugal"
+  },
+  {
+    "id": "21610",
+    "name": "Estrela",
+    "league": "Portugal"
+  },
+  {
+    "id": "12698",
+    "name": "FC Famalicao",
+    "league": "Portugal"
+  },
+  {
+    "id": "437",
+    "name": "FC Porto",
+    "league": "Portugal"
+  },
+  {
+    "id": "3699",
+    "name": "Gil Vicente",
+    "league": "Portugal"
+  },
+  {
+    "id": "552",
+    "name": "Maritimo",
+    "league": "Portugal"
+  },
+  {
+    "id": "3696",
+    "name": "Moreirense",
+    "league": "Portugal"
+  },
+  {
+    "id": "3822",
+    "name": "Rio Ave",
+    "league": "Portugal"
+  },
+  {
+    "id": "12215",
+    "name": "Santa Clara",
+    "league": "Portugal"
+  },
+  {
+    "id": "2250",
+    "name": "Sporting CP",
+    "league": "Portugal"
+  },
+  {
+    "id": "5309",
+    "name": "Vitória de Guimaraes",
+    "league": "Portugal"
+  }
+]

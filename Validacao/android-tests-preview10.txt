@@ -1,0 +1,8 @@
+
+PASS Seven widgets fit their chosen grid positions and photos work offline
+PASS Agenda commits atomically without configuration or HOME restart
+PASS Hidden widgets and history leave no placeholders or broken focus
+PASS Down reveals history below apps and Up returns; apps stay visible
+PASS RAM comes from actual system memory counters
+Passed 5 widget checks.
+

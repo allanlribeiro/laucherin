@@ -1,0 +1,34 @@
+# Local development and credentials
+.git/
+.gradle/
+.kotlin/
+.android/
+.keys/
+.idea/
+__pycache__/
+.venv/
+venv/
+node_modules/
+local.properties
+keystore.properties
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.key
+*.pass
+*-password.txt
+.env
+.env.local
+.DS_Store
+# Local generated output and personal TV state
+build/
+backup/
+backups/
+shots/
+traces/
+bench-results/
+work/
+# Download archives and final installers belong in Releases.
+/Distribuicao/APKs/
+/*.zip

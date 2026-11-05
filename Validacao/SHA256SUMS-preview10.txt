@@ -1,0 +1,2 @@
+37901199e4592d891977beeb625f24ed5da80b1dd9997a9d062a2b485d7381aa  Launcherin-Android-0.1.0-preview10.apk
+aab1444a2cc5a28f6db6e2335d6c223038f2a67683f06d1d81075757ebce8dbc  Launcherin-TV-0.1.0-preview10.apk

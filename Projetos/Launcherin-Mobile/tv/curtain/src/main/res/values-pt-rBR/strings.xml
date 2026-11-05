@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="app_name">Launcherin</string>
+  <string name="caption">Launcherin</string>
+  <string name="hint">Mantenha a TV ligada. Seu telefone mostra os detalhes.</string>
+  <string name="chip">Ponto de restauração</string>
+  <string name="all_clean">Tudo limpo.</string>
+  <string name="stage_scan">Salvando um ponto de restauração...
+Pesquisa</string>
+  <string name="stage_restore_saved">Ponto de restauração salvo</string>
+  <string name="stage_off">Desativando: %1$d de %2$d...</string>
+  <string name="stage_off_group">%1$s: %2$d de %3$d...</string>
+  <string name="stage_group_done">%1$d desativado</string>
+  <string name="stage_group_done_group">%1$s desativado (%2$d)</string>
+  <string name="stage_install">Instalando a nova tela inicial</string>
+  <string name="stage_installed">Nova tela inicial instalada</string>
+  <string name="stage_finale">Mudança para casa</string>
+  <string name="group_adverts">Anúncios</string>
+  <string name="group_tracking">Rastreamento</string>
+  <string name="group_nobody">Aplicativos que ninguém pediu</string>
+  <string name="group_brand">%1$s extras</string>
+  <string name="group_brand_unknown">Extras da fabricante</string>
+  <string name="group_shop">Modo de loja e demonstração</string>
+  <string name="group_other">Outros aplicativos</string>
+</resources>

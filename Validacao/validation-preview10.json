@@ -1,0 +1,63 @@
+{
+  "version": "0.1.0-preview10",
+  "phone": {
+    "package": "app.launcherin.mobile",
+    "versionCode": 10,
+    "bytes": 7929938,
+    "sha256": "37901199e4592d891977beeb625f24ed5da80b1dd9997a9d062a2b485d7381aa",
+    "certificateSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d",
+    "signatureVerified": true,
+    "exportedComponents": 1,
+    "minSdk": 28,
+    "targetSdk": 36,
+    "permissionsUnchanged": true
+  },
+  "tv": {
+    "package": "app.launcherin.tv",
+    "versionCode": 18,
+    "bytes": 724147,
+    "sha256": "aab1444a2cc5a28f6db6e2335d6c223038f2a67683f06d1d81075757ebce8dbc",
+    "certificateSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d",
+    "signatureVerified": true,
+    "permissionsUnchanged": true,
+    "embeddedByteIdentical": true
+  },
+  "validation": {
+    "junitTests": 165,
+    "suites": {
+      "_core_flows": 89,
+      "_core_planner": 2,
+      "_core_trust": 51,
+      "_feature_launcher": 16,
+      "tvWidgetPolicy": 7
+    },
+    "failed": 0,
+    "androidInstrumentationChecks": 5,
+    "ptBRResources": 1494,
+    "ptBRContractErrors": 0,
+    "composeStability": "passed",
+    "apkSizeGate": "passed",
+    "lint": {
+      "tv": {
+        "errors": 0,
+        "warnings": 135
+      },
+      "phoneLauncher": {
+        "errors": 0,
+        "warnings": 8
+      },
+      "phoneUi": {
+        "errors": 0,
+        "warnings": 11
+      }
+    }
+  },
+  "hardware": {
+    "physicalTclTested": false,
+    "emulator": "Android API28",
+    "phoneUi": "Robolectric API35",
+    "officialMusicAfterClose": "pending physical test",
+    "googlePhotosIdle": "pending physical test"
+  },
+  "publication": "local artifacts only; no commit, push or external publication"
+}

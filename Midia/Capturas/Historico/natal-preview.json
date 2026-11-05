@@ -1,0 +1,30 @@
+{
+  "status": "initial_preview_approved_and_implemented_in_preview3",
+  "native_emulator_capture": true,
+  "demonstration_content": true,
+  "theme": "christmas",
+  "elements": [
+    "widgets",
+    "continue_watching",
+    "apps"
+  ],
+  "decorations": [
+    "santa_hats",
+    "warm_string_lights",
+    "snowmen",
+    "gifts"
+  ],
+  "wallpaper": "user-approved Christmas cats image; preview only",
+  "apps_clipped_to_dock": true,
+  "scroll_anchors_verified_visually": true,
+  "tv_unit_tests": 327,
+  "tv_lint_errors": 0,
+  "mobile_theme_integration": "pending visual approval",
+  "new_release_apks_generated": false,
+  "screenshots": [
+    "natal-home-preview.png",
+    "natal-apps-scrolled-preview.png"
+  ],
+  "user_approved": true,
+  "latest_preview": "natal-home-preview3.png"
+}

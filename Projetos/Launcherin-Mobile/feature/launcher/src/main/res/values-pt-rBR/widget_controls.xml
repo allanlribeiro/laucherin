@@ -1,0 +1,17 @@
+<resources>
+    <string name="hub_layout">Organizar widgets</string>
+    <string name="hub_layout_desc">Mostrar, ocultar, mover e escolher tamanhos.</string>
+    <string name="hub_agenda">Agenda do dia</string>
+    <string name="hub_agenda_desc">Compromissos cadastrados no app, com envio separado.</string>
+    <string name="hub_photos">Porta-retratos</string>
+    <string name="hub_photos_desc">Carrossel de fotos escolhidas na galeria.</string>
+    <string name="hub_system">RAM e CPU</string>
+    <string name="hub_system_desc">Uso real de memória e processamento da TV.</string>
+    <string name="hub_widgets_update">Os novos controles precisam da nova versão da launcher na TV. Atualize uma vez; os próximos compromissos não exigem reinstalação ou configuração.</string>
+    <string name="hub_photos_hint">Escolha até 10 fotos. O app prepara cópias para a TV; os originais da galeria ficam intactos. Depois de aplicar, o carrossel funciona com o celular desconectado. Ative o Porta-retratos em Organizar widgets.</string>
+    <string name="hub_photos_count">Fotos selecionadas: %1$d</string>
+    <string name="hub_photos_loading">Preparando as fotos…</string>
+    <string name="hub_photos_choose">Escolher fotos na galeria</string>
+    <string name="hub_photos_clear">Remover fotos do porta-retratos</string>
+    <string name="hub_system_hint">A RAM mostra o uso total informado pelo Android. Para CPU, a launcher tenta a medição da TV inteira; quando o sistema bloqueia esse dado, mostra CPU da launcher, com esse nome. O widget só atualiza enquanto aparece na tela. Ative-o em Organizar widgets.</string>
+</resources>

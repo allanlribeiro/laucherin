@@ -1,0 +1,18 @@
+{
+  "version": "0.1.0-preview2",
+  "native": true,
+  "device": "own Android TV emulator",
+  "demonstration_data": true,
+  "weather_appearance_simulated": true,
+  "clubs_are_examples": true,
+  "screenshots": [
+    "preview/home-sports-preview2.png",
+    "preview/sports-expanded-preview2.png",
+    "preview/weather-rain-preview2.png",
+    "preview/weather-sun-preview2.png",
+    "preview/weather-stars-preview2.png",
+    "preview/weather-cloudy-day-preview2.png",
+    "preview/weather-cloudy-night-preview2.png"
+  ],
+  "rain_animation_verified_by_distinct_frames": true
+}
