@@ -1,9 +1,9 @@
 # Remove an app we installed
-op: Uninstall pkg=com.gathin.tvhome
+op: Uninstall pkg=app.launcherin.tv
 privilege: PROFILE_STEP
 timeout_ms: 30000
 stdout_cap: 65536
-line: 'pm' 'uninstall' '--user' '0' 'com.gathin.tvhome'
+line: 'pm' 'uninstall' '--user' '0' 'app.launcherin.tv'
 transfer: none
 verify: Read kind=PACKAGES
 verify_line: 'pm' 'list' 'packages' '-f'

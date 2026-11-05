@@ -66,13 +66,13 @@
     <string name="hub_saver_source">Origem das fotos</string>
     <string name="hub_saver_source_value">Modo ambiente da TV · Google Fotos</string>
     <string name="hub_google_photos_guide">1. Na TV, abra Configurações → Sistema → Modo ambiente (ou Protetor de tela).\n2. Escolha Google Fotos e os álbuns da sua conta. Em algumas versões, a seleção fica no app Google Home, em sua TV → Configurações → Modo ambiente.\n3. Volte aqui, escolha o tempo e toque em Aplicar na TV.\n\nAs fotos e os álbuns são gerenciados pelo Google. A Launcherin usa o protetor selecionado no sistema; este app não acessa sua biblioteca privada.</string>
-    <string name="hub_power_hint">0 significa desativado. Se o protetor estiver ativo, o desligamento deve acontecer depois dele; o intervalo será ajustado para manter essa ordem. O desligamento depende dos recursos e permissões disponíveis na TV.</string>
+    <string name="hub_power_hint">0 significa desativado. O desligamento deve acontecer depois do protetor. As fotos podem aparecer enquanto a música toca. Na TV atualizada para preview11 ou posterior, com acesso a mídias autorizado, a Launcherin suspende o desligamento durante uma música reconhecida e reinicia o prazo ao pausar ou encerrar. As permissões dos temporizadores também precisam estar concedidas.</string>
     <string name="hub_weather_hint">Na TV, selecione o widget do tempo para abrir a previsão de cinco dias. A animação acompanha o clima e a hora local.</string>
     <string name="hub_sports_hint">Escolha até dois times. Na TV, selecione o widget para ver os próximos jogos e o resultado anterior. Os avisos de gol dependem da atualização do placar e da conexão com a internet.</string>
     <string name="hub_watch_hint">A lista exibe até dez conteúdos, sem YouTube. Na TV, selecione um conteúdo para abri-lo. Para remover um item manualmente, mantenha OK pressionado sobre ele. Os títulos disponíveis e a retomada dependem das informações fornecidas por cada streaming.</string>
     <string name="hub_listen_hint">Abra Spotify ou YouTube Music na TV e reproduza uma música. Depois volte à Launcherin: o widget mostra a faixa e oferece Play/Pausa, anterior e próxima.\n\nApós fechar o app de música, a retomada ainda precisa ser validada na TCL. Abrir a launcher pelo botão abaixo não inicia uma música automaticamente.</string>
     <string name="hub_test_pending">Aplique as alterações antes de testar na TV.</string>
-    <string name="hub_test_saver">Testar protetor agora</string>
+    <string name="hub_test_saver">Abrir configurações do protetor</string>
     <string name="hub_open_tv">Ver na TV</string>
     <string name="hub_test_requested">Pedido enviado. Confira o resultado na TV.</string>
     <string name="hub_test_failed">A TV não confirmou a abertura. Confira a conexão e o protetor selecionado no sistema.</string>

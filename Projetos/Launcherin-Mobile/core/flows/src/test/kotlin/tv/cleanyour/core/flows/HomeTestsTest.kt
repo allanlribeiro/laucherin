@@ -15,15 +15,17 @@ class HomeTestsTest {
     @Test fun previewOnlyStartsFixedActivitiesAndRequiresAnAcknowledgment() = runTest {
         val session = FakeTvSession()
         for (test in HomeTest.entries) {
-            val line = ShellRenderer().render(Op.StartActivity(HomeTests.component(test), wait = true)).lines.single().text
-            session.recording.on(line, "Status: ok\nActivity: ${HomeTests.component(test).flat}")
+            val line = HomeTests.line(test).text
+            session.recording.on(line, "Status: ok\n")
             assertTrue(HomeTests.run(session, test))
             session.recording.on(line, "Error: Activity class does not exist.")
             assertFalse(HomeTests.run(session, test))
         }
         assertEquals(4, session.execLines.size)
-        assertTrue(session.execLines.all { "'am' 'start' '-W' '-n'" in it })
-        assertTrue(session.execLines.none { "force-stop" in it || "settings" in it || "keyevent" in it })
+        assertTrue(session.execLines.all { "'am' 'start' '-W'" in it })
+        assertTrue(session.execLines.any { "'android.settings.DREAM_SETTINGS'" in it })
+        assertTrue(session.execLines.none { "Somnambulator" in it })
+        assertTrue(session.execLines.none { "force-stop" in it || "settings put" in it || "keyevent" in it })
     }
 
     @Test fun returningToTheHubPreservesPendingCityAndDoesNotWriteAnything() = runTest {

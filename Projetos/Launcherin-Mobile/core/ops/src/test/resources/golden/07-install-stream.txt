@@ -1,12 +1,12 @@
 # Streaming install when the TV advertises cmd
-op: InstallStream blob=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:260000:bundled:launcher.apk sha256=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa pkg=com.gathin.tvhome versionCode=1 signer=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+op: InstallStream blob=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:260000:bundled:launcher.apk sha256=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa pkg=app.launcherin.tv versionCode=1 signer=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 privilege: COMMUNITY
 timeout_ms: 125200
 stdout_cap: 65536
 line: none
 transfer: sync:bundled:launcher.apk 260000
-verify: Read kind=PACKAGE_DUMP pkg=com.gathin.tvhome
-verify_line: 'dumpsys' 'package' 'com.gathin.tvhome'
+verify: Read kind=PACKAGE_DUMP pkg=app.launcherin.tv
+verify_line: 'dumpsys' 'package' 'app.launcherin.tv'
 prior: present=false
-inverse: Uninstall pkg=com.gathin.tvhome
-inverse_line: 'pm' 'uninstall' '--user' '0' 'com.gathin.tvhome'
+inverse: Uninstall pkg=app.launcherin.tv
+inverse_line: 'pm' 'uninstall' '--user' '0' 'app.launcherin.tv'

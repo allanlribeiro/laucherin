@@ -39,10 +39,10 @@ public final class LauncherinMediaService extends NotificationListenerService {
   if(service!=null&&service.manager!=null){service.main.post(()->{try{service.sessions(service.manager.getActiveSessions(new ComponentName(service,LauncherinMediaService.class)));}catch(RuntimeException ignored){}});}
   else if(granted(context)&&SystemClock.elapsedRealtime()-reboundAt>10000){reboundAt=SystemClock.elapsedRealtime();try{requestRebind(new ComponentName(context,LauncherinMediaService.class));}catch(RuntimeException ignored){}}
  }
- @Override public void onListenerConnected(){current=this;if(goals!=null)goals.stop();goals=new LauncherinGoalMonitor(this);goals.start();try{manager=getSystemService(MediaSessionManager.class);manager.addOnActiveSessionsChangedListener(listener,new ComponentName(this,LauncherinMediaService.class));sessions(manager.getActiveSessions(new ComponentName(this,LauncherinMediaService.class)));for(StatusBarNotification notification:getActiveNotifications())onNotificationPosted(notification);}catch(RuntimeException ignored){}}
+ @Override public void onListenerConnected(){current=this;if(goals!=null)goals.stop();goals=new LauncherinGoalMonitor(this);goals.start();try{manager=getSystemService(MediaSessionManager.class);manager.addOnActiveSessionsChangedListener(listener,new ComponentName(this,LauncherinMediaService.class));sessions(manager.getActiveSessions(new ComponentName(this,LauncherinMediaService.class)));for(StatusBarNotification notification:getActiveNotifications())onNotificationPosted(notification);}catch(RuntimeException ignored){}LauncherinIdle.listen(this);}
  private void observe(MediaController controller){
   MediaSession.Token token=controller.getSessionToken();if(controllers.containsKey(token))return;
-  MediaController.Callback callback=new MediaController.Callback(){@Override public void onMetadataChanged(MediaMetadata metadata){capture(controller);}@Override public void onPlaybackStateChanged(PlaybackState state){activityTimes.put(token,state==null?0L:state.getLastPositionUpdateTime());int status=state==null?PlaybackState.STATE_NONE:state.getState();Integer previous=playbackStates.put(token,status);capture(controller,null,status==PlaybackState.STATE_PLAYING&&(previous==null||previous!=PlaybackState.STATE_PLAYING));}@Override public void onSessionDestroyed(){MediaController gone=controllers.remove(token);activityTimes.remove(token);playbackStates.remove(token);MediaController.Callback callback=callbacks.remove(token);if(gone!=null&&callback!=null)gone.unregisterCallback(callback);sendBroadcast(new Intent(CHANGED).setPackage(getPackageName()));}};
+  MediaController.Callback callback=new MediaController.Callback(){@Override public void onMetadataChanged(MediaMetadata metadata){capture(controller);LauncherinIdle.apply(LauncherinMediaService.this);}@Override public void onPlaybackStateChanged(PlaybackState state){activityTimes.put(token,state==null?0L:state.getLastPositionUpdateTime());int status=state==null?PlaybackState.STATE_NONE:state.getState();Integer previous=playbackStates.put(token,status);capture(controller,null,status==PlaybackState.STATE_PLAYING&&(previous==null||previous!=PlaybackState.STATE_PLAYING));LauncherinIdle.apply(LauncherinMediaService.this);}@Override public void onSessionDestroyed(){MediaController gone=controllers.remove(token);activityTimes.remove(token);playbackStates.remove(token);MediaController.Callback callback=callbacks.remove(token);if(gone!=null&&callback!=null)gone.unregisterCallback(callback);LauncherinIdle.apply(LauncherinMediaService.this);sendBroadcast(new Intent(CHANGED).setPackage(getPackageName()));}};
   controllers.put(token,controller);activityTimes.put(token,0L);PlaybackState initial=controller.getPlaybackState();playbackStates.put(token,initial==null?PlaybackState.STATE_NONE:initial.getState());callbacks.put(token,callback);controller.registerCallback(callback,main);
  }
  private void sessions(List<MediaController> sessions){
@@ -50,6 +50,7 @@ public final class LauncherinMediaService extends NotificationListenerService {
   for(MediaSession.Token token:new ArrayList<>(controllers.keySet()))if(!live.contains(token)){MediaController gone=controllers.remove(token);activityTimes.remove(token);playbackStates.remove(token);MediaController.Callback callback=callbacks.remove(token);if(gone!=null&&callback!=null)gone.unregisterCallback(callback);}
   for(MediaController controller:sessions)if(music(controller.getPackageName())||!provider(controller.getPackageName()).isEmpty())observe(controller);
   for(MediaController controller:new ArrayList<>(controllers.values()))capture(controller);
+  LauncherinIdle.apply(this);
  }
  @Override public void onNotificationPosted(StatusBarNotification posted){
   String pkg=posted.getPackageName();if(!music(pkg)&&!pkg.equals("com.google.android.youtube.tv"))return;
@@ -190,10 +191,23 @@ public final class LauncherinMediaService extends NotificationListenerService {
    }
   }catch(RuntimeException ignored){}return false;
  }
+ /** Null means that playback could not be verified; standby must fail safely. */
+ static Boolean musicInProgress(Context context){
+  if(!granted(context))return null;
+  try{MediaSessionManager manager=context.getSystemService(MediaSessionManager.class);
+   if(manager==null)return null;JSONObject saved=lastMusic(context);
+   for(MediaController controller:manager.getActiveSessions(new ComponentName(context,LauncherinMediaService.class))){
+    PlaybackState state=controller.getPlaybackState();
+    if(state!=null&&LauncherinMusicCommand.started(state.getState())
+       &&LauncherinMusic.matchesSaved(controller.getPackageName(),controller.getMetadata(),saved))return true;
+   }
+   return false;
+  }catch(RuntimeException unavailable){return null;}
+ }
  static boolean musicPlaying(){MediaController controller=musicController();PlaybackState state=controller==null?null:controller.getPlaybackState();return state!=null&&state.getState()==PlaybackState.STATE_PLAYING;}
 
  static void skip(Context context,boolean next){cancelMusicCommand();MediaController controller=musicController();if(controller!=null){if(next)controller.getTransportControls().skipToNext();else controller.getTransportControls().skipToPrevious();}}
  static void seek(Context context,long position){MediaController controller=musicController();if(controller!=null)controller.getTransportControls().seekTo(position);}
- @Override public void onListenerDisconnected(){LauncherinMusicActions.clear();if(goals!=null){goals.stop();goals=null;}current=null;if(manager!=null)manager.removeOnActiveSessionsChangedListener(listener);for(MediaSession.Token token:new ArrayList<>(controllers.keySet()))controllers.get(token).unregisterCallback(callbacks.get(token));controllers.clear();activityTimes.clear();playbackStates.clear();callbacks.clear();}
+ @Override public void onListenerDisconnected(){LauncherinIdle.stopListening();LauncherinMusicActions.clear();if(goals!=null){goals.stop();goals=null;}current=null;if(manager!=null)manager.removeOnActiveSessionsChangedListener(listener);for(MediaSession.Token token:new ArrayList<>(controllers.keySet()))controllers.get(token).unregisterCallback(callbacks.get(token));controllers.clear();activityTimes.clear();playbackStates.clear();callbacks.clear();}
  @Override public void onDestroy(){onListenerDisconnected();main.removeCallbacksAndMessages(null);storage.shutdown();super.onDestroy();}
 }

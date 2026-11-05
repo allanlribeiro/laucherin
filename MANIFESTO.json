@@ -1,6 +1,6 @@
 {
-  "version": "0.1.0-preview10",
-  "variant": "fontes, guias e downloads publicos",
+  "version": "0.1.0-preview11",
+  "variant": "candidata; protecao de musica pendente de teste fisico",
   "files": [
     {
       "path": ".gitignore",
@@ -28,6 +28,11 @@
       "sha256": "37901199e4592d891977beeb625f24ed5da80b1dd9997a9d062a2b485d7381aa"
     },
     {
+      "path": "Downloads/Launcherin-Android-0.1.0-preview11.apk",
+      "bytes": 7931554,
+      "sha256": "11167799cf55267957c67e8e79a79ec3329f82ba4a30b939483a298041970589"
+    },
+    {
       "path": "Downloads/Launcherin-Clara-preview10-principal.zip",
       "bytes": 30411733,
       "sha256": "705dc006bdee755e5866f8277bcd115600fb20ad312e22fc4de7cb1054a90a43"
@@ -38,9 +43,14 @@
       "sha256": "aab1444a2cc5a28f6db6e2335d6c223038f2a67683f06d1d81075757ebce8dbc"
     },
     {
+      "path": "Downloads/Launcherin-TV-0.1.0-preview11.apk",
+      "bytes": 725767,
+      "sha256": "a9e9e112252cbc209a5e22a268af0c0e7234770b506dc25e3b432518c8ad3a90"
+    },
+    {
       "path": "Downloads/README.md",
-      "bytes": 1037,
-      "sha256": "7f2c25fa5a0fe965e4dea08385065132ab162277c4245a55e0c40552e6ba173d"
+      "bytes": 990,
+      "sha256": "2f6b2f1fe2bf05a4e2179e32b229d3c9d33f030572bd6d55cbae31647dea46f6"
     },
     {
       "path": "Downloads/SHA256SUMS.txt",
@@ -56,6 +66,11 @@
       "path": "Guias/INSTALACAO-E-CONFIGURACAO.md",
       "bytes": 10414,
       "sha256": "f75c875f4ff5560f56769859f1bcd35a504b2600868631b7f2027efb46a26063"
+    },
+    {
+      "path": "Guias/PROTETOR-E-MUSICA-preview11.md",
+      "bytes": 5224,
+      "sha256": "f19ae9b0fedb149344a40f6233d5930aed20f0dce7c55dea810c5981ca4b57bd"
     },
     {
       "path": "Guias/ROTEIRO-PARA-CLARA.md",
@@ -364,8 +379,8 @@
     },
     {
       "path": "Projetos/Launcherin/LAUNCHERIN.md",
-      "bytes": 22706,
-      "sha256": "da49ca85d3d6264faf3f02156542b891fbcd5fc644326a9459cbafd0e8aa40b1"
+      "bytes": 25548,
+      "sha256": "e59c0f1b9a9b54eaa6c515f9ba8c7572b681ecb935fe21670d9f622047b27f22"
     },
     {
       "path": "Projetos/Launcherin/LICENSE",
@@ -11894,8 +11909,8 @@
     },
     {
       "path": "Projetos/Launcherin/launcher/app/build.gradle",
-      "bytes": 2228,
-      "sha256": "6843b7854b41182b2358e4fc63bb3f3ed319063c16e32e032b1bda73a32abd1d"
+      "bytes": 2347,
+      "sha256": "b456007f4e664b79e5ebc981ef4fa1ed2cea979e0d216f992e692100afc1054c"
     },
     {
       "path": "Projetos/Launcherin/launcher/app/lint.xml",
@@ -12209,8 +12224,8 @@
     },
     {
       "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinControls.java",
-      "bytes": 6915,
-      "sha256": "6d14e840c8a57c52c91db1fa51270f3752a83a60da14f93254a755ef4ad1ba8a"
+      "bytes": 7071,
+      "sha256": "f0df3fd7f828ae3144bd6299c041e9ed65cb0913cfd16655a2126f13804ea11d"
     },
     {
       "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinDashboard.java",
@@ -12219,13 +12234,13 @@
     },
     {
       "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinDreamDeadline.java",
-      "bytes": 2226,
-      "sha256": "c56b3426a530833a82363d3bc7e72cf12354f913e2ac977476dbaf52fbdd6bb6"
+      "bytes": 2535,
+      "sha256": "a1d73fc1cc4eef3f7b8da2a2ac0ab75285074f3d6acd828b3865e5683f6b1358"
     },
     {
       "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinDreams.java",
-      "bytes": 3054,
-      "sha256": "5959ad3dff090bff6392204ba738cbd99e79da66a09ea752711a05d3112928c9"
+      "bytes": 3835,
+      "sha256": "270389f669477edfcacd908d349da17a107a2e4bfc86a33fc28de640a08c71e1"
     },
     {
       "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinExtraWidgets.java",
@@ -12254,8 +12269,8 @@
     },
     {
       "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinIdle.java",
-      "bytes": 4206,
-      "sha256": "4fe367ebded7dea4c46439c4195676210a17cf398524190f5c9a93acc0f3b41a"
+      "bytes": 8631,
+      "sha256": "93ffd27edea213756aa4ed4054f40a8e2b40b62d7d9395e6577eeab361f29e47"
     },
     {
       "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinMediaArt.java",
@@ -12264,8 +12279,8 @@
     },
     {
       "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinMediaService.java",
-      "bytes": 20705,
-      "sha256": "e0604e49accd37819cabd21a175feea069399bd0ca65c45f2431de2bef33ad28"
+      "bytes": 21700,
+      "sha256": "3864922ba26adb06c23ed4b22da673ac951bdb3d91aef8912984c55eddfe48f5"
     },
     {
       "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinMusic.java",
@@ -12281,6 +12296,11 @@
       "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinMusicCommand.java",
       "bytes": 2385,
       "sha256": "25ce16424c1f72d1e147e1a6c47139f8167767f4afd27486a3125189a77896d1"
+    },
+    {
+      "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinMusicIdlePolicy.java",
+      "bytes": 967,
+      "sha256": "fb8c53b45fe153b0ad43c2f9443af9e63f6c4ece8fa8c756374d546cfac46126"
     },
     {
       "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinMusicResume.java",
@@ -12404,8 +12424,8 @@
     },
     {
       "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/MainActivity.java",
-      "bytes": 210115,
-      "sha256": "3ed68926a9bcff7c2f915305050073187d08a5a26750609ecab0199d38e16f56"
+      "bytes": 210407,
+      "sha256": "9e439b4ef1aa3e4185163979787c1487cada13c31ed2174ad286a3421fe3511a"
     },
     {
       "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/MarigoldDrawable.java",
@@ -13241,6 +13261,16 @@
       "path": "Projetos/Launcherin/launcher/app/src/test/java/app/launcherin/tv/LauncherinHistoryTest.java",
       "bytes": 2390,
       "sha256": "e976108a82cf16c7df2668c2e25262feb6a8ee5780718b5ff5a54ca9b66a58dd"
+    },
+    {
+      "path": "Projetos/Launcherin/launcher/app/src/test/java/app/launcherin/tv/LauncherinMusicIdleAndroidTest.java",
+      "bytes": 6133,
+      "sha256": "797e5249690534ccf6d093fe3c300d0b0e94224f53b43f77e2aab112e3a748e2"
+    },
+    {
+      "path": "Projetos/Launcherin/launcher/app/src/test/java/app/launcherin/tv/LauncherinMusicIdlePolicyTest.java",
+      "bytes": 3379,
+      "sha256": "78d60c3614c4075fdb29d6f2d5e90f4424b18ef039fbfdedc017866a97416bc3"
     },
     {
       "path": "Projetos/Launcherin/launcher/app/src/test/java/app/launcherin/tv/LauncherinPlaybackControlsTest.java",
@@ -15499,8 +15529,8 @@
     },
     {
       "path": "Projetos/Launcherin-Mobile/LAUNCHERIN.md",
-      "bytes": 17548,
-      "sha256": "d998ebea640aec5a799e97c248450d140236646909a5eca3d66f1ab11269789a"
+      "bytes": 20390,
+      "sha256": "cdbb1d5c47038e3ffcfc4f21cb92ce538d41855ee5a8dfbd1daf192505c88b71"
     },
     {
       "path": "Projetos/Launcherin-Mobile/LICENSE",
@@ -15729,8 +15759,8 @@
     },
     {
       "path": "Projetos/Launcherin-Mobile/android/platform/src/main/assets/bundled/cleanyourtv-launcher.apk",
-      "bytes": 724147,
-      "sha256": "aab1444a2cc5a28f6db6e2335d6c223038f2a67683f06d1d81075757ebce8dbc"
+      "bytes": 725767,
+      "sha256": "a9e9e112252cbc209a5e22a268af0c0e7234770b506dc25e3b432518c8ad3a90"
     },
     {
       "path": "Projetos/Launcherin-Mobile/android/platform/src/main/assets/bundled/index.json",
@@ -15815,7 +15845,7 @@
     {
       "path": "Projetos/Launcherin-Mobile/app/build.gradle.kts",
       "bytes": 4635,
-      "sha256": "7d9dc28a5981de0bbb482c247609393fcf643454a3901471dfe66222da7b6ddc"
+      "sha256": "52328419056750d2971d6d441c50598b123d950cc76e6a86209c6afc68ecd151"
     },
     {
       "path": "Projetos/Launcherin-Mobile/app/proguard-rules.pro",
@@ -16354,8 +16384,8 @@
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/flows/src/main/kotlin/tv/cleanyour/core/flows/HomeTest.kt",
-      "bytes": 1311,
-      "sha256": "76bd89ae012ce60407e5633e7bb5d3eb4a67cd861d831f80b948faa78bd13b34"
+      "bytes": 1318,
+      "sha256": "48bf57151d1b8ba69f2ce1c306e4c499c8564291f8096a16b1ff02c5fd8957e3"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/flows/src/main/kotlin/tv/cleanyour/core/flows/ItWorked.kt",
@@ -16609,8 +16639,8 @@
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/flows/src/test/kotlin/tv/cleanyour/core/flows/HomeTestsTest.kt",
-      "bytes": 3717,
-      "sha256": "297dbb0716dc6058e34bcad35e2f38cfbace4c4098a090069362bc65d942ae20"
+      "bytes": 3755,
+      "sha256": "8a6679a3279bb587bb303ef7d1a8c4893ce96b67a2bfa9a36b627da0afb6c3d8"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/flows/src/test/kotlin/tv/cleanyour/core/flows/IntegrationBehavioursTest.kt",
@@ -19513,6 +19543,11 @@
       "sha256": "1b7cad116efdfd161218341cecb55fb163015fc3858363443589f6b452467d6e"
     },
     {
+      "path": "Projetos/Launcherin-Mobile/core/ops/src/main/kotlin/tv/cleanyour/core/ops/HomePreviewLines.kt",
+      "bytes": 393,
+      "sha256": "f60e7d25b9dbf95f99917f942287107cd29dce14470ea45b69921c71e32bf80e"
+    },
+    {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/main/kotlin/tv/cleanyour/core/ops/Ops.kt",
       "bytes": 3314,
       "sha256": "bb64c755df34561375879bfdc0d9f893ebcaf319b56d2cc6ea67715c7fd2d33a"
@@ -19578,6 +19613,11 @@
       "sha256": "9d66b55545f9b5b7ff45a8dd7a1bca68030cbb76999c21f27645e44d99a169fe"
     },
     {
+      "path": "Projetos/Launcherin-Mobile/core/ops/src/test/kotlin/tv/cleanyour/core/ops/HomePreviewLinesTest.kt",
+      "bytes": 538,
+      "sha256": "423155a7674f45fec9770dc63c69f92930ad8c508640724524ecf951f3abcf74"
+    },
+    {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/kotlin/tv/cleanyour/core/ops/RendererPropertyTest.kt",
       "bytes": 23900,
       "sha256": "e386303cca55d7b7e79fe46695247b55eb9100649f34f75a9eb9151abd860760"
@@ -19625,22 +19665,22 @@
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/05-install-replace.txt",
       "bytes": 781,
-      "sha256": "ce6d5cc2bbf01516f122282a76ddd3c8a8ead3b51070edf88efaaff637515bb6"
+      "sha256": "4af9cf9fbba773655022e8a208a149ac96fa88653820e9566f1d87da8809b546"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/06-install-fresh.txt",
       "bytes": 666,
-      "sha256": "29cc8ea83487bd5f9b254170cb4618571f4a9056dfac9465804b08d246a66c82"
+      "sha256": "701ef387f8381420f083fb681e95668a93621b07f797f4c0697041a15f2e694c"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/07-install-stream.txt",
       "bytes": 687,
-      "sha256": "51573e10d2b0f6790082d7f9317ddb73aab540539c1a51e7451583527b60cc4f"
+      "sha256": "650b34fbaa5e4dfedbc418f250508e227f33e3fbe1d6ee0a2f5934522dcc0e4a"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/08-uninstall.txt",
       "bytes": 298,
-      "sha256": "d9f75d8a2b2c0b67e6b0cf7023030e7d554ac29d472e82ac8fb10aa3f78d855b"
+      "sha256": "14b101cd492b931f53b6bd86735ea9bbbe9d54f67211fb288e78d23faacecf41"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/09-settings-put.txt",
@@ -19670,12 +19710,12 @@
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/14-set-home.txt",
       "bytes": 667,
-      "sha256": "bcc0693c8c7eeef8834aac3195cd95d6c6b62794b802682bd47ca83369621561"
+      "sha256": "ebceb2ef9c5a6c66f11f15be81f1a069ae972b0741f6d4241474fcba60e2357a"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/15-verify-home.txt",
       "bytes": 344,
-      "sha256": "7313bf0bd9343be3789e5c723ae67bdb5ebed46da921b491d786db1dcc73db40"
+      "sha256": "43dba3bb2cfa450402ab63ce24a041f910b63b95ac2a3f8622e4c367f31c0275"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/16-arm-home-watchdog-a.txt",
@@ -19710,7 +19750,7 @@
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/22-mkdir-overlay.txt",
       "bytes": 238,
-      "sha256": "b4e7c6d37318bf159c7951145ea5352dfe009a4d140e8c561fd8cc54da08707a"
+      "sha256": "6ffd51f760f3abead3bfa75a08319427458c25dffffc66bb7d6bd869487826a1"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/23-mkdir-restore.txt",
@@ -19720,32 +19760,32 @@
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/24-push-asset.txt",
       "bytes": 933,
-      "sha256": "9d01f79530e35e6e3dd920dfcfbb5a011df56417abd163b3984a79db57c52020"
+      "sha256": "fc174f3ca49f1d5556f01b3a7393d28fd3bd540d2b62672b058d56712c7c093a"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/25-push-asset-existing.txt",
       "bytes": 770,
-      "sha256": "aa15eb37ef216e7186aa391279b8e79940b0a2a02ba3d0a0efe44dc5279eb586"
+      "sha256": "969eedda02eebf186152fabcdc324df57f6bf2fefe84f95ab3367f5de51f1f2b"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/26-remove-file.txt",
       "bytes": 461,
-      "sha256": "cf4714a1c7376f24da1b635217614f0dd7d01626056cabc99e4cdfcfc55ef802"
+      "sha256": "2774b28ef65b7136660992cd45711221420306ebcde188d82f04604c590c90cb"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/27-restart-home.txt",
       "bytes": 306,
-      "sha256": "72b5add4e3b7f07b1ed1366ddafe26e4601f8e8bee459958f8e84fedd28e9d61"
+      "sha256": "d5f4599a514131f78456582427854bd21b056b06ba209be113257fb79583c264"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/28-start-activity-wait.txt",
       "bytes": 269,
-      "sha256": "6d350d7af3b7e7137b88bae8ddbf37f08fd9e5bfed42a7e8501eba75b0bb4bca"
+      "sha256": "9fb23b451cedfd30c86fc30d28dcf9d46d431f6beec04a41965f46ffd742d64b"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/29-start-activity.txt",
       "bytes": 270,
-      "sha256": "e62bbbde952db51fafc0a4fef9c8680927203a47e2e18b588d64956b496f8286"
+      "sha256": "bb0369dec1992270a8fcf6a93b46e491d35cf27b4f4546a68d8c487b94ca8596"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/30-read-props.txt",
@@ -19810,12 +19850,12 @@
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/42-read-sha256-of-installed.txt",
       "bytes": 250,
-      "sha256": "6809fff46fa92ce1fb37ae9e6a4ceb53886cd330af8ca0c96975bf03fcf9bfa4"
+      "sha256": "336fbe28cfd189e66829539fb9339dc34821af82b774bbb8ce12d4a64823e1f0"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/43-read-package-dump.txt",
       "bytes": 228,
-      "sha256": "32855130aefdd50a8b33d0ac6a0f85d33b0b8959dccc52f06fff508344a8b404"
+      "sha256": "457b405e3fc3e8a92bd6f4d2c3e43ce0f4e5daaaf2bbdca6bbee978243b87e2b"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/44-read-persistent.txt",
@@ -19845,7 +19885,7 @@
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/49-read-launcher-dir.txt",
       "bytes": 243,
-      "sha256": "170c1128618f8c91b020835253764027d13ef59dbfc559154684b41c499b231c"
+      "sha256": "bb5fbfadc2e0f4b74bf17134b7cd5c30a0b6026b57f5bad50e3a9d5e647d0710"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/50-settle.txt",
@@ -19900,57 +19940,57 @@
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/60-push-asset-provider.txt",
       "bytes": 1421,
-      "sha256": "d8156fe7bf3ea2a7b8ecfa6ffda2b7f5644e3a5e60e64d500618ee522f0d5be8"
+      "sha256": "4d91c8f63cbc891890b1d6fcc345d2fe9c28ca7d31b2754b19a6803a4ee9d4ca"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/61-push-asset-provider-wallpaper.txt",
       "bytes": 1170,
-      "sha256": "fbd6c9d8a0b6c33f8cb9f5de46cca8ee36754f978c2f7b2b063569d2ad9f10ae"
+      "sha256": "32c13a52ab5c57e6391e733ef502f53ad3c52fca6d39a3ccaa377b7988da6fda"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/62-remove-file-provider.txt",
       "bytes": 523,
-      "sha256": "a475f3570e77691ce803bfce35a31a076b02e0c2eecb54aa3959224491000dc6"
+      "sha256": "753d61b09e5cb2941cb58493078098d51bf6d515756bb1fe64f40ceb5002c5f3"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/63-read-launcher-file-sha256.txt",
       "bytes": 352,
-      "sha256": "e66c347dd3574c6722ec554b763924673c86ae1316073126d417237beffd4078"
+      "sha256": "63bac47e31c13800ca3af3114b158887a657ae308488f79c9064dba6ac8953c5"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/64-helper-add-unset.txt",
       "bytes": 1100,
-      "sha256": "02dd8b4dd1213e62e5360a82e08217863fcd7e7e4d07b38c59caed1694ea37ff"
+      "sha256": "ac2f820ed7a31b9317aeb75b7b16862f73785b892de0f4c24dc1cb16a8e5ee04"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/65-helper-add-after-reader.txt",
       "bytes": 1453,
-      "sha256": "c9b81b95434d64c0c56de7c9d81b41249753723a73bae32ac96e98b9b0770ac5"
+      "sha256": "2b61ae382a16187218182df1ad216ed6465a5c40e19d33e083e66c5883d4594b"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/66-helper-remove.txt",
       "bytes": 1021,
-      "sha256": "00786bbdd46d0d92e5a4476b22a93ce0d9060e387e18cde23caac28dcd69b2b8"
+      "sha256": "6d281bfb44f456f41d1a312c4a14e753456e112b9a2adb38b5d61cb6f9deae69"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/67-helper-remove-last.txt",
       "bytes": 680,
-      "sha256": "27d8f1c9dce0006fe263f98cee8e658ef31a117d211f75b44542a33452b4852d"
+      "sha256": "c029b249a5eb5976e0e22b2fc2afbf265783b3c996ad035cf357545cc321bdf8"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/68-helper-remove-on-tv.txt",
       "bytes": 842,
-      "sha256": "63c1573ed36c94e305349a88d5b5a5baed71efc01d56883b1dd2f7982992ebd9"
+      "sha256": "cdb1ee5408b454266323faf561a81d1cd276ba3fa23522d94dd1d893636825a6"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/69-helper-timer.txt",
       "bytes": 1323,
-      "sha256": "05532c0d3205f9946abc6a3379f8bf0c9255b2f61d353128d40a22cdd4eeca0e"
+      "sha256": "ad913663feff07fac1d367d4178346aa0697ced4f30d0f4cedbbb8d21d986084"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/ops/src/test/resources/golden/planhash.txt",
       "bytes": 65,
-      "sha256": "462be05a0eee0ab2efbd1b83ad253b64bbb3aefe7588fa195987bb0c96e61c1c"
+      "sha256": "4bf04e5947213eae8716e997bb25971500f2ad85a0271ab564b2f84949387b04"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/planner/build.gradle.kts",
@@ -21065,7 +21105,7 @@
     {
       "path": "Projetos/Launcherin-Mobile/core/trust/src/main/kotlin/tv/cleanyour/core/trust/Pins.kt",
       "bytes": 4494,
-      "sha256": "242ccc5fd8e54339c3273fea1e05c0d164f46874b0635fec4bb09d0226e0c5e8"
+      "sha256": "db332252284f4a11086e8c5f79568c8be44fec93690a2f4032344f6f3a8623ce"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/trust/src/main/kotlin/tv/cleanyour/core/trust/Trust.kt",
@@ -21095,7 +21135,7 @@
     {
       "path": "Projetos/Launcherin-Mobile/core/trust/src/test/kotlin/tv/cleanyour/core/trust/LauncherPinTest.kt",
       "bytes": 2926,
-      "sha256": "08bf935f96fa2da0223d72ccaabd681113a97c9d064393fee2af971b5a618c48"
+      "sha256": "b578aaa70b43cf0f7d00b788aad548ce2a31a235f2530933a57cd972c32c68dd"
     },
     {
       "path": "Projetos/Launcherin-Mobile/core/trust/src/test/kotlin/tv/cleanyour/core/trust/MinisignTest.kt",
@@ -22494,8 +22534,8 @@
     },
     {
       "path": "Projetos/Launcherin-Mobile/feature/launcher/src/main/res/values/launcherin_hub.xml",
-      "bytes": 7712,
-      "sha256": "c677014539ee0cad9c1b94817190ab4bbd7dc698b5f765d09074b21cbdd15fce"
+      "bytes": 7889,
+      "sha256": "b49ba77b9504eba7893c6952deaabfabe237a8f3cb552ef9dfe5096d323410c3"
     },
     {
       "path": "Projetos/Launcherin-Mobile/feature/launcher/src/main/res/values/strings.xml",
@@ -22509,8 +22549,8 @@
     },
     {
       "path": "Projetos/Launcherin-Mobile/feature/launcher/src/main/res/values-pt-rBR/launcherin_hub.xml",
-      "bytes": 7712,
-      "sha256": "c677014539ee0cad9c1b94817190ab4bbd7dc698b5f765d09074b21cbdd15fce"
+      "bytes": 7889,
+      "sha256": "b49ba77b9504eba7893c6952deaabfabe237a8f3cb552ef9dfe5096d323410c3"
     },
     {
       "path": "Projetos/Launcherin-Mobile/feature/launcher/src/main/res/values-pt-rBR/strings.xml",
@@ -42564,13 +42604,18 @@
     },
     {
       "path": "README.md",
-      "bytes": 5297,
-      "sha256": "50a29b15b26bb87771bfb9f4ad5b3b91adb9451319d8e02869146cf81be6a2cd"
+      "bytes": 5907,
+      "sha256": "8fd689aee2d7a648dea22c388d91984a542aff9bf801429e09e20bf024bfbeba"
     },
     {
       "path": "Validacao/SHA256SUMS-preview10.txt",
       "bytes": 205,
       "sha256": "2c39583141216aa1f1c066469cacd052930dbae397bfdd92bdd251fe07dbc15e"
+    },
+    {
+      "path": "Validacao/SHA256SUMS-preview11.txt",
+      "bytes": 205,
+      "sha256": "5608036159e4620fecf848b91ea5bc2bed1de57c2957af1d5b616c544f09f063"
     },
     {
       "path": "Validacao/android-tests-preview10.txt",
@@ -42581,6 +42626,11 @@
       "path": "Validacao/validation-preview10.json",
       "bytes": 1735,
       "sha256": "4e44358515cc5e1510a0dea9206d6bc3afd0457502c9439622ad13f1e039e13a"
+    },
+    {
+      "path": "Validacao/validation-preview11.json",
+      "bytes": 1993,
+      "sha256": "2cc94f3c8728debd62e291aea0d8860d254367f533c6724b14bdbb6c9061ada5"
     }
   ]
 }

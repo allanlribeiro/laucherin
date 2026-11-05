@@ -1,0 +1,68 @@
+{
+  "version": "0.1.0-preview11",
+  "tv": {
+    "package": "app.launcherin.tv",
+    "code": 19,
+    "version": "0.1.0-preview11",
+    "bytes": 725767,
+    "sha256": "a9e9e112252cbc209a5e22a268af0c0e7234770b506dc25e3b432518c8ad3a90",
+    "certificateSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d",
+    "signatureVerified": true,
+    "permissionsUnchanged": true,
+    "embeddedByteIdentical": true
+  },
+  "phone": {
+    "package": "app.launcherin.mobile",
+    "code": 11,
+    "version": "0.1.0-preview11",
+    "bytes": 7931554,
+    "sha256": "11167799cf55267957c67e8e79a79ec3329f82ba4a30b939483a298041970589",
+    "certificateSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d",
+    "signatureVerified": true,
+    "permissionsUnchanged": true
+  },
+  "validation": {
+    "tests": 510,
+    "counts": {
+      "tv": 392,
+      "phoneFlows": 9,
+      "phoneOps": 58,
+      "phoneTrust": 51
+    },
+    "failed": 0,
+    "androidSettingsRobolectricTests": 9,
+    "robolectricApi": 35,
+    "leasePolicyTests": 10,
+    "lint": {
+      "tv": {
+        "errors": 0,
+        "warnings": 136
+      },
+      "phoneLauncher": {
+        "errors": 0,
+        "warnings": 8
+      },
+      "phoneUi": {
+        "errors": 0,
+        "warnings": 11
+      }
+    },
+    "ptBRResources": 1494,
+    "ptBRContractErrors": 0,
+    "composeStability": "passed",
+    "apkSizeGate": "passed"
+  },
+  "requestedConfiguration": {
+    "screensaverMinutes": 5,
+    "standbyMinutes": 10,
+    "photosAllowedDuringMusic": true,
+    "standbySuspendedDuringRecognizedMusic": true,
+    "freshCountdownAfterPause": true
+  },
+  "hardware": {
+    "nativeGooglePhotos": "user confirmed native idle display on TCL with previous installation",
+    "newMusicStandbyProtection": "pending physical TCL test after update",
+    "emulatorTestedThisRevision": false
+  },
+  "publication": "candidate artifacts; native device configuration still requires applying 5/10 after installing the update"
+}

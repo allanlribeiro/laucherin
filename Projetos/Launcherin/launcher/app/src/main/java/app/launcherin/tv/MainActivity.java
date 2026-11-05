@@ -130,7 +130,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private long homeIdleStarted;
     private final Runnable showPhotoSaver = this::startPhotoSaver;
     private void startPhotoSaver() {
-        if(!resumed||!hasWindowFocus())return;
+        if(!LauncherinDreams.canStartImmediately()||!resumed||!hasWindowFocus())return;
         if(LauncherinMediaService.playbackInProgress(this)) {root.postDelayed(showPhotoSaver,MINUTE_MS);return;}
         int standby=LauncherinIdle.sleep(this);
         if(standby>0)LauncherinDreamDeadline.arm(this,homeIdleStarted+standby*MINUTE_MS);
@@ -1314,8 +1314,11 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         homeIdleStarted=android.os.SystemClock.elapsedRealtime();
         if(!resumed)return;
         int photos=LauncherinIdle.saver(this);
-        if(photos>0)root.postDelayed(showPhotoSaver,photos*MINUTE_MS);
-        else if(idleClockMs>0)root.postDelayed(showIdleClock,idleClockMs);
+        if(photos>0) {
+            // Android 14 removed this shortcut. Opening its no-op activity resets native idle.
+            // The native screen/sleep timers remain responsible for the selected DreamService.
+            if(LauncherinDreams.canStartImmediately())root.postDelayed(showPhotoSaver,photos*MINUTE_MS);
+        } else if(idleClockMs>0)root.postDelayed(showIdleClock,idleClockMs);
     }
 
     @Override

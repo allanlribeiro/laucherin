@@ -1,10 +1,10 @@
 # Two lines, force-stop then start
-op: RestartHome component=com.gathin.tvhome/.MainActivity
+op: RestartHome component=app.launcherin.tv/.MainActivity
 privilege: COMMUNITY
 timeout_ms: 30000
 stdout_cap: 65536
-line: 'am' 'force-stop' 'com.gathin.tvhome'
-line: 'am' 'start' '-n' 'com.gathin.tvhome/.MainActivity'
+line: 'am' 'force-stop' 'app.launcherin.tv'
+line: 'am' 'start' '-n' 'app.launcherin.tv/.MainActivity'
 transfer: none
 verify: none
 prior: none

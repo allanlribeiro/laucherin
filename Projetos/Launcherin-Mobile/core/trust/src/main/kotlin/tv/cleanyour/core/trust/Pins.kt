@@ -26,10 +26,10 @@ object PinnedLauncher {
     const val ASSET_NAME = "cleanyourtv-launcher.apk"
     const val UPSTREAM_COMMIT = "e62aa10a033f715a8ac7116efcf91e01b145adbd"
     const val PACKAGE = "app.launcherin.tv"
-    const val VERSION_CODE = 18L
-    const val VERSION_NAME = "0.1.0-preview10"
-    const val SIZE = 724147L
-    const val SHA256 = "aab1444a2cc5a28f6db6e2335d6c223038f2a67683f06d1d81075757ebce8dbc"
+    const val VERSION_CODE = 19L
+    const val VERSION_NAME = "0.1.0-preview11"
+    const val SIZE = 725767L
+    const val SHA256 = "a9e9e112252cbc209a5e22a268af0c0e7234770b506dc25e3b432518c8ad3a90"
     // SHA-256 of the dedicated Launcherin Development signing certificate (DER).
     const val SIGNER_SHA256 = "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d"
 }

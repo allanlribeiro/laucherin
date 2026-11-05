@@ -3,7 +3,7 @@ op: Read kind=LAUNCHER_DIR
 privilege: READ
 timeout_ms: 30000
 stdout_cap: 65536
-line: 'ls' '-l' '/sdcard/Android/data/com.gathin.tvhome/files'
+line: 'ls' '-l' '/sdcard/Android/data/app.launcherin.tv/files'
 transfer: none
 verify: none
 prior: none

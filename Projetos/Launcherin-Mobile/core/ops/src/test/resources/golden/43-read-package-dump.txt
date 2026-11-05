@@ -1,9 +1,9 @@
 # dumpsys of one package
-op: Read kind=PACKAGE_DUMP pkg=com.gathin.tvhome
+op: Read kind=PACKAGE_DUMP pkg=app.launcherin.tv
 privilege: READ
 timeout_ms: 20000
 stdout_cap: 1048576
-line: 'dumpsys' 'package' 'com.gathin.tvhome'
+line: 'dumpsys' 'package' 'app.launcherin.tv'
 transfer: none
 verify: none
 prior: none

@@ -23,7 +23,7 @@ final class LauncherinControls {
                 "Google Fotos · escolher álbum no modo ambiente",
                 "Liberar alteração dos tempos",
                 "Temporizadores: "+(status.isEmpty()?"configuração aplicada / padrão da TV":status),
-                "Visualizar protetor agora · "+LauncherinDreams.selected(host),
+                (LauncherinDreams.canStartImmediately()?"Visualizar protetor agora · ":"Configurações do protetor · ")+LauncherinDreams.selected(host),
                 "Diagnóstico do protetor e da música"
         };
         new AlertDialog.Builder(host).setTitle("TV aberta, gols e inatividade")
@@ -45,7 +45,7 @@ final class LauncherinControls {
                         case 8: permissions(host);break;
                         case 10: LauncherinDreams.start(host,true);break;
                         case 11: LauncherinMusicActions.diagnostic(host);break;
-                        default: Toast.makeText(host,status.isEmpty()?"Os tempos valem em todos os apps. Vídeos e músicas que mantêm a TV acordada interrompem a contagem. Desligar significa entrar em espera.":status,Toast.LENGTH_LONG).show();
+                        default: Toast.makeText(host,status.isEmpty()?"Os tempos valem em todos os apps. As fotos podem aparecer durante a música. Enquanto uma música reconhecida toca, o desligamento fica suspenso; ao pausar, o prazo começa novamente. Desligar significa entrar em espera.":status,Toast.LENGTH_LONG).show();
                     }
                 }).setNegativeButton("Fechar",null).show();
     }

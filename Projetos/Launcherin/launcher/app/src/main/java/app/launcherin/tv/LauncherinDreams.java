@@ -5,10 +5,18 @@ import android.content.pm.*;
 import android.provider.Settings;
 import android.widget.Toast;
 
-/** Public SystemUI Start-now activity: starts the user's selected dream without selecting another album. */
+/** Legacy Start-now, or public Dream settings on Android 14 where that activity became a no-op. */
 final class LauncherinDreams {
     static final ComponentName START = new ComponentName("com.android.systemui","com.android.systemui.Somnambulator");
+    static boolean canStartImmediately(){return LauncherinMusicIdlePolicy.legacyDreamShortcut(android.os.Build.VERSION.SDK_INT);}
     static boolean start(Context context, boolean explain) {
+        if(!canStartImmediately()) {
+            if(explain)try {
+                context.startActivity(new Intent(Settings.ACTION_DREAM_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                Toast.makeText(context,"No Android 14, configure o protetor aqui e aguarde o tempo de inatividade. O antigo atalho não inicia mais as fotos.",Toast.LENGTH_LONG).show();
+            }catch(RuntimeException unavailable){Toast.makeText(context,"Abra o modo ambiente nas configurações da TV.",Toast.LENGTH_LONG).show();}
+            return false;
+        }
         try {
             ActivityInfo activity=context.getPackageManager().getActivityInfo(START,0);
             boolean system=(activity.applicationInfo.flags & (ApplicationInfo.FLAG_SYSTEM|ApplicationInfo.FLAG_UPDATED_SYSTEM_APP))!=0;
@@ -37,6 +45,7 @@ final class LauncherinDreams {
     static String diagnostic(Context c) {
         String[] names={"screensaver_components","screensaver_default_component","screensaver_enabled","screensaver_activate_on_sleep","sleep_timeout","attentive_timeout"};
         StringBuilder text=new StringBuilder("Protetor: "+selected(c)+"\nDesligamento durante o protetor: "+(HomeKeyService.canLockScreen()?"auxiliar disponível":"temporizador do sistema")+"\n");
+        text.append("Proteção da música: ").append(LauncherinIdle.musicStatus(c)).append("\n");
         text.append("Prazo auxiliar: ").append(LauncherinDreamDeadline.status()).append("\n");
         for(String key:names)text.append(key).append(": ").append(Settings.Secure.getString(c.getContentResolver(),key)).append('\n');
         return text.append("screen_off_timeout: ").append(Settings.System.getString(c.getContentResolver(),"screen_off_timeout")).toString();

@@ -27,7 +27,13 @@ final class LauncherinDreamDeadline {
             if(Build.VERSION.SDK_INT>=33)context.registerReceiver(receiver,filter,Context.RECEIVER_NOT_EXPORTED);
             else context.registerReceiver(receiver,filter);
         } catch(RuntimeException unavailable){cancel();return false;}
-        handler.postDelayed(()->{status=dreaming?(standby.getAsBoolean()?"desligamento enviado":"TV recusou desligamento"):"protetor não iniciou antes do prazo";cancel();},Math.max(0,deadline-SystemClock.elapsedRealtime()));
+        final Context guardContext=context;
+        handler.postDelayed(()->{
+            if(LauncherinIdle.protectsMusic(guardContext)||!Boolean.FALSE.equals(LauncherinMediaService.musicInProgress(guardContext))) {
+                status="desligamento suspenso pela proteção da música";cancel();return;
+            }
+            status=dreaming?(standby.getAsBoolean()?"desligamento enviado":"TV recusou desligamento"):"protetor não iniciou antes do prazo";cancel();
+        },Math.max(0,deadline-SystemClock.elapsedRealtime()));
         handler.postDelayed(()->{if(!dreaming){status="protetor não iniciou";cancel();}},15000);
         return true;
     }
