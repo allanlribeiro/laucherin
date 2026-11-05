@@ -6,7 +6,7 @@ Launcher para Android TV/Google TV com aplicativo de configuração para celular
 
 ## Downloads
 
-Os APKs e os pacotes ZIP ficam em [Releases](https://github.com/allanlribeiro/laucherin/releases). Para instalar, use os dois APKs preview10; para preparar o tutorial com a Clara, use o ZIP principal menor. O pacote completo também preserva as imagens históricas e as comparações automáticas dos testes.
+Os links dos APKs e ZIPs ficam em [Releases](https://github.com/allanlribeiro/laucherin/releases) e na [pasta Downloads](Downloads/README.md). Para instalar, use os dois APKs preview10; para preparar o tutorial com a Clara, use o ZIP principal menor. A cópia completa do repositório também preserva as imagens históricas e as comparações automáticas dos testes.
 
 | Aplicativo | Identificador | Código | Android mínimo |
 | --- | --- | --- | --- |

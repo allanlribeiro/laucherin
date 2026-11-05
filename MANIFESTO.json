@@ -1,6 +1,6 @@
 {
   "version": "0.1.0-preview10",
-  "variant": "codigo-publicado; APKs e ZIPs em Releases",
+  "variant": "fontes, guias e downloads publicos",
   "files": [
     {
       "path": ".gitignore",
@@ -21,6 +21,31 @@
       "path": "Distribuicao/Scripts/Habilitar-Temporizadores.ps1",
       "bytes": 1229,
       "sha256": "70dd36a152ddb2c5686128720c838f5f99c0cf85168b92a700f15dc5bf46b9fd"
+    },
+    {
+      "path": "Downloads/Launcherin-Android-0.1.0-preview10.apk",
+      "bytes": 7929938,
+      "sha256": "37901199e4592d891977beeb625f24ed5da80b1dd9997a9d062a2b485d7381aa"
+    },
+    {
+      "path": "Downloads/Launcherin-Clara-preview10-principal.zip",
+      "bytes": 30411733,
+      "sha256": "705dc006bdee755e5866f8277bcd115600fb20ad312e22fc4de7cb1054a90a43"
+    },
+    {
+      "path": "Downloads/Launcherin-TV-0.1.0-preview10.apk",
+      "bytes": 724147,
+      "sha256": "aab1444a2cc5a28f6db6e2335d6c223038f2a67683f06d1d81075757ebce8dbc"
+    },
+    {
+      "path": "Downloads/README.md",
+      "bytes": 1037,
+      "sha256": "7f2c25fa5a0fe965e4dea08385065132ab162277c4245a55e0c40552e6ba173d"
+    },
+    {
+      "path": "Downloads/SHA256SUMS.txt",
+      "bytes": 312,
+      "sha256": "a204d0b2aa2c7105bfa80d48589113b698a9265bf1981546af1a14618cd250ca"
     },
     {
       "path": "Guias/COMPILACAO.md",
@@ -42539,8 +42564,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 5237,
-      "sha256": "667924bfc26f304521a8cca32d421b827b68cf758958e4b92b77c2ff52571d88"
+      "bytes": 5297,
+      "sha256": "50a29b15b26bb87771bfb9f4ad5b3b91adb9451319d8e02869146cf81be6a2cd"
     },
     {
       "path": "Validacao/SHA256SUMS-preview10.txt",
