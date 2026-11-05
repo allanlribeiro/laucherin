@@ -195,7 +195,7 @@ public class HomeKeyService extends AccessibilityService {
         consumeVolumeKeys = config.consumeVolumeKeys;
         appKeys = RemoteKeys.parseAppKeys(config.appKeys);
         appScancodes = RemoteKeys.parseAppScancodes(config.appKeys);
-        RemoteKeys.applyKeyFilter(this, config.keyFilter || LauncherinRemote.global(this));
+        RemoteKeys.applyKeyFilter(this, config.keyFilter || LauncherinRemote.anyGlobal(this));
         homeLongPressHome = config.homeLongPressHome;
         frontAppKeys = RemoteKeys.parseFrontAppKeys(config.appKeys);
         frontAppScancodes = RemoteKeys.parseFrontAppScancodes(config.appKeys);
@@ -248,6 +248,8 @@ public class HomeKeyService extends AccessibilityService {
 
     private boolean isSettingsKey(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_SETTINGS) return true;
+        if (LauncherinRemote.settingsGlobal(this)
+                && LauncherinNativeSettings.gear(event.getKeyCode(), LauncherinNativeSettings.tcl())) return true;
         for (int code : settingsScancodes) if (event.getScanCode() == code) return true;
         for (int code : settingsKeycodes) if (event.getKeyCode() == code) return true;
         return false;
@@ -256,7 +258,7 @@ public class HomeKeyService extends AccessibilityService {
     static void applyTvRemote() {
         HomeKeyService service = running;
         if (service != null) { LauncherinRemote.refresh(service); RemoteKeys.applyKeyFilter(service,
-                Config.load(service).keyFilter || LauncherinRemote.global(service)); }
+                Config.load(service).keyFilter || LauncherinRemote.anyGlobal(service)); }
     }
 
     @Override
@@ -283,11 +285,7 @@ public class HomeKeyService extends AccessibilityService {
         // The stock launcher handled the remote's Settings button; with it disabled the button does nothing.
         if (isSettingsKey(event)) {
             if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
-                Intent open = settingsPanel ? new Intent(this, QuickSettingsActivity.class)
-                        : SystemSettings.intent(this, Settings.ACTION_SETTINGS);
-                try {
-                    startActivity(open.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                } catch (ActivityNotFoundException | SecurityException unavailable) {
+                if (!LauncherinNativeSettings.open(this, settingsPanel)) {
                     Toast.makeText(this, R.string.not_available, Toast.LENGTH_SHORT).show();
                 }
             }

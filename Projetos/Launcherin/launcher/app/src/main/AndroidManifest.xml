@@ -26,6 +26,7 @@
          apps that declare a module card (docs/specs/card.md). -->
     <queries>
         <package android:name="com.android.systemui"/>
+        <package android:name="com.android.tv.settings"/>
         <intent><action android:name="android.service.dreams.DreamService"/></intent>
         <!-- Background media controls query only these publishers, without broad package visibility. -->
         <package android:name="com.spotify.tv.android" />

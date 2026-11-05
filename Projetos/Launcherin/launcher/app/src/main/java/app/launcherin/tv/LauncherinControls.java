@@ -24,7 +24,9 @@ final class LauncherinControls {
                 "Liberar alteração dos tempos",
                 "Temporizadores: "+(status.isEmpty()?"configuração aplicada / padrão da TV":status),
                 (LauncherinDreams.canStartImmediately()?"Visualizar protetor agora · ":"Configurações do protetor · ")+LauncherinDreams.selected(host),
-                "Diagnóstico do protetor e da música"
+                "Diagnóstico do protetor e da música",
+                "Tecla de configurações em outros apps: "+(LauncherinRemote.settingsGlobal(host)?"ativada":"desativada"),
+                "Testar painel de configurações da TV"
         };
         new AlertDialog.Builder(host).setTitle("TV aberta, gols e inatividade")
                 .setItems(labels,(d,index)->{
@@ -45,6 +47,15 @@ final class LauncherinControls {
                         case 8: permissions(host);break;
                         case 10: LauncherinDreams.start(host,true);break;
                         case 11: LauncherinMusicActions.diagnostic(host);break;
+                        case 12:
+                            if(LauncherinRemote.settingsGlobal(host))save(host,LauncherinRemote.SETTINGS_FILTER,0,changed);
+                            else new AlertDialog.Builder(host).setTitle("Usar configurações em outros apps?")
+                                .setMessage("Ative a acessibilidade da Launcherin para usar a tecla de configurações dentro dos aplicativos. Na TCL compatível, ela abre o painel lateral de imagem e som. A leitura global de teclas pode afetar o volume ao manter o botão pressionado em algumas TCL; se acontecer, desative esta opção e a opção da tecla de TV em outros apps.")
+                                .setPositiveButton("Ativar",(a,b)->save(host,LauncherinRemote.SETTINGS_FILTER,1,changed))
+                                .setNegativeButton("Cancelar",null).show();break;
+                        case 13:
+                            if(!LauncherinNativeSettings.open(host,false))Toast.makeText(host,R.string.not_available,Toast.LENGTH_SHORT).show();
+                            break;
                         default: Toast.makeText(host,status.isEmpty()?"Os tempos valem em todos os apps. As fotos podem aparecer durante a música. Enquanto uma música reconhecida toca, o desligamento fica suspenso; ao pausar, o prazo começa novamente. Desligar significa entrar em espera.":status,Toast.LENGTH_LONG).show();
                     }
                 }).setNegativeButton("Fechar",null).show();

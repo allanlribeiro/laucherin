@@ -1,0 +1,52 @@
+{
+  "version": "0.1.0-preview12",
+  "tv": {
+    "package": "app.launcherin.tv",
+    "code": 20,
+    "version": "0.1.0-preview12",
+    "bytes": 726339,
+    "sha256": "75cdebfa030bb069b007e123833c62eb0cbd5962ecdc203cc39b0b87da23c3ad",
+    "certificateSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d",
+    "signatureVerified": true,
+    "permissionsUnchanged": true,
+    "embeddedByteIdentical": true
+  },
+  "phone": {
+    "package": "app.launcherin.mobile",
+    "code": 12,
+    "version": "0.1.0-preview12",
+    "bytes": 7932218,
+    "sha256": "52fc5da45cb610d865e07795efc4ddee8b63963eb0ff3fd3552e37a85009be56",
+    "certificateSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d",
+    "signatureVerified": true,
+    "permissionsUnchanged": true
+  },
+  "validation": {
+    "tests": 453,
+    "counts": {
+      "tv": 402,
+      "phoneTrust": 51
+    },
+    "failed": 0,
+    "nativeSettingsRobolectricTests": 10,
+    "tvLintErrors": 0,
+    "tvLintWarnings": 136,
+    "ptBRResources": 1494,
+    "ptBRContractErrors": 0,
+    "composeStability": "passed",
+    "phoneSizeGate": "signed distribution APK measured below 8388608 bytes"
+  },
+  "hardware": {
+    "nativeSidePanelViaAdb": "user confirmed desired panel with Type=Settings, Catagory=picture; quicksettings bottom bar rejected",
+    "physicalSettingsKeyWithNewApk": "pending installed candidate test",
+    "ordinaryAppServiceAccess": "pending installed candidate test; fallback preserved on denial",
+    "musicStandbyProtection": "preview11 implementation included; physical test still pending",
+    "emulatorTestedThisRevision": false
+  },
+  "activation": {
+    "menu": "Configurações da Launcherin → TV aberta, gols e inatividade → Tecla de configurações em outros apps",
+    "defaultEnabled": false,
+    "accessibilityHelper": "HomeKeyService (Botão Home)"
+  },
+  "publication": "candidate branch fix/tcl-settings-preview12; no merge or release"
+}

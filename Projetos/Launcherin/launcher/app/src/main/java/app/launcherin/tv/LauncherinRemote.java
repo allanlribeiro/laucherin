@@ -6,17 +6,23 @@ import android.view.KeyEvent;
 /** Device-specific TV key, learned from the actual framework KeyEvent, never an evdev guess. */
 final class LauncherinRemote {
     static final String KEY = "live_tv_remote_keycode", FILTER = "live_tv_remote_global";
+    static final String SETTINGS_FILTER = "settings_remote_global";
     private static volatile int learnedKey;
     private static volatile boolean filter;
+    private static volatile boolean settingsFilter;
     static void refresh(Context context) {
         org.json.JSONObject config=LauncherinExtras.read(context);
         android.content.SharedPreferences saved=context.getSharedPreferences("launcherin-remote",0);
         learnedKey=config.optInt(KEY,saved.getInt(KEY,0));
         filter=config.optInt(FILTER,saved.getInt(FILTER,0))==1;
-        saved.edit().putInt(KEY,learnedKey).putInt(FILTER,filter?1:0).apply();
+        settingsFilter=config.optInt(SETTINGS_FILTER,saved.getInt(SETTINGS_FILTER,0))==1;
+        saved.edit().putInt(KEY,learnedKey).putInt(FILTER,filter?1:0)
+                .putInt(SETTINGS_FILTER,settingsFilter?1:0).apply();
     }
     static int key(Context context) { return learnedKey; }
     static boolean global(Context context) { return filter; }
+    static boolean settingsGlobal(Context context) { return settingsFilter; }
+    static boolean anyGlobal(Context context) { return filter || settingsFilter; }
     static boolean learnable(int key) {
         if (key <= 0 || key > 9999) return false;
         switch (key) {

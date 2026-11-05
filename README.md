@@ -4,11 +4,11 @@
 
 Launcher para Android TV/Google TV com aplicativo de configuração para celular Android, em português brasileiro. Fork independente de [CleanYourTV](https://github.com/Gathin23/cleanyourtv) e [Clean Your TV App](https://github.com/udhaykumarbala/cleanyourtv-app).
 
-**Candidata de teste: 0.1.0-preview11.** Esta ramificação contém a correção do protetor nativo no Android14 e a proteção do desligamento durante música. [Guia de instalação e teste](Guias/PROTETOR-E-MUSICA-preview11.md). O protetor pode mostrar fotos durante a música; apenas o standby é suspenso. A proteção nova ainda precisa de validação física após instalar a TV19. Esta é uma cópia dos fontes atuais dos dois projetos, com suas alterações locais e documentação. Não é uma versão oficial do CleanYourTV.
+**Candidata de teste: 0.1.0-preview12.** Corrige o encaminhamento da tecla de configurações para o painel lateral nativo das TCL compatíveis e inclui a proteção do desligamento durante música da preview11. [Instalação e teste](Guias/PAINEL-TCL-preview12.md). A chamada nativa foi confirmada na TV via ADB; o botão físico com o APK novo e a proteção de standby ainda precisam de teste após instalar a TV20. Este é um fork independente, não uma versão oficial do CleanYourTV.
 
 ## Downloads
 
-Os links dos APKs e ZIPs ficam em [Releases](https://github.com/allanlribeiro/laucherin/releases) e na [pasta Downloads](Downloads/README.md). Para instalar, use os dois APKs preview11; para preparar o tutorial com a Clara, use o ZIP principal menor. A cópia completa do repositório também preserva as imagens históricas e as comparações automáticas dos testes.
+Os links dos APKs e ZIPs ficam em [Releases](https://github.com/allanlribeiro/laucherin/releases) e na [pasta Downloads](Downloads/README.md). Para instalar, use os APKs preview12; para preparar o tutorial com a Clara, use o ZIP principal menor. A cópia completa do repositório também preserva as imagens históricas e as comparações automáticas dos testes.
 
 | Aplicativo | Identificador | Código | Android mínimo |
 | --- | --- | --- | --- |

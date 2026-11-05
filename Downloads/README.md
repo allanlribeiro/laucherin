@@ -1,10 +1,11 @@
-# Downloads da candidata preview11
+# Downloads da candidata preview12
 
-Atualização de teste: fotos após5min e desligamento após10min, com standby suspenso durante música reconhecida. As fotos continuam permitidas; ao pausar a música inicia um novo prazo completo. Configure os tempos na TV após instalar, conforme o guia. A proteção nova ainda precisa do teste físico da TCL.
+Painel lateral TCL e correções anteriores de protetor/música. Atualize sem desinstalar.
 
-- [Launcherin-TV-0.1.0-preview11.apk — 0.73 MB](https://github.com/allanlribeiro/laucherin/raw/refs/heads/fix/music-standby-preview11/Downloads/Launcherin-TV-0.1.0-preview11.apk)
-- [Launcherin-Android-0.1.0-preview11.apk — 7.93 MB](https://github.com/allanlribeiro/laucherin/raw/refs/heads/fix/music-standby-preview11/Downloads/Launcherin-Android-0.1.0-preview11.apk)
+- [Launcherin TV preview12](https://github.com/allanlribeiro/laucherin/raw/refs/heads/fix/tcl-settings-preview12/Downloads/Launcherin-TV-0.1.0-preview12.apk)
+- [Launcherin Android preview12](https://github.com/allanlribeiro/laucherin/raw/refs/heads/fix/tcl-settings-preview12/Downloads/Launcherin-Android-0.1.0-preview12.apk)
 
-[Instalar e testar](../Guias/PROTETOR-E-MUSICA-preview11.md) · [Validação](../Validacao/validation-preview11.json) · [Hashes](../Validacao/SHA256SUMS-preview11.txt)
+[Instalar e testar](../Guias/PAINEL-TCL-preview12.md) · [Validação](../Validacao/validation-preview12.json) · [Hashes](../Validacao/SHA256SUMS-preview12.txt)
 
-Os arquivos preview10 e o ZIP para Clara são históricos e não incluem esta proteção nova.
+A TV pode ser atualizada diretamente por ADB; atualizar o celular é opcional nesse caso.
+A confirmação do botão físico com esta versão ainda está pendente.

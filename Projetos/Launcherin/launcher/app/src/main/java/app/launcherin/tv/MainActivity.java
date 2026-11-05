@@ -1429,7 +1429,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         if (action == LauncherinTv.NONE) return false;
         if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
             if (action == LauncherinTv.LIVE_TV) launcherinLiveTv();
-            else open(systemIntent(Settings.ACTION_SETTINGS));
+            else openRemoteSettings();
         }
         return true;
     }
@@ -1438,12 +1438,16 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         for (int code : settingsKeycodes) {
             if (event.getKeyCode() != code) continue;
             if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
-                open(settingsKeyPanel ? new Intent(this, QuickSettingsActivity.class)
-                        : systemIntent(Settings.ACTION_SETTINGS));
+                openRemoteSettings();
             }
             return true;
         }
         return false;
+    }
+
+    private void openRemoteSettings() {
+        if (!LauncherinNativeSettings.open(this, settingsKeyPanel))
+            Toast.makeText(this, R.string.not_available, Toast.LENGTH_SHORT).show();
     }
 
     // ---- reorder ---------------------------------------------------------------------------------

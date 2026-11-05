@@ -1,3 +1,7 @@
 37901199e4592d891977beeb625f24ed5da80b1dd9997a9d062a2b485d7381aa  Launcherin-Android-0.1.0-preview10.apk
+11167799cf55267957c67e8e79a79ec3329f82ba4a30b939483a298041970589  Launcherin-Android-0.1.0-preview11.apk
+52fc5da45cb610d865e07795efc4ddee8b63963eb0ff3fd3552e37a85009be56  Launcherin-Android-0.1.0-preview12.apk
 705dc006bdee755e5866f8277bcd115600fb20ad312e22fc4de7cb1054a90a43  Launcherin-Clara-preview10-principal.zip
 aab1444a2cc5a28f6db6e2335d6c223038f2a67683f06d1d81075757ebce8dbc  Launcherin-TV-0.1.0-preview10.apk
+a9e9e112252cbc209a5e22a268af0c0e7234770b506dc25e3b432518c8ad3a90  Launcherin-TV-0.1.0-preview11.apk
+75cdebfa030bb069b007e123833c62eb0cbd5962ecdc203cc39b0b87da23c3ad  Launcherin-TV-0.1.0-preview12.apk
