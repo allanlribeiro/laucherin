@@ -39,7 +39,7 @@ public final class LauncherinYouTubeMusicActivity extends Activity {
     private TextView title, artist, clock, help;
     private ImageView cover;
     private SeekBar seek;
-    private Button toggle, open;
+    private Button toggle, open, previous, next;
     private String artworkKey = "";
     private long duration;
     private boolean playing, seekDragging;
@@ -159,9 +159,9 @@ public final class LauncherinYouTubeMusicActivity extends Activity {
         LinearLayout.LayoutParams cmdParams = new LinearLayout.LayoutParams(-1, dp(54));
         cmdParams.topMargin = dp(18);
         page.addView(commands, cmdParams);
-        Button previous = button("◀◀  Anterior");
+        previous = button("◀◀  Anterior");
         toggle = button("Reproduzir");
-        Button next = button("Próxima  ▶▶");
+        next = button("Próxima  ▶▶");
         commands.addView(previous, new LinearLayout.LayoutParams(0, -1, 1));
         LinearLayout.LayoutParams toggleParams = new LinearLayout.LayoutParams(0, -1, 1);
         toggleParams.setMargins(dp(10), 0, dp(10), 0);
@@ -189,11 +189,10 @@ public final class LauncherinYouTubeMusicActivity extends Activity {
         LinearLayout.LayoutParams openParams = new LinearLayout.LayoutParams(-1, dp(52));
         openParams.topMargin = dp(20);
         page.addView(open, openParams);
+        // Opening an installed app does not require notification-listener access.
+        // Permission is only necessary for reading its session and sending playback commands.
         open.setOnClickListener(v -> {
-            if (!LauncherinMediaService.granted(this)) {
-                try { startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)); }
-                catch (RuntimeException e) { toast("Ative o acesso às notificações nas configurações."); }
-            } else if (!LauncherinYouTubeMusicSession.openOfficial(this))
+            if (!LauncherinYouTubeMusicSession.openOfficial(this))
                 toast("Instale o YouTube Music ou YouTube na TV.");
         });
 
@@ -218,9 +217,12 @@ public final class LauncherinYouTubeMusicActivity extends Activity {
         artist.setText(track.optString("artist", "YouTube Music"));
         duration = track.optLong("duration", 0);
         playing = track.optBoolean("playing");
-        toggle.setText(playing ? "Pausar  ❚❚" : "Reproduzir  ▶");
         boolean granted = LauncherinMediaService.granted(this);
-        open.setText(granted ? "Abrir YouTube Music" : "Autorizar acesso à mídia");
+        toggle.setText(!granted ? "Autorizar controles" : playing ? "Pausar  ❚❚" : "Reproduzir  ▶");
+        toggle.setEnabled(!granted || track.optBoolean(playing ? "canPause" : "canPlay"));
+        previous.setEnabled(granted && track.optBoolean("canPrevious"));
+        next.setEnabled(granted && track.optBoolean("canNext"));
+        open.setText("Abrir YouTube Music");
         help.setText(!granted
                 ? "Autorize o acesso às notificações para controlar a sessão de música."
                 : song.isEmpty()
@@ -234,7 +236,8 @@ public final class LauncherinYouTubeMusicActivity extends Activity {
             clock.setText(LauncherinYouTubeMusicPolicy.clock(position) + " / "
                     + LauncherinYouTubeMusicPolicy.clock(duration));
         }
-        seek.setEnabled(duration > 0 && granted);
+        // A published duration does not guarantee that the player accepts seeking.
+        seek.setEnabled(duration > 0 && granted && track.optBoolean("canSeek"));
         loadCover(track.optString("art"));
     }
 
