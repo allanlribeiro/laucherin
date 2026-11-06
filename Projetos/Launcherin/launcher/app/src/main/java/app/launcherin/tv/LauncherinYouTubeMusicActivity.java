@@ -202,8 +202,9 @@ public final class LauncherinYouTubeMusicActivity extends Activity {
         LinearLayout.LayoutParams helpParams = new LinearLayout.LayoutParams(-1, -2);
         helpParams.topMargin = dp(15);
         page.addView(help, helpParams);
-        open.requestFocus();
         refresh();
+        if (track.optString("title").isEmpty()) open.requestFocus();
+        else toggle.requestFocus();
     }
 
     private void toast(String message) {
