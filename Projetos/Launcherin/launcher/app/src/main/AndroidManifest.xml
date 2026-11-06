@@ -125,6 +125,11 @@
             </intent-filter>
         </activity>
 
+        <!-- Optional YouTube Music panel: no exported component or new permissions. -->
+        <activity android:name=".LauncherinYouTubeMusicActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:screenOrientation="landscape" />
         <activity android:name=".LauncherinRemoteActivity" android:exported="false" android:screenOrientation="landscape"/>
         <activity
             android:name=".LauncherSettingsActivity"
