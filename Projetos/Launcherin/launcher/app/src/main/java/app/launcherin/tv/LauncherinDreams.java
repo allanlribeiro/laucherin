@@ -44,7 +44,7 @@ final class LauncherinDreams {
     }
     static String diagnostic(Context c) {
         String[] names={"screensaver_components","screensaver_default_component","screensaver_enabled","screensaver_activate_on_sleep","sleep_timeout","attentive_timeout"};
-        StringBuilder text=new StringBuilder("Protetor: "+selected(c)+"\nDesligamento durante o protetor: "+(HomeKeyService.canLockScreen()?"auxiliar disponível":"temporizador do sistema")+"\n");
+        StringBuilder text=new StringBuilder("Tempos escolhidos: protetor "+LauncherinIdle.saver(c)+" min; desligamento "+LauncherinIdle.sleep(c)+" min\nProtetor: "+selected(c)+"\nDesligamento durante o protetor: "+(HomeKeyService.canLockScreen()?"auxiliar disponível":"temporizador do sistema")+"\n");
         text.append("Proteção da música: ").append(LauncherinIdle.musicStatus(c)).append("\n");
         text.append("Prazo auxiliar: ").append(LauncherinDreamDeadline.status()).append("\n");
         for(String key:names)text.append(key).append(": ").append(Settings.Secure.getString(c.getContentResolver(),key)).append('\n');

@@ -173,3 +173,19 @@ TV23 / celular15, `0.1.0-preview15`. O usuário confirmou na TCL que a seta para
 - Amostras de gfxinfo fornecidas pelo usuário após aproximadamente30 toques separados: preview14, 10/1340 quadros atrasados (0,75%), p95 CPU10ms, mediana GPU4ms; preview15, 5/730 (0,68%), p95 CPU8ms, mediana GPU2ms. P99 CPU13ms em ambas. São amostras de navegação sem controle de cadência: não sustentam um percentual de aumento de FPS. Fluidez confirmada pela percepção do usuário. A amostra de RAM82MiB PSS é da preview14; não se declara redução de memória.
 
 Downloads e fontes na candidata `fix/app-focus-preview15` do repositório `allanlribeiro/laucherin`; sem merge em main e sem release de produção.
+
+## Preview16 — proteção de música sem bloqueio permanente do standby
+
+TV24 / celular16, `0.1.0-preview16`. Relato: a TV não desliga na Home ou no protetor, sem música. Usuário está sem computador; diagnóstico físico da TV foi solicitado, mas ainda não está disponível. Não declarar o desligamento confirmado na TCL.
+
+Foram reproduzidas cinco falhas em testes Android antes da alteração: ausência de acesso a notificações impedia verificar silêncio/áudio; o prazo não expirava sem listener conectado; desconexão de mídia cancelava a liberação; gravação interrompida de proteção podia deixar um sleep_timeout=-1 ainda pertencente à launcher. Os quinze testes desse grupo passaram depois da correção.
+
+- A verificação usa a sessão válida de música e, como sinal público adicional, AudioManager.isMusicActive(). Áudio ativo continua protegido mesmo sem acesso a notificações e com volume zero. Se ambos os sinais forem indisponíveis, mantém a proteção conservadora anterior.
+- O acompanhamento dos tempos é inicializado pela Home e pelo auxiliar existente após desbloqueio, independentemente do listener de notificações. Desconectar esse listener não cancela o prazo de proteção. Guardar o prazo depois da pausa agenda a rechecagem mesmo quando não há observador conectado. Depois da pausa mantém um intervalo completo de desligamento; novos metadados não reiniciam o prazo.
+- Recupera somente sleep_timeout=-1 que continua marcado como pertencente à proteção da launcher. Valores externos diferentes continuam preservados. Para reaplicar deliberadamente os tempos escolhidos no aparelho, pode-se selecionar Desativado e depois10min em Desligar após, mantendo o protetor5min.
+- Fotos/protetor continuam independentes da proteção de desligamento. Não foram alteradas as ações das teclas Home/configurações/TV, os ajustes de foco/fluidez da preview15, o TMDB ou os controles musicais. Não há novas permissões, dependências, serviço em primeiro plano ou WakeLock.
+- Diagnóstico agora informa também os tempos escolhidos. Mesma assinatura e pacote; credenciais e aparência preservadas.
+
+Validação: 431 testes TV +51 de integridade (482), lint TV sem erros, 1500 recursos pt-BR sem erros de contrato; APK TV embarcado idêntico, limites de tamanho e assinaturas conferidos. Falta teste físico de desligamento sem música e proteção durante reprodução. Celular16 inclui TV24 para atualização pelo próprio app, sem computador.
+
+Referência da API de áudio: https://developer.android.com/reference/android/media/AudioManager#isMusicActive() .

@@ -40,6 +40,40 @@ public class LauncherinMusicIdleAndroidTest {
     }
     @After public void finish(){LauncherinIdle.stopListening();}
     private void apply(Boolean music){assertEquals("",LauncherinIdle.apply(c,music));}
+    @Test public void silentTvCanBeVerifiedWithoutNotificationAccess() {
+        android.media.AudioManager audio=c.getSystemService(android.media.AudioManager.class);
+        Shadows.shadowOf(audio).setIsMusicActive(false);
+        assertFalse(LauncherinMediaService.granted(c));
+        assertEquals(Boolean.FALSE,LauncherinMediaService.musicInProgress(c));
+    }
+    @Test public void activeAudioWithoutNotificationAccessStillProtectsMusic() {
+        android.media.AudioManager audio=c.getSystemService(android.media.AudioManager.class);
+        Shadows.shadowOf(audio).setIsMusicActive(true);
+        audio.setStreamVolume(android.media.AudioManager.STREAM_MUSIC,0,0);
+        assertEquals(Boolean.TRUE,LauncherinMediaService.musicInProgress(c));
+    }
+    @Test public void pausedProtectionExpiresWithoutAConnectedMediaListener() {
+        Shadows.shadowOf(c.getSystemService(android.media.AudioManager.class)).setIsMusicActive(false);
+        apply(true);apply(false);
+        Shadows.shadowOf(android.os.Looper.getMainLooper()).idleFor(Duration.ofMinutes(10));
+        assertEquals("600000",LauncherinIdle.read(c,1));assertFalse(LauncherinIdle.protectsMusic(c));
+    }
+    @Test public void disconnectingTheMediaListenerDoesNotCancelThePauseDeadline() {
+        LauncherinIdle.listen(c);apply(true);apply(false);
+        Shadows.shadowOf(c.getSystemService(android.media.AudioManager.class)).setIsMusicActive(false);
+        LauncherinMediaService service=org.robolectric.Robolectric.buildService(LauncherinMediaService.class).create().get();
+        service.onListenerDisconnected();
+        Shadows.shadowOf(android.os.Looper.getMainLooper()).idleFor(Duration.ofMinutes(10));
+        assertEquals("600000",LauncherinIdle.read(c,1));assertFalse(LauncherinIdle.protectsMusic(c));
+    }
+    @Test public void interruptedLeaseWriteCannotLeaveOurOwnSleepValueDisabledForever() {
+        apply(true);c.getSharedPreferences("launcherin-idle",0).edit().remove("music_hold").commit();
+        apply(false);assertEquals("600000",LauncherinIdle.read(c,1));
+    }
+    @Test public void explicitExternalDisablingRemainsUntouchedWhenNotOwnedByTheLease() {
+        apply(false);Settings.Secure.putString(c.getContentResolver(),"sleep_timeout","-1");apply(false);
+        assertEquals("-1",LauncherinIdle.read(c,1));
+    }
     @Test public void photosRemainEnabledWhileOnlyStandbyIsSuspended() {
         apply(true);
         assertEquals("300000",LauncherinIdle.read(c,0));

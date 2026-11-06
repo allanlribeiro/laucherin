@@ -68,13 +68,14 @@ final class LauncherinIdle {
             String sleepValue=guard.hold?"-1":sleep>0?Long.toString(sleep*60000L):"-1";
             if (desired.equals(prefs.getString("applied", ""))) {
                 // Unrelated external changes remain untouched without a protection lease.
-                if(guard.hold || held && "-1".equals(read(c,1))) {
+                if(guard.hold || held && "-1".equals(read(c,1))
+                        || !guard.hold && "-1".equals(owned.optString(KEYS[1])) && "-1".equals(read(c,1))) {
                     if(!sleepValue.equals(read(c,1))) {
                         if(!write(c,1,sleepValue))throw new IllegalStateException("Proteção da música recusada");
                         owned.put(KEYS[1],sleepValue);
                     }
                 }
-                saveGuard(prefs,owned,guard,boot);
+                saveGuard(c,prefs,owned,guard,boot);
                 return sleep>0&&music==null?"Ative o acesso a mídias: o desligamento fica suspenso enquanto a reprodução não puder ser verificada.":"";
             }
             if (!prefs.contains("backup")) {
@@ -89,14 +90,14 @@ final class LauncherinIdle {
                 if (!prefs.edit().putString("owned", owned.toString()).commit()) throw new IllegalStateException();
             }
             prefs.edit().putString("applied", desired).commit();
-            saveGuard(prefs,owned,guard,boot);
+            saveGuard(c,prefs,owned,guard,boot);
             return sleep>0&&music==null?"Ative o acesso a mídias: o desligamento fica suspenso enquanto a reprodução não puder ser verificada.":"";
         } catch (Exception error) {
             prefs.edit().remove("applied").apply();
             return "A TV recusou os tempos. Verifique as permissões e tente novamente.";
         }
     }
-    private static void saveGuard(SharedPreferences prefs,JSONObject owned,LauncherinMusicIdlePolicy.Decision guard,int boot) {
+    private static void saveGuard(Context context,SharedPreferences prefs,JSONObject owned,LauncherinMusicIdlePolicy.Decision guard,int boot) {
         if((!owned.toString().equals(prefs.getString("owned","")) || guard.hold!=prefs.getBoolean("music_hold",false)
                 || guard.pausedAt!=prefs.getLong("music_paused_at",-1) || boot!=prefs.getInt("music_boot",-1))
                 && !prefs.edit().putString("owned",owned.toString()).putBoolean("music_hold",guard.hold)
@@ -104,17 +105,19 @@ final class LauncherinIdle {
             throw new IllegalStateException("Proteção não salva");
         if(guard.hold)LauncherinDreamDeadline.cancel();
         handler().removeCallbacks(recheck);
-        if(watched!=null&&guard.checkAfter>=0)handler().postDelayed(recheck,guard.checkAfter);
+        if(guard.checkAfter>=0){if(watched==null)watched=context.getApplicationContext();handler().postDelayed(recheck,guard.checkAfter);}
     }
-    static void listen(Context c) {
-        stopListening();watched=c.getApplicationContext();
+    static String listen(Context c) {
+        Context app=c.getApplicationContext();if(watched==app&&observer!=null)return apply(app);
+        stopListening();watched=app;
         observer=new ContentObserver(handler()){@Override public void onChange(boolean self){
             Context owner=watched;if(owner!=null&&owner.getSharedPreferences("launcherin-idle",0).getBoolean("music_hold",false)) {
                 handler().removeCallbacks(recheck);handler().post(recheck);
             }
         }};
-        watched.getContentResolver().registerContentObserver(Settings.Secure.getUriFor("sleep_timeout"),false,observer);
-        apply(watched);
+        try{watched.getContentResolver().registerContentObserver(Settings.Secure.getUriFor("sleep_timeout"),false,observer);}
+        catch(RuntimeException unavailable){observer=null;}
+        return apply(watched);
     }
     static void stopListening() {
         handler().removeCallbacks(recheck);

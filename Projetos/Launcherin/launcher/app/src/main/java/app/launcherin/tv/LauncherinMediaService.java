@@ -191,23 +191,28 @@ public final class LauncherinMediaService extends NotificationListenerService {
    }
   }catch(RuntimeException ignored){}return false;
  }
- /** Null means that playback could not be verified; standby must fail safely. */
+ /** Public audio activity is available even when notification/session access has disconnected. */
  static Boolean musicInProgress(Context context){
-  if(!granted(context))return null;
-  try{MediaSessionManager manager=context.getSystemService(MediaSessionManager.class);
-   if(manager==null)return null;JSONObject saved=lastMusic(context);
-   for(MediaController controller:manager.getActiveSessions(new ComponentName(context,LauncherinMediaService.class))){
-    PlaybackState state=controller.getPlaybackState();
-    if(state!=null&&LauncherinMusicCommand.started(state.getState())
-       &&LauncherinMusic.matchesSaved(controller.getPackageName(),controller.getMetadata(),saved))return true;
+  Boolean sessions=null;
+  if(granted(context))try{MediaSessionManager manager=context.getSystemService(MediaSessionManager.class);
+   if(manager!=null){sessions=false;JSONObject saved=lastMusic(context);
+    for(MediaController controller:manager.getActiveSessions(new ComponentName(context,LauncherinMediaService.class))){
+     PlaybackState state=controller.getPlaybackState();
+     if(state!=null&&LauncherinMusicCommand.started(state.getState())
+        &&LauncherinMusic.matchesSaved(controller.getPackageName(),controller.getMetadata(),saved))return true;
+    }
    }
-   return false;
-  }catch(RuntimeException unavailable){return null;}
+  }catch(RuntimeException unavailable){sessions=null;}
+  try{android.media.AudioManager audio=context.getSystemService(android.media.AudioManager.class);
+   if(audio!=null)return audio.isMusicActive();
+  }catch(RuntimeException unavailable){}
+  // Unknown is still protected if neither public signal can verify playback.
+  return sessions;
  }
  static boolean musicPlaying(){MediaController controller=musicController();PlaybackState state=controller==null?null:controller.getPlaybackState();return state!=null&&state.getState()==PlaybackState.STATE_PLAYING;}
 
  static void skip(Context context,boolean next){cancelMusicCommand();MediaController controller=musicController();if(controller!=null){if(next)controller.getTransportControls().skipToNext();else controller.getTransportControls().skipToPrevious();}}
  static void seek(Context context,long position){MediaController controller=musicController();if(controller!=null)controller.getTransportControls().seekTo(position);}
- @Override public void onListenerDisconnected(){LauncherinIdle.stopListening();LauncherinMusicActions.clear();if(goals!=null){goals.stop();goals=null;}current=null;if(manager!=null)manager.removeOnActiveSessionsChangedListener(listener);for(MediaSession.Token token:new ArrayList<>(controllers.keySet()))controllers.get(token).unregisterCallback(callbacks.get(token));controllers.clear();activityTimes.clear();playbackStates.clear();callbacks.clear();}
+ @Override public void onListenerDisconnected(){LauncherinMusicActions.clear();if(goals!=null){goals.stop();goals=null;}current=null;if(manager!=null)manager.removeOnActiveSessionsChangedListener(listener);for(MediaSession.Token token:new ArrayList<>(controllers.keySet()))controllers.get(token).unregisterCallback(callbacks.get(token));controllers.clear();activityTimes.clear();playbackStates.clear();callbacks.clear();}
  @Override public void onDestroy(){onListenerDisconnected();main.removeCallbacksAndMessages(null);storage.shutdown();super.onDestroy();}
 }

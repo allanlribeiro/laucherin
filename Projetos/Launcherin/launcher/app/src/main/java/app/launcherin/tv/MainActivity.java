@@ -1088,7 +1088,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         if(launcherin==null)launcherin=new LauncherinDashboard(this,root,grid);
         launcherin.resume();
         LauncherinRemote.refresh(this);
-        String timerError = LauncherinIdle.apply(this);
+        String timerError = LauncherinIdle.listen(this);
         SharedPreferences timerNotice = getSharedPreferences("launcherin-timer-notice", MODE_PRIVATE);
         if (!timerError.isEmpty() && !timerError.equals(timerNotice.getString("error", "")))
             Toast.makeText(this, timerError + " Abra TV aberta, gols e inatividade nas configurações da Launcherin.", Toast.LENGTH_LONG).show();

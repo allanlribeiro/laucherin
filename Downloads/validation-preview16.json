@@ -1,0 +1,70 @@
+{
+  "version": "0.1.0-preview16",
+  "tv": {
+    "package": "app.launcherin.tv",
+    "versionCode": 24,
+    "versionName": "0.1.0-preview16",
+    "bytes": 737015,
+    "sha256": "646cf9d058976f219595444b29a0c1386e0001bdb0704049c6f0f9801d91bbe1",
+    "certificateSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d",
+    "signatureVerified": true,
+    "permissionsUnchanged": true
+  },
+  "phone": {
+    "package": "app.launcherin.mobile",
+    "versionCode": 16,
+    "versionName": "0.1.0-preview16",
+    "bytes": 7950858,
+    "sha256": "945b442f4ef5391bf671b0efb7ab3fa4e28bd40b948f1c87051744c5fed5f528",
+    "certificateSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d",
+    "signatureVerified": true,
+    "permissionsUnchanged": true
+  },
+  "tvEmbeddedByteIdentical": true,
+  "runtimeApiKeyAbsentFromApks": true,
+  "tests": {
+    "total": 482,
+    "counts": {
+      "tv": 431,
+      "trust": 51
+    },
+    "failures": 0
+  },
+  "lint": {
+    "tv": {
+      "errors": 0,
+      "warnings": 138
+    },
+    "design": {
+      "errors": 0,
+      "warnings": 11
+    },
+    "launcherUi": {
+      "errors": 0,
+      "warnings": 8
+    }
+  },
+  "ptBR": {
+    "resources": 1500,
+    "contractErrors": 0
+  },
+  "hardware": {
+    "standbyFixOnTcl": "pending; user currently has no Windows computer",
+    "previousNavigationAndAppFluency": "confirmed by user on preview15; implementation preserved"
+  },
+  "scope": {
+    "tmdbArtworkAndContentLogos": true,
+    "transparentOrRoundedProviderMarks": true,
+    "dockLocalHighlight": true,
+    "downOnBottomShelfConsumed": true,
+    "legacyHeroFocusEffectsSkipped": true,
+    "lighterPillFocus": true,
+    "ownYoutubeMusicPlayerIncluded": false,
+    "standbyLeaseIndependentOfMediaListener": true,
+    "publicAudioFallback": true,
+    "crashedLeaseRecovery": true,
+    "homeKeyActionsChanged": false
+  },
+  "publication": "candidate for branch fix/idle-timer-preview16; no main merge or release",
+  "companionUi": "Unchanged; companion update packages TV24. Design/launcher UI lint reports remain from the unchanged preview14 UI."
+}
