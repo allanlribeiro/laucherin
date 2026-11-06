@@ -5,3 +5,5 @@
 aab1444a2cc5a28f6db6e2335d6c223038f2a67683f06d1d81075757ebce8dbc  Launcherin-TV-0.1.0-preview10.apk
 a9e9e112252cbc209a5e22a268af0c0e7234770b506dc25e3b432518c8ad3a90  Launcherin-TV-0.1.0-preview11.apk
 75cdebfa030bb069b007e123833c62eb0cbd5962ecdc203cc39b0b87da23c3ad  Launcherin-TV-0.1.0-preview12.apk
+ebaee7c974223c6293a54b595d246576514a53c5ca07d624728e88f9b89dde57  Launcherin-TV-0.1.0-preview13.apk
+06c0bedb9dca26f28e09d7b3c836cf8ac1e4aadedb120ba0f987f577bec490d6  Launcherin-Android-0.1.0-preview13.apk

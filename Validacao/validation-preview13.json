@@ -1,0 +1,57 @@
+{
+  "version": "0.1.0-preview13",
+  "tv": {
+    "package": "app.launcherin.tv",
+    "code": 21,
+    "version": "0.1.0-preview13",
+    "bytes": 726483,
+    "sha256": "ebaee7c974223c6293a54b595d246576514a53c5ca07d624728e88f9b89dde57",
+    "certificateSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d",
+    "signatureVerified": true,
+    "permissionsUnchanged": true,
+    "embeddedByteIdentical": true
+  },
+  "phone": {
+    "package": "app.launcherin.mobile",
+    "code": 13,
+    "version": "0.1.0-preview13",
+    "bytes": 7932286,
+    "sha256": "06c0bedb9dca26f28e09d7b3c836cf8ac1e4aadedb120ba0f987f577bec490d6",
+    "certificateSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d",
+    "signatureVerified": true,
+    "permissionsUnchanged": true
+  },
+  "validation": {
+    "tests": 462,
+    "counts": {
+      "tv": 411,
+      "phoneTrust": 51
+    },
+    "failed": 0,
+    "nativeGraphicsArtworkTests": 5,
+    "layoutReuseTest": 1,
+    "keyFilterReactivationTests": 3,
+    "tvLintErrors": 0,
+    "tvLintWarnings": 136,
+    "ptBRResources": 1494,
+    "ptBRContractErrors": 0,
+    "composeStability": "passed",
+    "phoneSizeGate": "passed"
+  },
+  "scope": {
+    "appRow": "bulk bitmap pixel processing and unchanged-layout request suppression",
+    "widgets": "unchanged",
+    "continueWatching": "unchanged",
+    "nativeSettings": "preview12 fix preserved plus runtime filter reactivation fix",
+    "systemPackagesAndOtherAccessibilityServices": "unchanged"
+  },
+  "hardware": {
+    "previousPreview12NativeSettings": "user confirmed native side panel with physical gear inside Netflix after enabling HomeKeyService",
+    "performanceComparison": "pending on TCL; user has no ADB access now",
+    "ramOrFpsImprovement": "not measured; no numerical improvement claimed",
+    "appsNavigationObservation": "user reports only app row stutters; widgets and continue watching are fluid",
+    "musicStandbyProtection": "previous implementation preserved; physical test remains pending",
+    "emulatorTestedThisRevision": false
+  },
+  "publication": "candidate branch perf/apps-preview13; no merge or release"
+}

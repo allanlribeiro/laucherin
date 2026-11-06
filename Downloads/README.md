@@ -1,11 +1,10 @@
-# Downloads da candidata preview12
+# Downloads da candidata preview13
 
-Painel lateral TCL e correções anteriores de protetor/música. Atualize sem desinstalar.
+Ajustes no preparo dos logos e no layout da barra de apps. Ganho de fluidez e RAM ainda não medido na TCL.
 
-- [Launcherin TV preview12](https://github.com/allanlribeiro/laucherin/raw/refs/heads/fix/tcl-settings-preview12/Downloads/Launcherin-TV-0.1.0-preview12.apk)
-- [Launcherin Android preview12](https://github.com/allanlribeiro/laucherin/raw/refs/heads/fix/tcl-settings-preview12/Downloads/Launcherin-Android-0.1.0-preview12.apk)
+- [Launcherin TV preview13](https://github.com/allanlribeiro/laucherin/raw/refs/heads/perf/apps-preview13/Downloads/Launcherin-TV-0.1.0-preview13.apk)
+- [Launcherin Android preview13](https://github.com/allanlribeiro/laucherin/raw/refs/heads/perf/apps-preview13/Downloads/Launcherin-Android-0.1.0-preview13.apk)
 
-[Instalar e testar](../Guias/PAINEL-TCL-preview12.md) · [Validação](../Validacao/validation-preview12.json) · [Hashes](../Validacao/SHA256SUMS-preview12.txt)
+[Instalar e comparar](../Guias/APPS-DESEMPENHO-preview13.md) · [Validação](../Validacao/validation-preview13.json) · [Hashes](../Validacao/SHA256SUMS-preview13.txt)
 
-A TV pode ser atualizada diretamente por ADB; atualizar o celular é opcional nesse caso.
-A confirmação do botão físico com esta versão ainda está pendente.
+O app do celular inclui o mesmo APK da TV. Atualize sem desinstalar e mantenha o serviço Botão Home da Launcherin ativado.

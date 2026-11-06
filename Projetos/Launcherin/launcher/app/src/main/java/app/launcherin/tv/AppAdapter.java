@@ -129,13 +129,19 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         int width = dockTileWidth(inner, height, Math.round(parent.getResources().getDisplayMetrics().heightPixels * .205f),
                 parent.getPaddingTop(), parent.getPaddingBottom(), dockSize, density);
         FrameLayout.LayoutParams tile = (FrameLayout.LayoutParams) holder.card.getLayoutParams();
-        tile.width = width; tile.height = tileHeightPx(width); tile.gravity = android.view.Gravity.CENTER;
-        holder.card.setLayoutParams(tile);
+        int tileHeight = tileHeightPx(width);
+        if (tile.width != width || tile.height != tileHeight || tile.gravity != android.view.Gravity.CENTER) {
+            tile.width = width; tile.height = tileHeight; tile.gravity = android.view.Gravity.CENTER;
+            holder.card.setLayoutParams(tile);
+        }
         ViewGroup.LayoutParams row = holder.itemView.getLayoutParams();
-        row.width = Math.max(1, inner / dockSize);
-        row.height = Math.max(1, (height > 0 ? height : Math.round(parent.getResources().getDisplayMetrics().heightPixels * .205f))
+        int rowWidth = Math.max(1, inner / dockSize);
+        int rowHeight = Math.max(1, (height > 0 ? height : Math.round(parent.getResources().getDisplayMetrics().heightPixels * .205f))
                 - parent.getPaddingTop() - parent.getPaddingBottom());
-        holder.itemView.setLayoutParams(row);
+        if (row.width != rowWidth || row.height != rowHeight) {
+            row.width = rowWidth; row.height = rowHeight;
+            holder.itemView.setLayoutParams(row);
+        }
     }
 
     @Override public void onViewAttachedToWindow(@NonNull RecyclerView.ViewHolder holder) {

@@ -119,10 +119,12 @@ final class RemoteKeys {
      * runs, since the flag is also declared in the manifest metadata.
      */
     static void applyKeyFilter(AccessibilityService service, boolean keyFilter) {
-        if (keyFilter) return;
         AccessibilityServiceInfo info = service.getServiceInfo();
         if (info == null) return;
-        info.flags &= ~AccessibilityServiceInfo.FLAG_REQUEST_FILTER_KEY_EVENTS;
+        int flag = AccessibilityServiceInfo.FLAG_REQUEST_FILTER_KEY_EVENTS;
+        int flags = keyFilter ? info.flags | flag : info.flags & ~flag;
+        if (flags == info.flags) return;
+        info.flags = flags;
         service.setServiceInfo(info);
     }
 

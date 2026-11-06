@@ -151,3 +151,15 @@ Em Configurações da Launcherin → TV aberta, gols e inatividade, ative **Tecl
 O auxiliar abre o painel ao soltar a tecla, ignora cancelamentos e não leva a Home para a frente. O código TCL83 é tratado globalmente com essa opção; botões TCL4020, volume e Home não ganham novos mapeamentos. A leitura global pode afetar a repetição do volume em algumas TCL; para desligá-la, desative ambas as opções de teclas em outros apps quando não houver outro filtro configurado. Se o serviço nativo não estiver disponível ou negar acesso à Launcherin, usa-se o caminho anterior de configurações.
 
 Inclui também as correções da preview11 para protetor nativo Android14 e proteção do desligamento durante música. Fotos podem aparecer enquanto toca música; apenas o standby fica suspenso. O APK da TV e o teste da tecla física ainda precisam ser confirmados após instalar esta candidata.
+
+## Preview13 — trabalho de renderização na barra de apps
+
+O relato de lentidão foi localizado pelo usuário na barra de aplicativos; widgets e Continuar assistindo não apresentaram engasgos. O uso total informado (1,2GB de1,9GB) não estabelece pressão de memória. Esta candidata reduz trabalho evitável nessa barra, sem prometer redução de RAM ou ganho de FPS ainda não medido na TCL.
+
+- O ajuste dos logos transfere os pixels em lote, substituindo chamadas de bitmap por pixel nos laços de recorte e de extração do ícone Disney. Mantém as regras de recorte, cores, margens e resolução.
+- O ajuste dos cartões só aplica parâmetros de layout quando tamanho ou alinhamento mudou, inclusive ao reutilizar ou anexar um cartão na rolagem. O tamanho continua se adaptando a mudanças da área disponível.
+- Corrige também a ativação do filtro de teclas com o auxiliar já conectado: desativar e reativar a opção volta a solicitar a entrega de teclas. Os outros flags de acessibilidade são preservados.
+
+A tecla física de configurações da preview12 foi confirmada na TCL após ativar o serviço distinto **Botão Home** da Launcherin; o auxiliar chamado apenas Launcherin é o de entradas. Essa configuração continua necessária.
+
+Os testes de imagens usam renderização nativa do Android para conferir recortes, cores, transparência e extração da marca Disney. Há testes do layout dos cartões e da reativação das teclas. A comparação de fluidez, CPU e memória na TCL precisa ser feita depois de instalar a candidata; o usuário está sem computador ADB neste momento. Protetor de tela, proteção de standby durante música, widgets e Continuar assistindo conservam o comportamento da candidata anterior.
