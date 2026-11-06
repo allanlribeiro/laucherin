@@ -55,6 +55,7 @@ final class LauncherinYouTubeMusicSession {
         }
         MediaMetadata md = controller.getMetadata();
         PlaybackState state = controller.getPlaybackState();
+        long actions = state == null ? 0L : state.getActions();
         String pkg = controller.getPackageName();
         String title = LauncherinMusic.text(md, MediaMetadata.METADATA_KEY_DISPLAY_TITLE,
                 MediaMetadata.METADATA_KEY_TITLE);
@@ -76,6 +77,13 @@ final class LauncherinYouTubeMusicSession {
             result.put("duration", md == null ? 0L : Math.max(0L, md.getLong(MediaMetadata.METADATA_KEY_DURATION)));
             result.put("position", state == null ? 0L : Math.max(0L, state.getPosition()));
             result.put("capturedElapsed", SystemClock.elapsedRealtime());
+            result.put("canSeek", (actions & PlaybackState.ACTION_SEEK_TO) != 0);
+            result.put("canNext", (actions & PlaybackState.ACTION_SKIP_TO_NEXT) != 0);
+            result.put("canPrevious", (actions & PlaybackState.ACTION_SKIP_TO_PREVIOUS) != 0);
+            result.put("canPause", (actions & (PlaybackState.ACTION_PAUSE
+                    | PlaybackState.ACTION_PLAY_PAUSE)) != 0);
+            result.put("canPlay", (actions & (PlaybackState.ACTION_PLAY
+                    | PlaybackState.ACTION_PLAY_PAUSE)) != 0);
         } catch (Exception ignored) { /* A partial result is safe for the view. */ }
         return result;
     }
