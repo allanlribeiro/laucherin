@@ -31,7 +31,8 @@ final class LauncherinAudioWidget extends FrameLayout {
   previous=button("Faixa anterior",-1);play=button("Reproduzir ou pausar",0);next=button("Próxima faixa",1);addView(previous);addView(play);addView(next);
   previous.setOnClickListener(v->LauncherinMediaService.skip(host,false));next.setOnClickListener(v->LauncherinMediaService.skip(host,true));play.setOnClickListener(v->{if(!LauncherinMediaService.granted(host)){try{host.startActivity(new Intent(android.provider.Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));}catch(RuntimeException error){Toast.makeText(host,"Abra o acesso a mídias nas configurações da TV.",Toast.LENGTH_LONG).show();}}else if(!LauncherinMusicResume.busy())LauncherinMediaService.setMusicPlaying(host,!track.optBoolean("playing"));});
   setOnLongClickListener(v->{LauncherinMusicActions.diagnostic(host);return true;});
-  for(Button control:new Button[]{previous,play,next})control.setOnLongClickListener(v->{LauncherinMusicActions.diagnostic(host);return true;});
+  for(Button control:new Button[]{previous,next})control.setOnLongClickListener(v->{LauncherinMusicActions.diagnostic(host);return true;});
+  play.setOnLongClickListener(v->{host.startActivity(new Intent(host,LauncherinYouTubeMusicActivity.class));return true;});
   provider=new ImageView(host);provider.setScaleType(ImageView.ScaleType.FIT_CENTER);provider.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);addView(provider);
   setOnFocusChangeListener((v,has)->{if(has)play.requestFocus();});
   for(Button button:new Button[]{previous,play,next})button.setOnKeyListener((v,key,event)->{if(event.getAction()!=KeyEvent.ACTION_DOWN)return false;if(key==KeyEvent.KEYCODE_DPAD_DOWN){down.run();return true;}if(key==KeyEvent.KEYCODE_DPAD_UP)return true;if(key==KeyEvent.KEYCODE_DPAD_LEFT&&v==previous){left.run();return true;}if(key==KeyEvent.KEYCODE_DPAD_RIGHT&&v==next){right.run();return true;}return false;});
