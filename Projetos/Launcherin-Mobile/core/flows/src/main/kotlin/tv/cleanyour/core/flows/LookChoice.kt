@@ -42,6 +42,8 @@ data class LookDetails(
     val widgetLayout: List<WidgetSlot>? = null,
     val framePhotos: List<String>? = null,
     val watchNextMode: String? = null,
+    val tmdbApiKey: String? = null,
+    val tmdbArtwork: Boolean? = null,
 )
 
 // What the look depends on about the TV.
@@ -119,6 +121,8 @@ sealed interface LookEdit {
     data class SetWidgetLayout(val slots: List<WidgetSlot>) : LookEdit
     data class SetFramePhotos(val ids: List<String>) : LookEdit
     data class SetWatchNextMode(val mode: String) : LookEdit
+    data class SetTmdbApiKey(val key: String) : LookEdit
+    data class SetTmdbArtwork(val on: Boolean) : LookEdit
     data class SetSeasonalTheme(val id: String) : LookEdit
     data class SetGoalAlerts(val on: Boolean) : LookEdit
     data class SetIdleScreensaver(val minutes: Int) : LookEdit

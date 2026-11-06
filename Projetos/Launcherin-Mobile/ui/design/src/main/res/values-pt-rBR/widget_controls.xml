@@ -46,4 +46,10 @@
     <string name="agenda_time">Horário</string>
     <string name="agenda_save">Salvar compromisso</string>
     <string name="agenda_cancel">Cancelar edição</string>
+    <string name="tmdb_artwork">Imagens e logos pela TMDB</string>
+    <string name="tmdb_artwork_hint">Usa a logo do conteúdo no lugar do título escrito, quando disponível.</string>
+    <string name="tmdb_key">Chave da API TMDB</string>
+    <string name="tmdb_key_error">A chave deve conter 32 caracteres hexadecimais.</string>
+    <string name="tmdb_key_hint">Cole sua chave e toque em Aplicar na TV. Apague para remover a credencial.</string>
+    <string name="tmdb_credit">Imagens e dados: TMDB. This product uses the TMDB API but is not endorsed or certified by TMDB.</string>
 </resources>

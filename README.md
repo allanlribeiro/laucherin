@@ -1,3 +1,5 @@
+> Esta branch contem a candidata preview15 para a navegacao da Launcherin. [Downloads e instrucoes](Downloads/README.md). Main permanece separado.
+
 > Os APKs desta candidata estão em [Downloads](Downloads/README.md). A versão publicada anteriormente em Releases continua sendo preview10. O ZIP de compartilhamento antigo permanece como arquivo histórico; os fontes atualizados estão nesta ramificação.
 
 # Launcherin

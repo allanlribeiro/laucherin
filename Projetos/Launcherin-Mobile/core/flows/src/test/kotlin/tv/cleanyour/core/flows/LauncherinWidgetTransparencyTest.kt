@@ -21,6 +21,24 @@ class LauncherinWidgetTransparencyTest {
         .jsonObject["widget_transparency"]?.jsonPrimitive?.int
     private fun season(draft: LookDraft) = Json.parseToJsonElement(draft.fullFile).jsonObject["seasonal_theme"]?.jsonPrimitive?.content
 
+    @Test fun tmdbChoiceSurvivesStorageStyleChangesResetAndExplicitRemoval() {
+        val key = "0123456789abcdef0123456789abcdef"
+        var draft = drafts.open(saved(), context)
+        draft = drafts.edit(draft, LookEdit.SetTmdbApiKey(key), context)
+        draft = drafts.edit(draft, LookEdit.SetTmdbArtwork(true), context)
+        draft = drafts.edit(draft, LookEdit.SelectStyle(StyleId.CLASSIC), context)
+        val choice = drafts.choiceOf(draft, saved(), emptyList(), true, LookPicture.NONE_ID, null)
+        val restored = HomePrefs.decode(HomePrefs.encode(choice))
+        assertEquals(key, restored.details.tmdbApiKey)
+        assertEquals(true, restored.details.tmdbArtwork)
+        assertEquals(key, Json.parseToJsonElement(draft.fullFile).jsonObject.getValue("tmdb_api_key").jsonPrimitive.content)
+        val reset = drafts.edit(draft, LookEdit.ResetDetails, context)
+        assertEquals(key, reset.details.tmdbApiKey)
+        val removed = drafts.edit(draft, LookEdit.SetTmdbApiKey(""), context)
+        assertEquals("", Json.parseToJsonElement(removed.fullFile).jsonObject.getValue("tmdb_api_key").jsonPrimitive.content)
+        assertEquals("", HomePrefs.decode(HomePrefs.encode(drafts.choiceOf(removed, saved(), emptyList(), true, LookPicture.NONE_ID, null))).details.tmdbApiKey)
+    }
+
     @Test fun goalAndIdleOptionsSurviveReopeningAndTravelToTv() {
         var chosen = drafts.open(saved(), context)
         chosen = drafts.edit(chosen, LookEdit.SetGoalAlerts(true), context)

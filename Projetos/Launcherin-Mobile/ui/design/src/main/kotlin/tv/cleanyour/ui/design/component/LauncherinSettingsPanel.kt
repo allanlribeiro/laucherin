@@ -17,11 +17,23 @@ enum class LauncherinPanel { WEATHER, SPORTS, TRANSPARENCY, THEME, SAVER, POWER,
 fun ColumnScope.LauncherinSettingsPanel(panel: LauncherinPanel, details: LookDetails, onEdit: (LookEdit) -> Unit) {
     when (panel) {
         LauncherinPanel.LAYOUT -> LauncherinWidgetEditor(details.widgetLayout ?: tv.cleanyour.core.flows.LauncherinWidgets.defaults()) { onEdit(LookEdit.SetWidgetLayout(it)) }
-        LauncherinPanel.WATCH -> LookRadioList(listOf(
+        LauncherinPanel.WATCH -> { LookRadioList(listOf(
             RadioChoice("above",stringResource(R.string.watch_above),stringResource(R.string.watch_above_hint)),
             RadioChoice("below",stringResource(R.string.watch_below),stringResource(R.string.watch_below_hint)),
             RadioChoice("hidden",stringResource(R.string.watch_hidden),stringResource(R.string.watch_hidden_hint)),
         ),details.watchNextMode ?: "above",{onEdit(LookEdit.SetWatchNextMode(it))})
+            ListGroup(Modifier.padding(top = 14.dp)) {
+                LookSwitchRow(stringResource(R.string.tmdb_artwork), details.tmdbArtwork != false,
+                    { onEdit(LookEdit.SetTmdbArtwork(it)) }, description = stringResource(R.string.tmdb_artwork_hint))
+            }
+            val key = details.tmdbApiKey.orEmpty()
+            CytTextField(key, { onEdit(LookEdit.SetTmdbApiKey(it)) }, stringResource(R.string.tmdb_key),
+                modifier = Modifier.padding(top = 14.dp), password = true,
+                error = if (key.isNotEmpty() && !Regex("[a-fA-F0-9]{32}").matches(key)) stringResource(R.string.tmdb_key_error) else null,
+                supporting = stringResource(R.string.tmdb_key_hint))
+            androidx.compose.foundation.Image(androidx.compose.ui.res.painterResource(R.drawable.tmdb_logo), contentDescription = "TMDB", modifier = Modifier.padding(top = 12.dp))
+            LookBody(stringResource(R.string.tmdb_credit), Modifier.padding(top = 12.dp))
+        }
         LauncherinPanel.WEATHER -> {
             CytTextField(details.weatherCityQuery.orEmpty(), { onEdit(LookEdit.SetWeatherCityQuery(it)) },
                 stringResource(R.string.launcherin_weather_city), supporting = stringResource(R.string.launcherin_weather_city_hint))

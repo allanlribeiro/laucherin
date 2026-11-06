@@ -1,10 +1,11 @@
-# Downloads da candidata preview13
+# Launcherin preview15
 
-Ajustes no preparo dos logos e no layout da barra de apps. Ganho de fluidez e RAM ainda não medido na TCL.
+[Baixar TV](Launcherin-TV-0.1.0-preview15.apk) | [Baixar celular](Launcherin-Android-0.1.0-preview15.apk)
 
-- [Launcherin TV preview13](https://github.com/allanlribeiro/laucherin/raw/refs/heads/perf/apps-preview13/Downloads/Launcherin-TV-0.1.0-preview13.apk)
-- [Launcherin Android preview13](https://github.com/allanlribeiro/laucherin/raw/refs/heads/perf/apps-preview13/Downloads/Launcherin-Android-0.1.0-preview13.apk)
+Correcao da navegacao no Continuar assistindo abaixo dos apps e foco mais leve na barra. Usuario confirmou na TCL que o seletor deixou de se deslocar e os apps ficaram fluidos.
 
-[Instalar e comparar](../Guias/APPS-DESEMPENHO-preview13.md) · [Validação](../Validacao/validation-preview13.json) · [Hashes](../Validacao/SHA256SUMS-preview13.txt)
+O celular inclui TV23 e permite atualizar em Atualizar a tela inicial. Quem ja instalou TV23 pelo ADB pode manter o celular preview14: a interface/configuracao continua compativel.
 
-O app do celular inclui o mesmo APK da TV. Atualize sem desinstalar e mantenha o serviço Botão Home da Launcherin ativado.
+Home, TMDB, musica e temporizadores preservados. Nenhuma chave pessoal esta embutida. [Instrucoes](LEIA-ME-preview15.md) | [Validacao](validation-preview15.json) | [Hashes](SHA256SUMS-preview15.txt)
+
+Candidata de teste em branch separada; nao e release de producao.

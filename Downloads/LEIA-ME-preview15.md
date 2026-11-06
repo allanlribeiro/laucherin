@@ -1,7 +1,9 @@
-# Candidata preview15 — foco dos apps
+# Launcherin preview15 — navegação dos apps
 
-TV23 / 0.1.0-preview15. Corrige navegação para baixo no Continuar assistindo abaixo dos apps, mantém o realce dentro da barra e reduz trabalho de animação por troca de foco. Home e credenciais TMDB preservados.
+A instalação na TCL foi confirmada: o seletor deixou de aparecer sobre o Continuar assistindo e a navegação entre apps ficou fluida.
 
-APK validado com assinatura estável, mesmas permissões e425 testes passando. Ganho de fluidez ainda precisa de comparação física na TCL. Nenhuma chave pessoal está embutida. Esta branch não altera main.
+Esta correção está no APK da TV (código23). Quem já usa o celular preview14 pode atualizar só a TV pelo ADB. O celular preview15 inclui a TV23, para quem prefere instalar pelo app em Atualizar a tela inicial. A interface do celular continua a mesma.
 
-SHA256: 6a403fe30ebb4c44f5aececdee6643cf4253c2633acc59b030526eb4031abf96
+Mantidos Home, painel rápido TCL, logos e imagens TMDB, música e temporizadores. A chave TMDB existente permanece salva; não está embutida nos APKs.
+
+Validação: 425 testes TV +51 de integridade, lint TV sem erros, assinatura estável e permissões iguais às da preview14. Não se declara aumento percentual de FPS ou redução de RAM.

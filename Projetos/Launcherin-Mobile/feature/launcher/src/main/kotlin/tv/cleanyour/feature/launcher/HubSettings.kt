@@ -16,7 +16,7 @@ enum class HubSetting(val tab: HubTab, val title: Int, val description: Int, val
     APPS(HubTab.PERSONALIZE, R.string.hub_apps, R.string.hub_apps_desc, "ícones ordem dock aplicativos tamanho"),
     WEATHER(HubTab.WIDGETS, R.string.hub_weather, R.string.hub_weather_desc, "cidade previsão clima localização"),
     SPORTS(HubTab.WIDGETS, R.string.hub_sports, R.string.hub_sports_desc, "times futebol gols notificações favoritos escudos"),
-    WATCH(HubTab.WIDGETS, R.string.hub_watch, R.string.hub_watch_desc, "netflix prime disney max histórico assistir youtube"),
+    WATCH(HubTab.WIDGETS, R.string.hub_watch, R.string.hub_watch_desc, "netflix prime disney max histórico assistir youtube tmdb logos imagem chave api"),
     LISTEN(HubTab.WIDGETS, R.string.hub_listen, R.string.hub_listen_desc, "spotify youtube music música álbum play reprodução"),
     SAVER(HubTab.TV, R.string.hub_saver, R.string.hub_saver_desc, "google fotos álbum ambiente inatividade descanso"),
     POWER(HubTab.TV, R.string.hub_power, R.string.hub_power_desc, "desligar dormir temporizador ociosidade standby"),

@@ -75,6 +75,8 @@ internal class Look(val doc: LauncherConfigDoc, val digest: Sha256, val config: 
             parts.details.widgetLayout?.let { widgetKeys[LauncherinWidgets.KEY] = LauncherinWidgets.encode(it) }
             parts.details.framePhotos?.let { widgetKeys["frame_photos"] = JsonArray(it.filter { id -> Regex("[a-f0-9]{64}").matches(id) }.distinct().take(10).map(::JsonPrimitive)) }
             parts.details.watchNextMode?.let { widgetKeys["watch_next_mode"] = JsonPrimitive(it.takeIf { mode -> mode in setOf("above","below","hidden") } ?: "above") }
+            parts.details.tmdbApiKey?.let { widgetKeys["tmdb_api_key"] = JsonPrimitive(it.trim()) }
+            parts.details.tmdbArtwork?.let { widgetKeys["tmdb_artwork"] = JsonPrimitive(it) }
             parts.details.weatherCityQuery?.let { widgetKeys["weather_city_query"] = JsonPrimitive(it.trim()) }
             parts.details.favoriteTeams?.let { widgetKeys["sports_favorite_teams"] = JsonArray(LauncherinTeams.clean(it).map(::JsonPrimitive)) }
             parts.details.seasonalTheme?.let { widgetKeys["seasonal_theme"] = JsonPrimitive(if (it == "christmas") "christmas" else "none") }

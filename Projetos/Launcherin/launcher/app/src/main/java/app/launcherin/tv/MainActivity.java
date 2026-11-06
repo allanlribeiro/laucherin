@@ -1853,7 +1853,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         // Tile rect in root coordinates, using layout positions (ignores the scale animation).
         Rect r = tileRect;
         r.set(0, 0, card.getWidth(), card.getHeight());
-        root.offsetDescendantRectToMyCoords(card, r);
+        ((ViewGroup)glass.getParent()).offsetDescendantRectToMyCoords(card, r);
         float pad = 6f * density;        // matches GlassView's glow inset
         float scale = adapter.focusScale();
         float w = card.getWidth() * scale + 2 * pad;
@@ -1900,6 +1900,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             springX.animateToFinalPosition(x - glassScrollShiftX);
             springY.animateToFinalPosition(y - glassScrollShift);
         }
+        // The Launcherin composition owns the shelf and background. The original hero/glow path
+        // rebuilds hidden artwork and starts full-screen fades on every app focus change.
+        if (launcherin != null) return;
         View item = (View) card.getParent();
         if (dockRow && (singleRow || position < COLUMNS)) {
             // Dock: park it at the bottom of the screen and show the top shelf for this app. In a single row
@@ -1939,7 +1942,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         // cold start can leave the glass at the right size and the wrong place. Comparing the rect catches that.
         Rect r = tileRect;
         r.set(0, 0, card.getWidth(), card.getHeight());
-        root.offsetDescendantRectToMyCoords(card, r);
+        ((ViewGroup)glass.getParent()).offsetDescendantRectToMyCoords(card, r);
         if (!glassShown || card.getWidth() != glassCardW || glass.getWidth() != w || glass.getHeight() != h
                 || !glassCardRect.equals(r)) {
             onTileFocused(pos, card);
@@ -3707,6 +3710,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                 if (vendor != null) open(vendor);
             });
         }
+        if (launcherin != null) addSettingsMenuRow(rows, popup, R.string.launcherin_tmdb, launcherin::tmdbSettings);
         if (moduleCards) addSettingsMenuRow(rows, popup, R.string.module_cards, this::showModuleCards);
         if (dockRow) addSettingsMenuRow(rows, popup, R.string.dock_edit, this::startDockEdit);
         addSettingsMenuRow(rows, popup, R.string.reorder, this::toggleReorder);

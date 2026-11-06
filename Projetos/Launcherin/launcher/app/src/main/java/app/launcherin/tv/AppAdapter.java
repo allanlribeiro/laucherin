@@ -492,7 +492,8 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             View label = v.findViewById(R.id.label);
             label.setPadding(label.getPaddingLeft(), label.getPaddingTop(), label.getPaddingRight(), Math.round(4f * density));
         }
-        return new Holder(v, listener, animations, advancedEffects, reducedMotion, restNameAlpha, focusOvershoot);
+        Holder holder=new Holder(v, listener, animations, advancedEffects, reducedMotion, restNameAlpha, focusOvershoot);
+        holder.pillFocus=singleRow;return holder;
     }
 
     @Override
@@ -527,9 +528,9 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         h.card.setScaleX(focused && animations ? focusScale() : 1f);
         h.card.setScaleY(focused && animations ? focusScale() : 1f);
         h.card.setTranslationY(focused && advancedEffects && !dockKind ? -4f * ctx.getResources().getDisplayMetrics().density : 0f);
-        h.card.setTranslationZ(focused && advancedEffects ? 8f * ctx.getResources().getDisplayMetrics().density : 0f);
-        h.banner.setScaleX(focused && advancedEffects ? 1.035f : 1f);
-        h.banner.setScaleY(focused && advancedEffects ? 1.035f : 1f);
+        h.card.setTranslationZ(focused && advancedEffects && !singleRow ? 8f * ctx.getResources().getDisplayMetrics().density : 0f);
+        h.banner.setScaleX(focused && advancedEffects && !singleRow ? 1.035f : 1f);
+        h.banner.setScaleY(focused && advancedEffects && !singleRow ? 1.035f : 1f);
         // A fully opaque banner covers the whole card (centerCrop), so the card's own fill under it is drawn for
         // nothing on every frame; keep it under banners with transparent parts and under icon tiles.
         h.card.setBackground(e.banner != null && e.banner.getOpacity() == PixelFormat.OPAQUE ? null : h.cardBackground);
@@ -974,6 +975,7 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         final boolean overshoot;
         /** A dock tile: it grows in place without advanced_effects' lift, which reads as off-centre in the band (#2135). */
         boolean inDock;
+        boolean pillFocus;
 
         Holder(View v, TileListener listener, boolean animations, boolean advancedEffects,
                boolean reducedMotion, float restNameAlpha, boolean overshoot) {
@@ -1023,6 +1025,15 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     banner.setScaleY(1f);
                     name.setAlpha(focused ? 1f : restNameAlpha);
                     name.setTranslationY(0f);
+                } else if (pillFocus) {
+                    // One transform on the pill: no temporary texture upload, inner-banner zoom,
+                    // shadow animation or invisible caption animation on every D-pad press.
+                    view.setTranslationY(0f);view.setTranslationZ(0f);
+                    banner.setScaleX(1f);banner.setScaleY(1f);
+                    view.animate().scaleX(s).scaleY(s)
+                            .setDuration(reducedMotion ? Motion.REDUCED_MS : focused ? 140 : 100)
+                            .setInterpolator(new DecelerateInterpolator(1.5f)).start();
+                    name.setAlpha(focused ? 1f : restNameAlpha);
                 } else if (reducedMotion) {
                     // A short zoom with no hardware layer: building a layer for so short an animation costs more
                     // frames than it saves. The name just appears instead of fading.

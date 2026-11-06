@@ -59,10 +59,12 @@ fun CytTextField(
     supporting: String? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     singleLine: Boolean = true,
+    password: Boolean = false,
 ) {
     val c = CytTheme.colors
     OutlinedTextField(
         value = value, onValueChange = onValueChange, modifier = modifier.fillMaxWidth(),
+        visualTransformation = if (password) androidx.compose.ui.text.input.PasswordVisualTransformation() else androidx.compose.ui.text.input.VisualTransformation.None,
         label = { Text(label) }, isError = error != null, singleLine = singleLine,
         supportingText = (error ?: supporting)?.let { { Text(it) } },
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),

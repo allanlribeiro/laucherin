@@ -211,6 +211,8 @@ internal class LookDrafts(
             is LookEdit.SetFavoriteTeams -> detail(true) { copy(favoriteTeams = LauncherinTeams.clean(edit.ids)) }
             is LookEdit.SetWidgetLayout -> detail(true) { copy(widgetLayout = LauncherinWidgets.clean(LauncherinWidgets.encode(edit.slots))) }
             is LookEdit.SetFramePhotos -> detail(true) { copy(framePhotos = edit.ids.filter { Regex("[a-f0-9]{64}").matches(it) }.distinct().take(10)) }
+            is LookEdit.SetTmdbApiKey -> detail(true) { copy(tmdbApiKey = edit.key.trim().take(32).filter { it.isLetterOrDigit() }) }
+            is LookEdit.SetTmdbArtwork -> detail(true) { copy(tmdbArtwork = edit.on) }
             is LookEdit.SetWatchNextMode -> detail(true) { copy(watchNextMode = edit.mode.takeIf { it in setOf("above","below","hidden") } ?: "above") }
             is LookEdit.SetSeasonalTheme -> detail(true) { copy(seasonalTheme = if (edit.id == "christmas") "christmas" else "none") }
             is LookEdit.SetSeeThrough -> detail(rows.seeThrough.enabled && edit.percent in LookKeys.SEE_THROUGH) { copy(seeThrough = edit.percent) }
@@ -227,7 +229,7 @@ internal class LookDrafts(
                 noted(LookNoteKind.RESET, { before })
                 touched(p.copy(details = LookDetails(goalAlerts = p.details.goalAlerts, idleScreensaverMinutes = p.details.idleScreensaverMinutes,
                     idleStandbyMinutes = p.details.idleStandbyMinutes, widgetLayout = p.details.widgetLayout,
-                    framePhotos = p.details.framePhotos, watchNextMode=p.details.watchNextMode), movement = LookGates.defaultMovement(ctx.tv.ramMb), lift = false, movementPicked = false,
+                    framePhotos = p.details.framePhotos, watchNextMode=p.details.watchNextMode, tmdbApiKey=p.details.tmdbApiKey, tmdbArtwork=p.details.tmdbArtwork), movement = LookGates.defaultMovement(ctx.tv.ramMb), lift = false, movementPicked = false,
                     extras = LookExtras.DEFAULT))
             }
             LookEdit.UndoChanges -> base?.takeIf { draft.changed }?.let { b ->

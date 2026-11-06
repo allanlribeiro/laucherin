@@ -1,0 +1,96 @@
+{
+  "version": "0.1.0-preview15",
+  "tv": {
+    "package": "app.launcherin.tv",
+    "versionCode": 23,
+    "versionName": "0.1.0-preview15",
+    "bytes": 736835,
+    "sha256": "6a403fe30ebb4c44f5aececdee6643cf4253c2633acc59b030526eb4031abf96",
+    "certificateSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d",
+    "signatureVerified": true,
+    "permissionsUnchanged": true
+  },
+  "phone": {
+    "package": "app.launcherin.mobile",
+    "versionCode": 15,
+    "versionName": "0.1.0-preview15",
+    "bytes": 7950646,
+    "sha256": "b798a51fa4855353d05c478d3d113ee326ac4be5665091bec170b3a5e74e2e7c",
+    "certificateSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d",
+    "signatureVerified": true,
+    "permissionsUnchanged": true
+  },
+  "tvEmbeddedByteIdentical": true,
+  "runtimeApiKeyAbsentFromApks": true,
+  "tests": {
+    "total": 476,
+    "counts": {
+      "tv": 425,
+      "trust": 51
+    },
+    "failures": 0
+  },
+  "lint": {
+    "tv": {
+      "errors": 0,
+      "warnings": 138
+    },
+    "design": {
+      "errors": 0,
+      "warnings": 11
+    },
+    "launcherUi": {
+      "errors": 0,
+      "warnings": 8
+    }
+  },
+  "ptBR": {
+    "resources": 1500,
+    "contractErrors": 0
+  },
+  "hardware": {
+    "navigationFixConfirmedByUser": true,
+    "appFluencyComparison": "User reports apps are now fluid on TCL after preview15.",
+    "installedTvVersionCode": 23,
+    "appFluencyConfirmedByUser": true,
+    "measurements": {
+      "method": "User-reported gfxinfo samples after approximately 30 separate D-pad taps; not a controlled benchmark.",
+      "before": {
+        "versionCode": 22,
+        "frames": 1340,
+        "jankyFrames": 10,
+        "jankyPercent": 0.75,
+        "cpuP95Ms": 10,
+        "cpuP99Ms": 13,
+        "gpuP50Ms": 4,
+        "gpuP95Ms": 4,
+        "gpuP99Ms": 5,
+        "pssKiB": 84368
+      },
+      "after": {
+        "versionCode": 23,
+        "frames": 730,
+        "jankyFrames": 5,
+        "jankyPercent": 0.68,
+        "cpuP95Ms": 8,
+        "cpuP99Ms": 13,
+        "gpuP50Ms": 2,
+        "gpuP95Ms": 3,
+        "gpuP99Ms": 5
+      }
+    },
+    "limitations": "No FPS or RAM improvement percentage claimed. Physical navigation and subjective fluency confirmed by the user."
+  },
+  "scope": {
+    "tmdbArtworkAndContentLogos": true,
+    "transparentOrRoundedProviderMarks": true,
+    "homeBehaviorChanged": false,
+    "dockLocalHighlight": true,
+    "downOnBottomShelfConsumed": true,
+    "legacyHeroFocusEffectsSkipped": true,
+    "lighterPillFocus": true,
+    "ownYoutubeMusicPlayerIncluded": false
+  },
+  "publication": "candidate branch fix/app-focus-preview15; no main merge or release",
+  "companionUi": "Unchanged from preview14; this build updates version and bundled TV package."
+}
