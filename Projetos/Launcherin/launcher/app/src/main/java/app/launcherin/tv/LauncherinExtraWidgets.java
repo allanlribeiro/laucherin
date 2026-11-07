@@ -15,7 +15,11 @@ import java.util.concurrent.Executor;
 /** Passive widgets; only visible cards are sampled. All imported pictures remain on the TV. */
 final class LauncherinExtraWidgets {
     final MainActivity host;final Executor io;final FrameLayout agenda,photos,system;
-    private final TextView appointments,memory,cpu,photoHint;private final ImageView picture;
+    private final TextView appointments,photoHint;private final ImageView picture;
+    private final LauncherinWidgetFaces.System systemFace;
+    private final LauncherinDownloadStats downloads=new LauncherinDownloadStats();
+    private int generation;
+    private Double lastDownload;
     private final LauncherinSystemStats stats=new LauncherinSystemStats();
     private List<LauncherinAgendaData.Entry> events=Collections.emptyList();private String agendaText="";
     private String shown="";private long photoAt;private int photoIndex;private boolean sampling,decoding,active;
@@ -25,13 +29,13 @@ final class LauncherinExtraWidgets {
         appointments=text("Cadastre compromissos pelo celular",15);place(agenda,appointments,37,14);agenda.setContentDescription("Agenda do dia");agenda.setOnClickListener(v->agendaPopup());
         picture=new ImageView(host);picture.setScaleType(ImageView.ScaleType.FIT_CENTER);photos.addView(picture,0,new FrameLayout.LayoutParams(-1,-1));photos.setClipToOutline(true);
         photoHint=text("Escolha fotos no celular",15);photoHint.setGravity(Gravity.CENTER);place(photos,photoHint,30,12);photos.setContentDescription("Porta-retratos");photos.setOnClickListener(v->{photoAt=0;photoIndex++;refreshPhoto();});
-        memory=text("RAM · —",16);cpu=text("CPU · —",14);place(system,memory,38,12);place(system,cpu,73,12);system.setContentDescription("Memória RAM e CPU");system.setOnClickListener(v->systemPopup());
+        systemFace=new LauncherinWidgetFaces.System(host);FrameLayout.LayoutParams metrics=new FrameLayout.LayoutParams(-1,-1);metrics.setMargins(dp(15),dp(33),dp(15),dp(10));system.addView(systemFace,metrics);system.setContentDescription("Sistema. RAM, CPU e download da TV");system.setOnClickListener(v->systemPopup());
     }
     private int dp(int value){return Math.round(value*host.getResources().getDisplayMetrics().density);}
     private TextView text(String title,int size){TextView v=new TextView(host);v.setText(title);v.setTextSize(size);v.setTextColor(0xfff4f4fa);v.setEllipsize(TextUtils.TruncateAt.END);v.setMaxLines(3);v.setIncludeFontPadding(false);return v;}
     private void place(FrameLayout card,View view,int top,int side){FrameLayout.LayoutParams p=new FrameLayout.LayoutParams(-1,-1);p.setMargins(dp(side),dp(top),dp(side),dp(8));card.addView(view,p);}
-    void active(boolean on){active=on;if(!on&&popup!=null)popup.dismiss();}
-    void tick(){if(!active)return;if(agenda.isShown())refreshAgenda();if(photos.isShown())refreshPhoto();if(system.isShown())refreshSystem();}
+    void active(boolean on){if(active!=on){generation++;downloads.reset();}active=on;if(!on&&popup!=null)popup.dismiss();}
+    void tick(){if(!active)return;if(agenda.isShown())refreshAgenda();if(photos.isShown())refreshPhoto();if(system.isShown())refreshSystem();else downloads.reset();}
     private void refreshAgenda(){
         List<LauncherinAgendaData.Entry> next=LauncherinAgendaData.today(host);StringBuilder s=new StringBuilder();
         for(int i=0;i<Math.min(2,next.size());i++){if(i>0)s.append('\n');LauncherinAgendaData.Entry e=next.get(i);s.append(e.time.isEmpty()?"Dia todo":e.time).append(" · ").append(e.title);}
@@ -45,19 +49,19 @@ final class LauncherinExtraWidgets {
         popup.content.addView(popup.button("Fechar",()->popup.dismiss()));popup.show();
     }
     private void refreshSystem(){
-        if(sampling)return;sampling=true;io.execute(()->{
-            LauncherinSystemStats.Sample sample=stats.sample(host);system.post(()->{sampling=false;if(!active||!system.isShown())return;last=sample;
-                memory.setText(sample.totalMemory>0?String.format(Locale.forLanguageTag("pt-BR"),"RAM · %.1f / %.1f GB",sample.usedMemory()/1073741824d,sample.totalMemory/1073741824d):"RAM indisponível");
-                cpu.setText((sample.wholeTv?"CPU da TV · ":"CPU da launcher · ")+(sample.cpu==null?"—":Math.round(sample.cpu)+"%"));
+        if(sampling)return;sampling=true;int run=generation;io.execute(()->{
+            LauncherinSystemStats.Sample sample=stats.sample(host);Double download=downloads.sample();system.post(()->{sampling=false;if(run!=generation){downloads.reset();return;}if(!active||!system.isShown())return;last=sample;lastDownload=download;
+                systemFace.update(sample,download);system.setContentDescription(systemFace.description());
             });
         });
     }
     private void systemPopup(){
-        if(popup!=null)popup.dismiss();popup=new LauncherinCardPopup(host,system,440,230);popup.content.addView(popup.label("RAM e CPU",22,-1));
+        if(popup!=null)popup.dismiss();popup=new LauncherinCardPopup(host,system,480,310);popup.content.addView(popup.label("Sistema",22,-1));
         String scope=last!=null&&last.wholeTv?"O uso de CPU reúne todos os núcleos da TV.":"Este Android não disponibiliza o uso total de CPU. A medição exibida é somente da Launcherin, dividida entre os núcleos disponíveis.";
-        popup.content.addView(popup.label("A RAM inclui o sistema e os aplicativos.\n\n"+scope+"\nAtualização a cada 5 segundos enquanto o widget está visível.",15,0xffdddddd),new LinearLayout.LayoutParams(-1,0,1));
+        popup.content.addView(popup.label("A RAM inclui o sistema e os aplicativos.\n\n"+scope+"\n\n↓ Download da TV: "+LauncherinDownloadStats.format(lastDownload)+" Mb/s. Tráfego recebido pelas interfaces de rede; não é um teste da velocidade contratada.\n\nAtualização a cada 5 segundos, somente enquanto o widget está visível. A primeira amostra aguarda o próximo intervalo.",14,0xffdddddd),new LinearLayout.LayoutParams(-1,0,1));
         popup.content.addView(popup.button("Fechar",()->popup.dismiss()));popup.show();
     }
+
     private void refreshPhoto(){
         if(decoding||!active)return;JSONArray ids=LauncherinExtras.read(host).optJSONArray("frame_photos");List<String> valid=new ArrayList<>();
         if(ids!=null)for(int i=0;i<Math.min(10,ids.length());i++){String id=ids.optString(i);if(id.matches("[a-f0-9]{64}"))valid.add(id);}

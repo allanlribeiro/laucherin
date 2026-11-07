@@ -5,7 +5,7 @@
     <string name="widget_sports">Esportes</string>
     <string name="widget_agenda">Agenda</string>
     <string name="widget_photos">Fotos</string>
-    <string name="widget_system">RAM e CPU</string>
+    <string name="widget_system">Sistema</string>
     <string name="widgets_layout_hint">Escolha os widgets e arraste os cards na prévia. Você também pode usar os botões de posição. A grade mantém os cards separados dos apps e do Continuar assistindo.</string>
     <string name="widgets_none">Nenhum widget visível</string>
     <string name="widgets_show_hint">Ocultar remove o card da TV e deixa o fundo visível.</string>

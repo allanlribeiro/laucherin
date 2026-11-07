@@ -49,7 +49,7 @@ class WidgetPagesTest {
         }
         assertTrue(slots.none { it.enabled })
         compose.onNodeWithText("Nenhum widget visível").performScrollTo().assertIsDisplayed()
-        compose.onNodeWithText("RAM e CPU").performScrollTo().performClick()
+        compose.onNodeWithText("Sistema").performScrollTo().performClick()
         compose.onNode(isToggleable()).performScrollTo().performClick()
         compose.onNodeWithContentDescription("Mover para cima").performScrollTo().performClick()
         assertTrue(slots.single { it.id=="system" }.enabled);assertEquals(0,slots.single { it.id=="system" }.y)

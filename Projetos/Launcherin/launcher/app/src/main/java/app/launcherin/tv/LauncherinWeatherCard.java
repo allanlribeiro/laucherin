@@ -27,7 +27,7 @@ final class LauncherinWeatherCard {
     }
     void render(LauncherinWeather.Snapshot weather,long now) {
         if(!popup.showing())return;
-        city.setText(weather.city);current.setText(weather.icon(now)+"  "+weather.temperature+"°");
+        city.setText(weather.city);current.setText(weather.icon(now)+"  "+weather.temperature+"°");current.setTextColor(LauncherinWidgetFaces.Weather.accent(weather.code,weather.night(now)));
         condition.setText(weather.conditions+" · "+(weather.night(now)?"Noite":"Dia")+(weather.old()?" · Dados anteriores":""));
         scene.weather(weather.code,weather.night(now),LauncherinWidgetAppearance.transparency(popup.host));
         source.setText("Open-Meteo · "+new java.text.SimpleDateFormat("HH:mm",Locale.forLanguageTag("pt-BR")).format(new java.util.Date(weather.updated)));
@@ -37,6 +37,7 @@ final class LauncherinWeatherCard {
         for(LauncherinWeather.Day day:forecast){
             LinearLayout column=new LinearLayout(popup.host);column.setOrientation(LinearLayout.VERTICAL);column.setGravity(Gravity.CENTER);
             TextView date=popup.label(label.format(day.date),12,0xffe3e8f0),icon=popup.label(LauncherinWeather.symbol(day.code),24,Color.WHITE),range=popup.label(day.high+"° / "+day.low+"°",14,Color.WHITE),rain=popup.label(day.rain<0?"Chuva —":"Chuva "+day.rain+"%",10,0xffd5e1ec);
+            icon.setTextColor(LauncherinWidgetFaces.Weather.accent(day.code,false));
             for(TextView text:new TextView[]{date,icon,range,rain}){text.setGravity(Gravity.CENTER);column.addView(text,new LinearLayout.LayoutParams(-1,-2));}
             column.setContentDescription(date.getText()+" · "+LauncherinWeather.description(day.code)+" · máxima "+day.high+" graus, mínima "+day.low+" graus"+(day.rain<0?"":" · chance de chuva "+day.rain+" por cento"));
             days.addView(column,new LinearLayout.LayoutParams(0,-2,1));

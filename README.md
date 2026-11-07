@@ -1,4 +1,4 @@
-> Esta branch contem a candidata preview16 para o temporizador da Launcherin. [Downloads e instrucoes](Downloads/README.md). Main permanece separado.
+> Esta branch contém a candidata preview17 com o novo visual dos widgets. [Downloads e instruções](Downloads/README.md).
 
 > Os APKs desta candidata estão em [Downloads](Downloads/README.md). A versão publicada anteriormente em Releases continua sendo preview10. O ZIP de compartilhamento antigo permanece como arquivo histórico; os fontes atualizados estão nesta ramificação.
 
@@ -6,20 +6,22 @@
 
 Launcher para Android TV/Google TV com aplicativo de configuração para celular Android, em português brasileiro. Fork independente de [CleanYourTV](https://github.com/Gathin23/cleanyourtv) e [Clean Your TV App](https://github.com/udhaykumarbala/cleanyourtv-app).
 
-**Candidata de teste: 0.1.0-preview13.** Reduz trabalho de preparo dos logos e de layout na barra de aplicativos. Mantém a integração do painel lateral TCL e as correções de protetor/música. [Instalação e comparação](Guias/APPS-DESEMPENHO-preview13.md). A melhora de fluidez, CPU e RAM ainda precisa de medição na TCL; os testes automatizados verificam recortes, cores, layout e integração. Este é um fork independente, não uma versão oficial do CleanYourTV.
+**Candidata de teste: 0.1.0-preview17.** Relógio com tipografia própria, previsão colorida e widget Sistema com RAM, CPU e download em tempo real. Mantém os temporizadores da preview16 e a navegação dos apps da preview15, ambos confirmados pelo usuário na TCL. [Detalhes e instalação](Guias/WIDGETS-preview17.md). O novo visual e a leitura de rede ainda precisam de validação física. Este é um fork independente, não uma versão oficial do CleanYourTV.
 
 ## Downloads
 
-Os links dos APKs e ZIPs ficam em [Releases](https://github.com/allanlribeiro/laucherin/releases) e na [pasta Downloads](Downloads/README.md). Para instalar, use os APKs preview13; para preparar o tutorial com a Clara, use o ZIP principal menor. A cópia completa do repositório também preserva as imagens históricas e as comparações automáticas dos testes.
+Os links dos APKs e ZIPs ficam em [Releases](https://github.com/allanlribeiro/laucherin/releases) e na [pasta Downloads](Downloads/README.md). Para instalar, use os APKs preview17; para preparar o tutorial com a Clara, use o ZIP principal menor. A cópia completa do repositório também preserva as imagens históricas e as comparações automáticas dos testes.
 
 | Aplicativo | Identificador | Código | Android mínimo |
 | --- | --- | --- | --- |
-| Launcherin TV | app.launcherin.tv | 19 | Android8/API26 |
-| Launcherin Mobile | app.launcherin.mobile | 11 | Android9/API28 |
+| Launcherin TV | app.launcherin.tv | 25 | Android8/API26 |
+| Launcherin Mobile | app.launcherin.mobile | 17 | Android9/API28 |
 
 Atualize sobre as instalações existentes, sem desinstalar nem apagar os dados. O APK do celular inclui exatamente o mesmo APK da TV, mas instalar na TV exige conexão e autorização: não acontece apenas ao abrir o app no celular.
 
 ## Guias em português
+
+- [Widgets: novo visual, Sistema e download](Guias/WIDGETS-preview17.md)
 
 - [Instalação e configuração](Guias/INSTALACAO-E-CONFIGURACAO.md)
 - [Roteiro e briefing para Clara criar o tutorial](Guias/ROTEIRO-PARA-CLARA.md)

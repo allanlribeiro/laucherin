@@ -1,0 +1,68 @@
+{
+  "version": "0.1.0-preview17",
+  "tv": {
+    "package": "app.launcherin.tv",
+    "versionCode": 25,
+    "versionName": "0.1.0-preview17",
+    "bytes": 742847,
+    "sha256": "fb9e3266581735d732a76d177ee2d0c2f94cae01d55f12faa17b1c9aa85b56ce",
+    "certificateSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d",
+    "signatureVerified": true,
+    "permissionsUnchanged": true
+  },
+  "phone": {
+    "package": "app.launcherin.mobile",
+    "versionCode": 17,
+    "versionName": "0.1.0-preview17",
+    "bytes": 7955294,
+    "sha256": "35932733e8ab63caab1da0654b3f95470a62fe6c60a56e73ed9943b32f2f2a43",
+    "certificateSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d",
+    "signatureVerified": true,
+    "permissionsUnchanged": true
+  },
+  "tvEmbeddedByteIdentical": true,
+  "tests": {
+    "total": 493,
+    "counts": {
+      "tv": 436,
+      "trust": 51,
+      "widgetUi": 6
+    },
+    "failures": 0
+  },
+  "lint": {
+    "tv": {
+      "errors": 0,
+      "warnings": 132
+    },
+    "design": {
+      "errors": 0,
+      "warnings": 11
+    },
+    "launcherUi": {
+      "errors": 0,
+      "warnings": 8
+    }
+  },
+  "ptBR": {
+    "resources": 1500,
+    "contractErrors": 0
+  },
+  "hardware": {
+    "newWidgetAppearanceAndNetworkRate": "pending TCL test",
+    "standbyAndMusicProtection": "confirmed by user on preview16; implementation preserved",
+    "appRowFluencyAndNavigation": "confirmed by user on preview15; implementation preserved"
+  },
+  "scope": {
+    "clockTypeface": "bundled Outfit",
+    "coloredWeather": true,
+    "systemRamCpuAndDownloadOnly": true,
+    "wireWidgetIdUnchanged": "system",
+    "network": "passive total received bytes divided by monotonic interval; approximately every 5 seconds, only while visible",
+    "homeGraphics": "static Canvas; no frame loop",
+    "noNewPermissionsOrDependencies": true,
+    "noHomeOrTimersChanges": true
+  },
+  "preview": "Android native component rendering with sample data, not a TCL screenshot",
+  "publication": "candidate on feat/widget-art-preview17; no main merge or production release"
+}

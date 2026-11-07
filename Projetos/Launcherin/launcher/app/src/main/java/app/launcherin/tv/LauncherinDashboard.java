@@ -29,7 +29,7 @@ final class LauncherinDashboard {
  private FrameLayout appsDock;private int widgetTransparency;private String watchMode="above";private boolean watchRevealed;private int watchOffset;
  private final Map<String,View> allWidgets=new LinkedHashMap<>();private List<LauncherinWidgetLayout.Slot> widgetSlots=Collections.emptyList();private String widgetSignature="";private LauncherinExtraWidgets extraWidgets;
  private final Runnable extrasTick=new Runnable(){public void run(){if(alive&&visible){applyWidgetLayout();extraWidgets.tick();handler.postDelayed(this,5000);}}};
- private TextView clock,date,weather,weatherDetail,sportsTitle,sportsDetail;private LauncherinAudioWidget audio;private TextView historyLabel;private int lastHistory;
+ private LauncherinWidgetFaces.Clock clockFace;private LauncherinWidgetFaces.Weather weatherFace;private TextView sportsTitle,sportsDetail;private LauncherinAudioWidget audio;private TextView historyLabel;private int lastHistory;
  private FrameLayout forecastWidget,sportsWidget;private LauncherinWeatherCard weatherCard;private LauncherinSportsCard sportsCard;
  private final Map<String,LauncherinSports.Snapshot> sportsData=new HashMap<>();private boolean sportsLoading;private String sportsSelection="",crestSignature="";private LinearLayout crests;
  private LauncherinSeasonOverlay seasonOverlay;
@@ -63,15 +63,16 @@ final class LauncherinDashboard {
   for(SpringAnimation animation:new SpringAnimation[]{new SpringAnimation(v,DynamicAnimation.SCALE_X,scale),new SpringAnimation(v,DynamicAnimation.SCALE_Y,scale)})animation.setSpring(new SpringForce(scale).setStiffness(440).setDampingRatio(.82f)).start();
  });}
  private FrameLayout widget(String label){FrameLayout frame=new FrameLayout(host);frame.setClipChildren(false);frame.setTag("launcherin-widget");focusable(frame);frame.setBackground(LauncherinWidgetAppearance.glass(host,widgetTransparency,false));frame.setOnLongClickListener(v->{transparency();return true;});TextView kicker=text(label,11,0xffa8a8af);kicker.setLetterSpacing(.08f);put(frame,kicker,15,13,-1,18);widgets.add(frame);return frame;}
+ private void face(FrameLayout card,View content){FrameLayout.LayoutParams p=new FrameLayout.LayoutParams(-1,-1);p.setMargins(dp(15),dp(33),dp(15),dp(10));card.addView(content,p);}
  private void put(FrameLayout parent,View view,int x,int y,int w,int h){FrameLayout.LayoutParams p=new FrameLayout.LayoutParams(w<0?w:dp(w),h<0?h:dp(h));p.leftMargin=dp(x);p.topMargin=dp(y);if(w==-1)p.rightMargin=dp(15);parent.addView(view,p);}
  private void build(){
   widgetRow=new FrameLayout(host);widgetRow.setTag("launcherin-widget-board");widgetRow.setClipChildren(false);widgetRow.setClipToPadding(false);layer.addView(widgetRow);
-  FrameLayout time=widget("HOJE");clock=text("",34,0xfff7f7fa);clock.setTypeface(Typeface.create("sans-serif-light",Typeface.NORMAL));date=text("",12,0xffc3c3cb);put(time,clock,14,35,-1,43);put(time,date,16,83,-1,21);time.setOnClickListener(v->host.startActivity(new Intent(host,ClockActivity.class)));
-  FrameLayout forecast=widget("PREVISÃO DO TEMPO");forecastWidget=forecast;weather=text(preview?"☁  25°":"—",29,0xfff7f7fa);weatherDetail=text(preview?"Serra, ES · Chuva fraca":"Escolha sua cidade",12,0xffc3c3cb);put(forecast,weather,15,36,-1,42);put(forecast,weatherDetail,15,84,-1,20);weatherDetail.setSingleLine(true);weatherDetail.setEllipsize(TextUtils.TruncateAt.END);forecast.setOnClickListener(v->expandWeather());
+  FrameLayout time=widget("DATA E HORA");clockFace=new LauncherinWidgetFaces.Clock(host);face(time,clockFace);time.setOnClickListener(v->host.startActivity(new Intent(host,ClockActivity.class)));
+  FrameLayout forecast=widget("PREVISÃO DO TEMPO");forecastWidget=forecast;weatherFace=new LauncherinWidgetFaces.Weather(host);face(forecast,weatherFace);forecast.setOnClickListener(v->expandWeather());
   audio=new LauncherinAudioWidget(host,preview);widgets.add(audio);
   FrameLayout modules=widget("SEUS TIMES");sportsWidget=modules;sportsTitle=text("Próximos jogos",19,0xfff7f7fa);sportsDetail=text("Escolha até 2 times  ›",12,0xffc3c3cb);sportsTitle.setMaxLines(2);sportsTitle.setEllipsize(TextUtils.TruncateAt.END);sportsDetail.setSingleLine(true);sportsDetail.setEllipsize(TextUtils.TruncateAt.END);put(modules,sportsTitle,15,37,-1,43);put(modules,sportsDetail,15,85,-1,23);
   crests=new LinearLayout(host);crests.setGravity(Gravity.CENTER);crests.setVisibility(View.GONE);put(modules,crests,10,35,-1,47);modules.setOnClickListener(v->expandSports());modules.setOnLongClickListener(v->{widgetSettings();return true;});
-  FrameLayout agenda=widget("AGENDA DO DIA"),photos=widget("PORTA-RETRATOS"),system=widget("RAM E CPU");
+  FrameLayout agenda=widget("AGENDA DO DIA"),photos=widget("PORTA-RETRATOS"),system=widget("SISTEMA");
   extraWidgets=new LauncherinExtraWidgets(host,io,agenda,photos,system);
   for(int i=0;i<LauncherinWidgetLayout.IDS.size();i++)allWidgets.put(LauncherinWidgetLayout.IDS.get(i),widgets.get(i));widgets.clear();
   quick=new LinearLayout(host);quick.setOrientation(LinearLayout.VERTICAL);quick.setGravity(Gravity.CENTER);layer.addView(quick);
@@ -139,7 +140,7 @@ final class LauncherinDashboard {
   View badge=layer.findViewWithTag("preview");if(badge!=null)bounds(badge,margin,height-dp(15),width-2*margin,dp(13));
   if(shelf.getChildCount()>0){int cardWidth=(shelfWidth-dp(42))/4;for(int i=0;i<shelf.getChildCount();i++){LinearLayout.LayoutParams p=(LinearLayout.LayoutParams)shelf.getChildAt(i).getLayoutParams();if(p.width!=cardWidth||p.height!=-1){p.width=cardWidth;p.height=-1;shelf.getChildAt(i).setLayoutParams(p);}}}
  }
- private void updateClock(){Date now=new Date();clock.setText(android.text.format.DateFormat.getTimeFormat(host).format(now));date.setText(new SimpleDateFormat("EEE, d 'de' MMMM",Locale.forLanguageTag("pt-BR")).format(now));}
+ private void updateClock(){Date now=new Date();clockFace.update(android.text.format.DateFormat.getTimeFormat(host).format(now),new SimpleDateFormat("EEEE",Locale.forLanguageTag("pt-BR")).format(now),new SimpleDateFormat("d 'de' MMMM",Locale.forLanguageTag("pt-BR")).format(now));allWidgets.get("clock").setContentDescription(clockFace.getContentDescription());}
  private JSONArray items(){if(preview)try(InputStream in=host.getAssets().open("launcherin-preview/items.json")){return LauncherinHistory.visible(new JSONArray(new String(LauncherinExtras.bytes(in,65536),java.nio.charset.StandardCharsets.UTF_8)),LauncherinMediaService.removed(host));}catch(Exception ignored){}return LauncherinMediaService.history(host);}
  private void update(){updateClock();if(host.hasWindowFocus()){applyWidgetTransparency(LauncherinWidgetAppearance.transparency(host));seasonOverlay.theme(LauncherinSeason.selected(host));}if(widgets.contains(audio))audio.refresh(LauncherinMediaService.lastMusic(host));
   if("hidden".equals(watchMode))return;if(!forceHistory&&!history.isEmpty()&&history.contains(host.getCurrentFocus()))return;forceHistory=false;JSONArray rows=items();LauncherinTmdb.Settings artSettings=LauncherinTmdb.settings(host);String signature=rows.toString()+LauncherinMediaService.granted(host)+LauncherinWatchNext.granted(host)+artSettings.signature();if(signature.equals(historySignature))return;historySignature=signature;shelf.removeAllViews();history.clear();
@@ -207,17 +208,16 @@ final class LauncherinDashboard {
  }
 
  private void showWeather(LauncherinWeather.Snapshot value){
-  weather.setText(value.icon(System.currentTimeMillis())+"  "+value.temperature+"°");weatherDetail.setText(value.city+" · "+(value.old()?"Dados anteriores":value.conditions));
-  weather.setContentDescription(value.temperature+" graus · "+value.conditions);weatherDetail.setContentDescription(value.city+" · "+(value.old()?"Última consulta salva. ":"")+value.conditions+" · Open-Meteo");
+  weatherFace.update(value,System.currentTimeMillis());forecastWidget.setContentDescription(weatherFace.getContentDescription());
   if(weatherCard!=null)weatherCard.render(value,System.currentTimeMillis());
  }
  private void updateWeather(){if(!widgets.contains(forecastWidget))return;
   if(preview||!alive||!visible)return;String query=LauncherinWeather.query(host);
-  if(query.isEmpty()){weather.setText("—");weatherDetail.setText("Escolha sua cidade");return;}
+  if(query.isEmpty()){weatherFace.empty("Escolha sua cidade");forecastWidget.setContentDescription("Previsão do tempo. Escolha sua cidade.");return;}
   LauncherinWeather.Snapshot cached=LauncherinWeather.cached(host,query);if(cached!=null)showWeather(cached);
-  if(weatherLoading)return;weatherLoading=true;if(cached==null)weatherDetail.setText("Consultando o tempo…");
+  if(weatherLoading)return;weatherLoading=true;if(cached==null)weatherFace.empty("Consultando o tempo…");
   io.execute(()->{LauncherinWeather.Snapshot result=null;try{result=LauncherinWeather.load(host,query);}catch(Exception ignored){}final LauncherinWeather.Snapshot value=result;
-   handler.post(()->{weatherLoading=false;if(!alive||!visible||!query.equals(LauncherinWeather.query(host)))return;if(value!=null)showWeather(value);else{weather.setText("—");weatherDetail.setText("Consulta indisponível");if(weatherCard!=null)weatherCard.unavailable();}});
+   handler.post(()->{weatherLoading=false;if(!alive||!visible||!query.equals(LauncherinWeather.query(host)))return;if(value!=null)showWeather(value);else{weatherFace.empty("Consulta indisponível");forecastWidget.setContentDescription("Previsão indisponível. Escolha sua cidade ou verifique a conexão.");if(weatherCard!=null)weatherCard.unavailable();}});
   });
  }
  private void expandWeather(){
