@@ -102,6 +102,12 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
 
     private LauncherinDashboard launcherin;
+    private boolean appearancePending,appearanceWallpaperPending;
+    private final LauncherinAppearance.Listener appearanceChanged=wallpaper->{if(this.resumed)applyAppearance(wallpaper);else {appearancePending=true;appearanceWallpaperPending|=wallpaper;}};
+    private void applyAppearance(boolean wallpaper){
+        if(wallpaper){Config c=Config.load(this);WallpaperPlayer previous=wallpaperPlayer;root.setBackgroundColor(c.backgroundColor);wallpaperPlayer=new WallpaperPlayer(this,root,c,true);wallpaperPlayer.replaces(previous);if(resumed)wallpaperPlayer.start();}
+        if(launcherin!=null)launcherin.restyle();if(adapter!=null)adapter.restyle(grid);GlassView focus=findViewById(R.id.glass);if(focus!=null)focus.setAccent(LauncherinAppearance.get(this).accent);
+    }
     private static final int LAUNCHER_SETTINGS_REQUEST = 42;
     /** Sent by QuickSettingsActivity: open Launcher settings from here so Home rebuilds when they close. */
     static final String ACTION_LAUNCHER_SETTINGS = "app.launcherin.tv.action.LAUNCHER_SETTINGS";
@@ -462,6 +468,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         setContentView(R.layout.activity_main);
         density = getResources().getDisplayMetrics().density;
         // config.xml, overlaid by config.json from a pushed theme (see Config and tools/theme.sh).
+        LauncherinAppearance.listen(appearanceChanged);
         Config cfg = Config.load(this);
         homeAppKeys = RemoteKeys.parseAppKeys(cfg.appKeys);
         clockFormat = cfg.clockFormat;
@@ -1095,6 +1102,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         timerNotice.edit().putString("error", timerError).apply();
         HomeKeyService.applyTvRemote();
         resumed = true;
+        if(appearancePending){boolean wallpaper=appearanceWallpaperPending;appearancePending=appearanceWallpaperPending=false;applyAppearance(wallpaper);}
         // A festival that started or ended while Home was in the background: rebuild with or without it.
         if (festive != festival.active(LocalDate.now())) {
             recreate();
@@ -1373,6 +1381,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         // RUNNING_LOW and CRITICAL also arrive while Home is visible when an accessibility service keeps the
         // process in the foreground; never blank the screen the owner is looking at.
         if (!MemoryTrimPolicy.shouldRelease(level, started)) return;
+        LauncherinAppFinish.trim();LauncherinWeatherArt.trim();
         adapter.clear();
         // Detach the adapter too: with Home stopped no layout pass runs, so the tile views (and the bitmaps
         // they hold) would stay attached until Home comes back. setAdapter(null) recycles them now.
@@ -1398,6 +1407,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
     @Override
     protected void onDestroy() {
+        LauncherinAppearance.forget(appearanceChanged);
         if(launcherin!=null)launcherin.close();
         super.onDestroy();
         RemoteKeys.release(this);

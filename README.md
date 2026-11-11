@@ -1,3 +1,15 @@
+# Candidata de teste: Launcherin preview18
+
+Nova aparência dos widgets e do Continuar Assistindo, personalização independente pelo celular e tabela do Brasileirão.
+
+- [Baixar Mobile preview18](https://raw.githubusercontent.com/allanlribeiro/laucherin/refs/heads/feat/glass-premium-preview18/Downloads/Launcherin-Mobile-0.1.0-preview18.apk)
+- [Baixar TV preview18](https://raw.githubusercontent.com/allanlribeiro/laucherin/refs/heads/feat/glass-premium-preview18/Downloads/Launcherin-TV-0.1.0-preview18.apk)
+- [Instalação, capturas reais, código e validação](Distribuicao/preview18/README.md)
+
+Teste físico na TCL pendente. Os APKs preservam o certificado existente e o Mobile inclui o mesmo APK da TV.
+
+---
+
 > Esta branch contém a candidata preview17 com o novo visual dos widgets. [Downloads e instruções](Downloads/README.md).
 
 > Os APKs desta candidata estão em [Downloads](Downloads/README.md). A versão publicada anteriormente em Releases continua sendo preview10. O ZIP de compartilhamento antigo permanece como arquivo histórico; os fontes atualizados estão nesta ramificação.

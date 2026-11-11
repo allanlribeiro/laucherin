@@ -33,11 +33,11 @@ final class LauncherinWeatherScene extends View {
         this.sky=kind(code);this.night=night;this.transparency=LauncherinWidgetAppearance.clamp(transparency);shade();invalidate();schedule();
     }
     private void shade() {
-        if(getHeight()==0)return;int alpha=Math.round(255*(100-transparency)/100f);
+        if(getHeight()==0)return;int alpha=Math.round(90*(100-transparency)/100f);
         int top=night?0x101c48:sky==Sky.CLEAR?0x317db1:0x52677b,bottom=night?0x27233c:sky==Sky.CLEAR?0xa9cdda:0x8f9d9e;
         gradient=new LinearGradient(0,0,0,getHeight(),new int[]{(alpha<<24)|top,(alpha<<24)|bottom},null,Shader.TileMode.CLAMP);
     }
-    private boolean shouldAnimate(){return motion&&isAttachedToWindow()&&getWindowVisibility()==VISIBLE&&isShown()&&hasWindowFocus()&&ValueAnimator.areAnimatorsEnabled();}
+    private boolean shouldAnimate(){return motion&&!LauncherinAppearance.get(getContext()).reduced&&isAttachedToWindow()&&getWindowVisibility()==VISIBLE&&isShown()&&hasWindowFocus()&&ValueAnimator.areAnimatorsEnabled();}
     private void schedule(){removeCallbacks(frame);if(shouldAnimate())postDelayed(frame,42);}
     @Override protected void onAttachedToWindow(){super.onAttachedToWindow();schedule();}
     @Override protected void onDetachedFromWindow(){removeCallbacks(frame);super.onDetachedFromWindow();}
@@ -66,7 +66,7 @@ final class LauncherinWeatherScene extends View {
             int count=sky==Sky.PARTLY_CLOUDY?2:4;
             for(int i=0;i<count;i++){
                 float x=((i*.28f+t*.009f)%1.55f-.25f)*w,y=h*(.12f+(i%3)*.14f),r=h*(.07f+(i%2)*.02f);
-                paint.setColor(night?0x605e6b86:0x70dce3e8);cloud(canvas,x,y,r);
+                paint.setColor(night?0x305e6b86:0x30dce3e8);cloud(canvas,x,y,r);
             }
         }
         if(sky==Sky.RAIN||sky==Sky.STORM||sky==Sky.SNOW){

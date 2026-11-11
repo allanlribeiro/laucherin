@@ -1,0 +1,77 @@
+{
+  "version": "0.1.0-preview18",
+  "date": "2026-11-11",
+  "timezone": "America/Sao_Paulo",
+  "physicalTclTested": false,
+  "systemEmulatorTested": false,
+  "graphicsRuntime": "Robolectric Native Graphics / Android API 35",
+  "artifacts": {
+    "tv": {
+      "file": "Launcherin-TV-0.1.0-preview18.apk",
+      "package": "app.launcherin.tv",
+      "versionCode": 26,
+      "size": 790808,
+      "sha256": "158ce647bd7668527134bb34d60e4e66ae0edea45e2fa5dadd8e8dca55325671",
+      "signerSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d"
+    },
+    "mobile": {
+      "file": "Launcherin-Mobile-0.1.0-preview18.apk",
+      "package": "app.launcherin.mobile",
+      "versionCode": 18,
+      "size": 8052155,
+      "sha256": "aa8e05856fa67457ad7cb301063cc77f5f9582189b21ed34c0c36b4923c8e13c",
+      "signerSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d"
+    }
+  },
+  "bundledTvByteIdentical": true,
+  "tvTests": {
+    "tests": 461,
+    "failures": 0
+  },
+  "tvLint": {
+    "errors": 0,
+    "warnings": 139
+  },
+  "mobileTests": {
+    "flows": 437,
+    "ops": 58,
+    "trust": 51,
+    "uiAppearance": 5,
+    "uiExistingWidgets": 6,
+    "failures": 0
+  },
+  "structure": {
+    "base": "6772a32bdb81659eca9503c1f7f04692fce5a96d",
+    "unchangedProtected": [
+      "HomeKeyService",
+      "InputKeyService",
+      "RemoteKeys",
+      "LauncherinIdle",
+      "LauncherinMusicIdlePolicy",
+      "LauncherinNativeSettings",
+      "LauncherinRemote",
+      "LauncherinDockFocus",
+      "LauncherinWatchMode"
+    ],
+    "geometry": [
+      "LauncherinDashboard.layout",
+      "LauncherinDashboard.bounds",
+      "LauncherinDashboard.applyWidgetLayout",
+      "LauncherinDashboard.focusNeighbor",
+      "LauncherinDashboard.focusHistory",
+      "LauncherinDashboard.closeBelowWatch",
+      "AppAdapter.fitDockHolder",
+      "AppAdapter.tileWidthPx",
+      "AppAdapter.tileHeightPx",
+      "AppAdapter.dockTileWidth",
+      "AppAdapter.cornerRadius"
+    ]
+  },
+  "limits": [
+    "TCL physical validation pending",
+    "No continuous real-time blur/refraction",
+    "Safe original-artwork fallback for nonuniform app banners",
+    "Standings use names and favourite stars, without loading twenty crests",
+    "Existing YouTube Music background-playback restrictions remain"
+  ]
+}

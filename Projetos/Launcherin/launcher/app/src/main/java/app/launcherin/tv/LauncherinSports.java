@@ -61,6 +61,13 @@ final class LauncherinSports {
         }
         boolean old() { return System.currentTimeMillis()-updated>REFRESH_MS; }
     }
+    /** Up to two distinct nearest fixtures, prioritising one for each favourite. */
+    static List<Match> nextGames(List<Team> teams,java.util.Map<String,Snapshot> data){
+        LinkedHashMap<String,Match> chosen=new LinkedHashMap<>();List<Match> others=new ArrayList<>();
+        for(Team t:teams){Snapshot s=data.get(t.id);if(s==null)continue;for(int i=0;i<s.upcoming.size();i++){Match g=s.upcoming.get(i);if(i==0)chosen.put(g.id,g);else others.add(g);}}
+        Collections.sort(others,Comparator.comparingLong(g->g.time));for(Match g:others)if(chosen.size()<2)chosen.put(g.id,g);
+        List<Match> result=new ArrayList<>(chosen.values());Collections.sort(result,Comparator.comparingLong(g->g.time));return result.size()>2?new ArrayList<>(result.subList(0,2)):result;
+    }
     private static SharedPreferences store(Context context) { return context.getSharedPreferences("launcherin-sports",0); }
     static Snapshot cached(Context context,String id) {try{return new Snapshot(new JSONObject(store(context).getString(id,"{}")));}catch(Exception ignored){return null;}}
     static JSONObject get(String id,boolean future) throws Exception {

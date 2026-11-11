@@ -1,0 +1,277 @@
+[
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinAppearance.java",
+    "size": 12455,
+    "sha256": "226bf8b5a554dc62649d284a6e4bc7198ac076aa90b24cc47a4a2617e9dee54d"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinSurface.java",
+    "size": 5811,
+    "sha256": "e45c3a5f55ae076a0dc5e3d4ce01c209a5cc5a2f8a3c5292075775a4584f414c"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinGlyph.java",
+    "size": 2323,
+    "sha256": "0e7311ab259ac7b7e96ed96d27614f11692d577533ebb54b4beb5cf29d52ad2a"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinAppFinish.java",
+    "size": 4709,
+    "sha256": "e757a7ee88b490338f32fa61d7914ff247d2d760fd881773b7054672275ac1fb"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinWeatherArt.java",
+    "size": 3677,
+    "sha256": "9c7e73dbc135f805d1dfdc7a1194e9f54263fc790e58c8ee915a12c79d008f98"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinStandings.java",
+    "size": 5813,
+    "sha256": "604f7882cbda757e0e85b8fc24e0eecec69a6a720d45458520a0be7dcdf9341a"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/ThemeProvider.java",
+    "size": 3984,
+    "sha256": "b00e13d9aefda231a4ec6ce2ddc289b5ea3e6209f8f55cfefc77f55effb26d58"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinWidgetAppearance.java",
+    "size": 3275,
+    "sha256": "4f62b0ff4e249c2ebd9c14993c221cd2fbd79161214384f4b4683c6c770a5bde"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/Config.java",
+    "size": 60148,
+    "sha256": "408d54e231d91b50bef5def2cf3b11afdc7d7d490ffc10dbd15a550d4ba24d27"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/WallpaperPlayer.java",
+    "size": 16089,
+    "sha256": "831ed81158eb0a82e29b0231c58bac1ef50ea2aa829e55f0b8e3414d342d6631"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/MainActivity.java",
+    "size": 211973,
+    "sha256": "1e826cb09a806b8a956c20ea41e530c9db03d1617f3674c5eb3d5a3dc53d66b1"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinDashboard.java",
+    "size": 46023,
+    "sha256": "3a2877751df6b290ec91d3d6c521b39df24597feda7830e7fca80366371517ec"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinAudioWidget.java",
+    "size": 11694,
+    "sha256": "e87e993c59d8731aca1f4363266ec8aba9448c5a3c6d3ab7a11243faa19a5162"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinTitle.java",
+    "size": 1486,
+    "sha256": "7704eeaf3ed020a0701795e14bd94b5f6c1e2ef5421a9b8a5433de2214d4ed58"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinCardPopup.java",
+    "size": 4881,
+    "sha256": "f78020456354e7d1c7089d55b4f57968fb95d3d41acddc5a9f9bf442150ed911"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinSportsCard.java",
+    "size": 12033,
+    "sha256": "3efe1ab99b528e52b5947f8a6d1c9647746b0ce13a291a7cf4862fa9cc4c51ae"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinExtraWidgets.java",
+    "size": 8817,
+    "sha256": "962628b7f1b706ca84a04a7cd796a1f9c4a72113ea42e005813f72192e43307a"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinSystemStats.java",
+    "size": 2987,
+    "sha256": "b0fca593e795bf22343e801e136c288a585576bbb69f315c582ea5ae73375a0a"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinWidgetFaces.java",
+    "size": 9191,
+    "sha256": "b1355dca197bb5ebcfafac05a1068cd7d476a1d44b714801a30e03ba72d5c36d"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/AppAdapter.java",
+    "size": 56766,
+    "sha256": "8b522577eed91f591651fe57f77da614969c546634b068fd68b2415640f6a92e"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinSports.java",
+    "size": 9590,
+    "sha256": "c405ded819ea5e8d2dbbb5ff00b167f2b67dfc397a7459ca0bdbcb8c06950719"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinTeamCrests.java",
+    "size": 3829,
+    "sha256": "06e7d081888887ac7715b7c9d0c26cc4f15fefc5df1d2c142d6a275c26b3f338"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinWeatherCard.java",
+    "size": 4954,
+    "sha256": "f8297b9f0af513a9542a86fc02338520d350ad1e345a8d43c001c6421df70f43"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/java/app/launcherin/tv/LauncherinWeatherScene.java",
+    "size": 6045,
+    "sha256": "9c8fd7ab089b6571afcd5b04160ffaf9f4ba8eed3450cd17760cf4d0fe572835"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/build.gradle",
+    "size": 2347,
+    "sha256": "4fe07a3d8a247398c0e1f5520cfa44684eb59a8018447ec57dd9cbc344c71b55"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/assets/appearance-palettes.json",
+    "size": 1420,
+    "sha256": "d5387f69a633a1cbd06d28984c272a6b400241a1fc133766ebd81e066755bc1d"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/res/drawable-nodpi/launcherin_weather_partly.webp",
+    "size": 6824,
+    "sha256": "c1a2a7991e306e7623534ac6287c62fda0084dfe2a95bf019a73f546404eb572"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/res/drawable-nodpi/launcherin_weather_cloud.webp",
+    "size": 4856,
+    "sha256": "22dffd2e2d16560b9bcccabf9106ce989b04a24dcd70fc3221d4780dd0577450"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/res/drawable-nodpi/launcherin_weather_rain.webp",
+    "size": 8492,
+    "sha256": "94c6577171d305d7be8eef059a7f8636e4734bc519edbbc7b2d7713dfbd32684"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/main/res/drawable-nodpi/launcherin_weather_night.webp",
+    "size": 8900,
+    "sha256": "37dcdaff0b69dca1ce56fe22e8472157984080c7e82c077d240035810eba62b2"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/test/java/app/launcherin/tv/LauncherinAppearanceTest.java",
+    "size": 11710,
+    "sha256": "afb86a49edc5e9207378c095f324209fde392a6ca16cc7926b14d4031f47dc51"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/test/java/app/launcherin/tv/LauncherinStandingsTest.java",
+    "size": 10253,
+    "sha256": "ccafd1b5d1989555b44d76a094395e8205eed291f615f93c582f3f69ca34a869"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/test/java/app/launcherin/tv/LauncherinVisualPreviewTest.java",
+    "size": 11003,
+    "sha256": "8593be8bc4bca36562769e8c20ad00770dc6d2d29ff807959c40f390334e7bbe"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/test/resources/standings/bra-1-2026.json",
+    "size": 5796,
+    "sha256": "16e7036edf733abf8177ef9fbce7957ae658020f62caaadab6b0f136c7b1186c"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/test/resources/standings/README.md",
+    "size": 306,
+    "sha256": "db3c23fc57ba2c8962832c86e371638edecc2e21fa4728adaf3376be8798f2b5"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/test/resources/sports-crests/2029.png",
+    "size": 15082,
+    "sha256": "0e64b88eb63cd2ff9e49737c3bdfccd0a7b6af141135c306fcf0138e35317965"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/test/resources/sports-crests/README.md",
+    "size": 233,
+    "sha256": "8e2d34864b2c55ca9c090b11fe528d75266fd80171a1ac4fcf7d9932ab5903c0"
+  },
+  {
+    "path": "Projetos/Launcherin/launcher/app/src/test/resources/sports-crests/819.png",
+    "size": 4900,
+    "sha256": "5f05fe6ae99444863aa0234a7a2c9f4102af433bd424494868cc525757ef6e4c"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/core/spec/src/main/kotlin/tv/cleanyour/core/spec/AppearanceOptions.kt",
+    "size": 2225,
+    "sha256": "921b12e18237820284ca10b7d038abe22a3ac3e721d1a2b42b8d5e6c11dc7e7d"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/core/spec/src/main/resources/launcherin/appearance-palettes.json",
+    "size": 1420,
+    "sha256": "d5387f69a633a1cbd06d28984c272a6b400241a1fc133766ebd81e066755bc1d"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/core/ops/src/main/kotlin/tv/cleanyour/core/ops/AppearanceLines.kt",
+    "size": 451,
+    "sha256": "761f9291b659ba47e5c53f618b283c72f43b8b5e6eda6e54da349ff19136ad74"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/core/ops/src/main/kotlin/tv/cleanyour/core/ops/ThemeProviderLines.kt",
+    "size": 5391,
+    "sha256": "12b992fe3308704fee52054c965a94174476e942132ad1e1b218ef07de61a0e8"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/core/flows/src/main/kotlin/tv/cleanyour/core/flows/AppearanceRepository.kt",
+    "size": 6602,
+    "sha256": "868ad4180f875b05245574717d7b88fc35693201bf544e41d70efeaceb5357f7"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/core/flows/src/main/kotlin/tv/cleanyour/core/flows/HomeScreenMachine.kt",
+    "size": 49836,
+    "sha256": "95203759f572087005a868c68fdea6aef0142a7de09a93f049abd2277d1902be"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/feature/launcher/src/main/kotlin/tv/cleanyour/feature/launcher/AppearancePanel.kt",
+    "size": 6341,
+    "sha256": "9d16db279c3296cbfac1cb12f26281b700738d6b47bba666ff1baf920d31a902"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/feature/launcher/src/main/kotlin/tv/cleanyour/feature/launcher/LauncherinHubScreen.kt",
+    "size": 20629,
+    "sha256": "892d71e52da394f029d1e4b038e0f8818b5281bfc11e873193769c2322bd2f1c"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/feature/launcher/src/main/kotlin/tv/cleanyour/feature/launcher/HubSettings.kt",
+    "size": 3310,
+    "sha256": "9852145d3c6e6176e0ba4e43fc37b87727c651c5cba5dcf95af1cc111e68d3fb"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/feature/launcher/src/main/res/values/visual_styles.xml",
+    "size": 2693,
+    "sha256": "134a7a992e8294783be337d147c3438a975d511e6cf485ffd9c0d203a1fe3952"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/feature/launcher/src/main/res/values-pt-rBR/visual_styles.xml",
+    "size": 2693,
+    "sha256": "134a7a992e8294783be337d147c3438a975d511e6cf485ffd9c0d203a1fe3952"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/app/build.gradle.kts",
+    "size": 4635,
+    "sha256": "8761e1576626e9357955a958c7e9fe96178a53992d0ff39070ea4e6a7f8f62fc"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/core/trust/src/main/kotlin/tv/cleanyour/core/trust/Pins.kt",
+    "size": 4494,
+    "sha256": "dfff07c171c1e010ef2f2ab346f9114d83ad50ec5d61a90f08845a0230b9630d"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/android/platform/src/main/assets/bundled/cleanyourtv-launcher.apk",
+    "size": 790808,
+    "sha256": "158ce647bd7668527134bb34d60e4e66ae0edea45e2fa5dadd8e8dca55325671"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/core/trust/src/test/kotlin/tv/cleanyour/core/trust/LauncherPinTest.kt",
+    "size": 2926,
+    "sha256": "cc50c9dfe31c2d4250bad4a424b371244c3791a7e6d9448a7df2adeeacf0769f"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/core/flows/src/test/kotlin/tv/cleanyour/core/flows/AppearanceFeaturesTest.kt",
+    "size": 4993,
+    "sha256": "5d195914bfa7c2f6b08fcb530f06516873d30029d489933d886f37c4408344aa"
+  },
+  {
+    "path": "Projetos/Launcherin-Mobile/feature/launcher/src/test/kotlin/tv/cleanyour/feature/launcher/AppearancePagesTest.kt",
+    "size": 2582,
+    "sha256": "ec5cd14bc7117b65da1feb6ccdb27612607d3547f0f4185c29b85a7901448fa7"
+  }
+]

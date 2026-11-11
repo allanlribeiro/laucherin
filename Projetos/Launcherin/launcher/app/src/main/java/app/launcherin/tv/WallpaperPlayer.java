@@ -48,13 +48,16 @@ final class WallpaperPlayer {
     private final int dimColor;
     /** The picture on screen, released once the next one has been drawn. */
     private Bitmap current;
+    private WallpaperPlayer previousPlayer;private boolean firstReady;
+    void replaces(WallpaperPlayer previous){previousPlayer=previous;if(firstReady)releasePrevious();}
+    private void releasePrevious(){if(previousPlayer!=null){previousPlayer.close();previousPlayer=null;}}
     private boolean active;
     private boolean closed;
     private boolean loading;
     private String displayed = "";
     /** Paint only the wallpaper under a glass popover, excluding overlapping home labels/cards. */
     void drawCardBackdrop(Canvas canvas,int screenX,int screenY) {
-        canvas.drawColor(backgroundColor);if(image.getParent()!=root||image.getDrawable()==null)return;
+        if(current==null&&previousPlayer!=null){previousPlayer.drawCardBackdrop(canvas,screenX,screenY);return;}canvas.drawColor(backgroundColor);if(image.getParent()!=root||image.getDrawable()==null)return;
         int[] location=new int[2];image.getLocationOnScreen(location);int save=canvas.save();canvas.translate(location[0]-screenX,location[1]-screenY);image.draw(canvas);canvas.restoreToCount(save);
     }
     /** wallpaper_captions: the shown picture's name from wallpapers/captions.txt; null when off or there are none. */
@@ -67,7 +70,8 @@ final class WallpaperPlayer {
     private LocalDate sunDay;
     private int[] sun;
 
-    WallpaperPlayer(Context context, FrameLayout root, Config config) {
+    WallpaperPlayer(Context context, FrameLayout root, Config config) {this(context,root,config,false);}
+    WallpaperPlayer(Context context, FrameLayout root, Config config,boolean async) {
         this.root = root;
         backgroundColor = config.backgroundColor;
         files = new ArrayList<>(config.wallpapers);
@@ -99,8 +103,8 @@ final class WallpaperPlayer {
         if (config.wallpaperEnabled && !files.isEmpty()) {
             root.addView(image, 0, new FrameLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            showFirst();
-        }
+            if(async)showFirstAsync();else showFirst();
+        }else firstReady=true;
     }
 
     /**
@@ -116,7 +120,7 @@ final class WallpaperPlayer {
         while (first != null) {
             Bitmap bitmap = decode(first);
             if (bitmap != null) {
-                show(bitmap);
+                show(bitmap);firstReady=true;releasePrevious();
                 // The picture covers the whole screen: the root's plain colour under it is overdraw.
                 root.setBackground(null);
                 displayed = first.getName();
@@ -133,6 +137,11 @@ final class WallpaperPlayer {
         }
     }
 
+    private void showFirstAsync(){loading=true;decoder.execute(()->{
+        Bitmap ready=null;File picked=null;List<File> candidates=new ArrayList<>(playable());String previous=preferences.getString("image","");File first=WallpaperRotation.find(candidates,previous);if(first==null)first=WallpaperRotation.pick(candidates,previous,order,random);
+        while(first!=null){ready=decode(first);if(ready!=null){picked=first;break;}candidates.remove(first);first=WallpaperRotation.pick(candidates,previous,order,random);}
+        Bitmap bitmap=ready;File file=picked;root.post(()->{loading=false;if(closed)return;if(bitmap!=null){show(bitmap);firstReady=true;releasePrevious();displayed=file.getName();preferences.edit().putString("image",displayed).putLong("changed",System.currentTimeMillis()).apply();showCaption(false);}});
+    });}
     void start() {
         active = true;
         update();
@@ -167,7 +176,7 @@ final class WallpaperPlayer {
     void close() {
         active = false;
         closed = true;
-        decoder.shutdownNow();
+        decoder.shutdownNow();releasePrevious();root.removeView(image);if(caption!=null)root.removeView(caption);current=null;
     }
 
     void update() {
@@ -295,6 +304,7 @@ final class WallpaperPlayer {
             options.inMutable = dimColor != 0;
             Bitmap decoded = BitmapFactory.decodeFile(file.getPath(), options);
             if (decoded == null) return null;
+            {String key=file.getAbsolutePath()+":"+file.length()+":"+file.lastModified();if(android.os.Looper.myLooper()==android.os.Looper.getMainLooper()){Bitmap thumb=Bitmap.createScaledBitmap(decoded,64,36,true);decoder.execute(()->{LauncherinAppearance.sample(root.getContext(),thumb,key);thumb.recycle();});}else LauncherinAppearance.sample(root.getContext(),decoded,key);}
             if (dimColor != 0) new Canvas(decoded).drawColor(dimColor);
             // One copy in GPU memory instead of a software bitmap plus its texture; the decode stays off the UI
             // thread for rotations, and Home's return no longer uploads 4-8 MB to the GPU.

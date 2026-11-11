@@ -691,6 +691,16 @@ final class Config {
             wallpaper = chosen.isEmpty() ? null : chosen.get(0);
             wallpaperEnabled = !chosen.isEmpty();
         }
+        // Appearance wallpaper is independent of the legacy theme file and its personal choices.
+        org.json.JSONObject visual=LauncherinAppearance.saved(ctx);String visualMode=visual.optString("wallpaper_mode","existing");
+        if(!"existing".equals(visualMode))try{
+            wallpapers.clear();wallpaper=null;wallpaperOrder=WallpaperRotation.ORDER_SEQUENTIAL;
+            if("personal".equals(visualMode))wallpaper=LauncherinAppearance.image(ctx,visual.getString("personal_sha"));
+            else if("theme".equals(visualMode)&&!visual.optString("original_sha").isEmpty())wallpaper=LauncherinAppearance.image(ctx,visual.getString("original_sha"));
+            else if("dynamic".equals(visualMode)){org.json.JSONArray images=visual.getJSONArray("dynamic");for(int i=0;i<images.length();i++)wallpapers.add(LauncherinAppearance.image(ctx,images.getString(i)));}
+            if(wallpaper!=null&&wallpaper.isFile())wallpapers.add(wallpaper);wallpaperEnabled=!wallpapers.isEmpty();rotationMinutes="dynamic".equals(visualMode)?visual.optInt("rotation_minutes",15):0;wallpaperDim=visual.optInt("dim",10);
+            background=LauncherinAppearance.get(ctx).surface;wallpaperMoods=java.util.Collections.emptyMap();
+        }catch(Exception ignored){} // Only validated appearance files are committed by the provider.
         // A festive skin comes only from a theme; config.xml has no festival. seasonal_skin names one the same way
         // but launchers before it ignore the key, so a theme can carry it without older ones showing the diya skin.
         Festival festival = json == null ? Festival.NONE : Festival.parse(festivalName(json),

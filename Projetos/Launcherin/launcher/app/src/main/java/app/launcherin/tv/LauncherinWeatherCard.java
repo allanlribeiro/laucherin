@@ -27,7 +27,7 @@ final class LauncherinWeatherCard {
     }
     void render(LauncherinWeather.Snapshot weather,long now) {
         if(!popup.showing())return;
-        city.setText(weather.city);current.setText(weather.icon(now)+"  "+weather.temperature+"°");current.setTextColor(LauncherinWidgetFaces.Weather.accent(weather.code,weather.night(now)));
+        city.setText(weather.city);current.setText(weather.temperature+"°");LauncherinWeatherArt.Symbol currentIcon=new LauncherinWeatherArt.Symbol(popup.host,weather.code,weather.night(now));currentIcon.setBounds(0,0,popup.dp(43),popup.dp(43));current.setCompoundDrawables(currentIcon,null,null,null);current.setCompoundDrawablePadding(popup.dp(8));current.setTextColor(LauncherinWidgetFaces.Weather.accent(weather.code,weather.night(now)));
         condition.setText(weather.conditions+" · "+(weather.night(now)?"Noite":"Dia")+(weather.old()?" · Dados anteriores":""));
         scene.weather(weather.code,weather.night(now),LauncherinWidgetAppearance.transparency(popup.host));
         source.setText("Open-Meteo · "+new java.text.SimpleDateFormat("HH:mm",Locale.forLanguageTag("pt-BR")).format(new java.util.Date(weather.updated)));
@@ -35,12 +35,11 @@ final class LauncherinWeatherCard {
         if(forecast.size()<5){TextView empty=popup.label("Previsão de 5 dias indisponível. Tente novamente com conexão.",13,Color.WHITE);days.addView(empty);return;}
         DateTimeFormatter label=DateTimeFormatter.ofPattern("EEE · dd",Locale.forLanguageTag("pt-BR"));
         for(LauncherinWeather.Day day:forecast){
-            LinearLayout column=new LinearLayout(popup.host);column.setOrientation(LinearLayout.VERTICAL);column.setGravity(Gravity.CENTER);
-            TextView date=popup.label(label.format(day.date),12,0xffe3e8f0),icon=popup.label(LauncherinWeather.symbol(day.code),24,Color.WHITE),range=popup.label(day.high+"° / "+day.low+"°",14,Color.WHITE),rain=popup.label(day.rain<0?"Chuva —":"Chuva "+day.rain+"%",10,0xffd5e1ec);
-            icon.setTextColor(LauncherinWidgetFaces.Weather.accent(day.code,false));
-            for(TextView text:new TextView[]{date,icon,range,rain}){text.setGravity(Gravity.CENTER);column.addView(text,new LinearLayout.LayoutParams(-1,-2));}
+            LinearLayout column=new LinearLayout(popup.host);column.setOrientation(LinearLayout.VERTICAL);column.setGravity(Gravity.CENTER);column.setTag("expanded-surface");column.setBackground(LauncherinSurface.card(popup.host,70,false));column.setPadding(popup.dp(2),popup.dp(8),popup.dp(2),popup.dp(8));
+            TextView date=popup.label(label.format(day.date),12,0xffe3e8f0),range=popup.label(day.high+"° / "+day.low+"°",14,Color.WHITE),rain=popup.label(day.rain<0?"Chuva —":"Chuva "+day.rain+"%",10,0xffd5e1ec);
+            for(TextView text:new TextView[]{date,range,rain})text.setGravity(Gravity.CENTER);column.addView(date,new LinearLayout.LayoutParams(-1,-2));column.addView(new LauncherinWeatherArt.Icon(popup.host,day.code,false),new LinearLayout.LayoutParams(-1,popup.dp(34)));column.addView(range,new LinearLayout.LayoutParams(-1,-2));column.addView(rain,new LinearLayout.LayoutParams(-1,-2));
             column.setContentDescription(date.getText()+" · "+LauncherinWeather.description(day.code)+" · máxima "+day.high+" graus, mínima "+day.low+" graus"+(day.rain<0?"":" · chance de chuva "+day.rain+" por cento"));
-            days.addView(column,new LinearLayout.LayoutParams(0,-2,1));
+            LinearLayout.LayoutParams item=new LinearLayout.LayoutParams(0,-2,1);item.setMargins(popup.dp(3),0,popup.dp(3),0);days.addView(column,item);
         }
     }
     void unavailable(){if(popup.showing()){current.setText("Sem previsão agora");condition.setText("Verifique a conexão ou escolha outra cidade.");}}

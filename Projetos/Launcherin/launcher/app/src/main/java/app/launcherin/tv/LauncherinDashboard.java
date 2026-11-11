@@ -50,19 +50,20 @@ final class LauncherinDashboard {
  @android.annotation.SuppressLint("UnspecifiedRegisterReceiverFlag")
  private void registerChanges(IntentFilter filter){if(Build.VERSION.SDK_INT>=33)host.registerReceiver(changes,filter,Context.RECEIVER_NOT_EXPORTED);else host.registerReceiver(changes,filter);}
  private int dp(float value){return Math.round(value*density);}
- private TextView text(String value,int size,int color){TextView view=new TextView(host);view.setText(value);view.setTextSize(size);view.setTextColor(color);view.setFontFeatureSettings("kern");view.setIncludeFontPadding(false);view.setTypeface(Typeface.create("sans-serif",Typeface.NORMAL));return view;}
- private GradientDrawable background(boolean focused){GradientDrawable drawable=new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,new int[]{focused?0x443f434c:0x3030323b,focused?0x38282b33:0x201a1b23});drawable.setCornerRadius(dp(18));drawable.setStroke(dp(1),focused?0xccffffff:0x30ffffff);return drawable;}
+ private TextView text(String value,int size,int color){TextView view=new TextView(host);view.setText(value);view.setTextSize(size);view.setTextColor(color);view.setFontFeatureSettings("kern");view.setIncludeFontPadding(false);view.setTypeface(host.getResources().getFont(R.font.outfit_regular));return view;}
+ private GradientDrawable background(boolean focused){return LauncherinSurface.card(host,70,focused);}
+
  private void focusable(View view){view.setId(View.generateViewId());view.setFocusable(true);view.setClickable(true);view.setBackground(background(false));view.setOnFocusChangeListener((v,focused)->{
   if(focused)host.launcherinChromeFocused();
   if("launcherin-history".equals(v.getTag())){
    float selected=1.035f*1.07f;v.animate().cancel();v.setTranslationZ(focused?dp(10):0);
-   GradientDrawable border=new GradientDrawable();border.setColor(Color.TRANSPARENT);border.setCornerRadius(dp(18));border.setStroke(dp(2),Color.WHITE);v.setForeground(focused?border:null);
+   v.setForeground(focused?LauncherinSurface.outline(host,true,18):null);
    v.animate().scaleX(focused?selected:1).scaleY(focused?selected:1).setDuration(160).start();return;
   }
   v.setBackground("launcherin-widget".equals(v.getTag())?LauncherinWidgetAppearance.glass(host,widgetTransparency,focused):background(focused));float scale=focused?1.035f:1f;
   for(SpringAnimation animation:new SpringAnimation[]{new SpringAnimation(v,DynamicAnimation.SCALE_X,scale),new SpringAnimation(v,DynamicAnimation.SCALE_Y,scale)})animation.setSpring(new SpringForce(scale).setStiffness(440).setDampingRatio(.82f)).start();
  });}
- private FrameLayout widget(String label){FrameLayout frame=new FrameLayout(host);frame.setClipChildren(false);frame.setTag("launcherin-widget");focusable(frame);frame.setBackground(LauncherinWidgetAppearance.glass(host,widgetTransparency,false));frame.setOnLongClickListener(v->{transparency();return true;});TextView kicker=text(label,11,0xffa8a8af);kicker.setLetterSpacing(.08f);put(frame,kicker,15,13,-1,18);widgets.add(frame);return frame;}
+ private FrameLayout widget(String label){FrameLayout frame=new FrameLayout(host);frame.setClipChildren(false);frame.setTag("launcherin-widget");focusable(frame);frame.setBackground(LauncherinWidgetAppearance.glass(host,widgetTransparency,false));frame.setOnLongClickListener(v->{transparency();return true;});String heading=label.substring(0,1)+label.substring(1).toLowerCase(Locale.forLanguageTag("pt-BR"));TextView kicker=text(heading,11,0xffa8a8af);kicker.setTag("appearance-heading");kicker.setTypeface(host.getResources().getFont(R.font.outfit_medium));kicker.setTextColor(LauncherinAppearance.get(host).muted);String glyph=label.contains("HORA")?"time":label.contains("TEMPO")?"weather":label.contains("TIMES")?"sports":label.contains("AGENDA")?"agenda":label.contains("RETRATOS")?"photo":"system";LauncherinGlyph mark=new LauncherinGlyph(glyph,LauncherinAppearance.get(host).accent);mark.setBounds(0,0,dp(12),dp(12));kicker.setCompoundDrawables(mark,null,null,null);kicker.setCompoundDrawablePadding(dp(5));put(frame,kicker,15,13,-1,18);widgets.add(frame);return frame;}
  private void face(FrameLayout card,View content){FrameLayout.LayoutParams p=new FrameLayout.LayoutParams(-1,-1);p.setMargins(dp(15),dp(33),dp(15),dp(10));card.addView(content,p);}
  private void put(FrameLayout parent,View view,int x,int y,int w,int h){FrameLayout.LayoutParams p=new FrameLayout.LayoutParams(w<0?w:dp(w),h<0?h:dp(h));p.leftMargin=dp(x);p.topMargin=dp(y);if(w==-1)p.rightMargin=dp(15);parent.addView(view,p);}
  private void build(){
@@ -70,17 +71,17 @@ final class LauncherinDashboard {
   FrameLayout time=widget("DATA E HORA");clockFace=new LauncherinWidgetFaces.Clock(host);face(time,clockFace);time.setOnClickListener(v->host.startActivity(new Intent(host,ClockActivity.class)));
   FrameLayout forecast=widget("PREVISÃO DO TEMPO");forecastWidget=forecast;weatherFace=new LauncherinWidgetFaces.Weather(host);face(forecast,weatherFace);forecast.setOnClickListener(v->expandWeather());
   audio=new LauncherinAudioWidget(host,preview);widgets.add(audio);
-  FrameLayout modules=widget("SEUS TIMES");sportsWidget=modules;sportsTitle=text("Próximos jogos",19,0xfff7f7fa);sportsDetail=text("Escolha até 2 times  ›",12,0xffc3c3cb);sportsTitle.setMaxLines(2);sportsTitle.setEllipsize(TextUtils.TruncateAt.END);sportsDetail.setSingleLine(true);sportsDetail.setEllipsize(TextUtils.TruncateAt.END);put(modules,sportsTitle,15,37,-1,43);put(modules,sportsDetail,15,85,-1,23);
+  FrameLayout modules=widget("TIMES FAVORITOS");sportsWidget=modules;sportsTitle=text("Próximos jogos",19,0xfff7f7fa);sportsDetail=text("Escolha até 2 times  ›",12,0xffc3c3cb);sportsTitle.setMaxLines(2);sportsTitle.setEllipsize(TextUtils.TruncateAt.END);sportsDetail.setSingleLine(true);sportsDetail.setEllipsize(TextUtils.TruncateAt.END);put(modules,sportsTitle,15,37,-1,43);put(modules,sportsDetail,15,85,-1,23);
   crests=new LinearLayout(host);crests.setGravity(Gravity.CENTER);crests.setVisibility(View.GONE);put(modules,crests,10,35,-1,47);modules.setOnClickListener(v->expandSports());modules.setOnLongClickListener(v->{widgetSettings();return true;});
   FrameLayout agenda=widget("AGENDA DO DIA"),photos=widget("PORTA-RETRATOS"),system=widget("SISTEMA");
   extraWidgets=new LauncherinExtraWidgets(host,io,agenda,photos,system);
   for(int i=0;i<LauncherinWidgetLayout.IDS.size();i++)allWidgets.put(LauncherinWidgetLayout.IDS.get(i),widgets.get(i));widgets.clear();
   quick=new LinearLayout(host);quick.setOrientation(LinearLayout.VERTICAL);quick.setGravity(Gravity.CENTER);layer.addView(quick);
-  TextView tv=text("TV",13,-1);tv.setGravity(Gravity.CENTER);focusable(tv);tv.setContentDescription("TV aberta");tv.setOnClickListener(v->host.launcherinLiveTv());quick.addView(tv,new LinearLayout.LayoutParams(-1,dp(34)));
+  TextView tv=text("",13,-1);tv.setForeground(new LauncherinGlyph("tv",LauncherinAppearance.get(host).text));tv.setForegroundGravity(Gravity.CENTER);tv.getForeground().setBounds(0,0,dp(18),dp(18));tv.setGravity(Gravity.CENTER);focusable(tv);tv.setContentDescription("TV aberta");tv.setOnClickListener(v->host.launcherinLiveTv());quick.addView(tv,new LinearLayout.LayoutParams(-1,dp(34)));
   for(int id:new int[]{R.id.btnSettings,R.id.btnInputs}){TextView button=host.findViewById(id);((ViewGroup)button.getParent()).removeView(button);button.setGravity(Gravity.CENTER);button.setPadding(0,0,0,0);
    if(id==R.id.btnInputs){button.setText(null);button.setContentDescription("HDMI e entradas");button.setCompoundDrawables(null,null,null,null);button.setBackground(null);button.setForeground(host.getDrawable(R.drawable.ic_input));button.setForegroundGravity(Gravity.CENTER);}
    else{button.setText(null);button.setContentDescription("Configurações");button.setCompoundDrawables(null,null,null,null);button.setBackground(null);button.setForeground(host.getDrawable(R.drawable.ic_settings));button.setForegroundGravity(Gravity.CENTER);}LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(34));p.topMargin=dp(7);quick.addView(button,p);}
-  for(int i=0;i<quick.getChildCount();i++){final int index=i;View action=quick.getChildAt(i);action.setOnKeyListener((v,key,event)->{if(event.getAction()!=KeyEvent.ACTION_DOWN)return false;if(key==KeyEvent.KEYCODE_DPAD_UP){if(index>0)quick.getChildAt(index-1).requestFocus();return true;}if(key==KeyEvent.KEYCODE_DPAD_DOWN){if(index+1<quick.getChildCount())quick.getChildAt(index+1).requestFocus();else focusBelow(3);return true;}if(key==KeyEvent.KEYCODE_DPAD_LEFT){focusUpper(Integer.MAX_VALUE);return true;}return key==KeyEvent.KEYCODE_DPAD_RIGHT;});action.setOnFocusChangeListener((v,focused)->{if(focused)host.launcherinChromeFocused();v.setBackground(focused?background(true):null);v.animate().scaleX(focused?1.04f:1).scaleY(focused?1.04f:1).setDuration(120).start();});}
+  for(int i=0;i<quick.getChildCount();i++){final int index=i;View action=quick.getChildAt(i);action.setOnKeyListener((v,key,event)->{if(event.getAction()!=KeyEvent.ACTION_DOWN)return false;if(key==KeyEvent.KEYCODE_DPAD_UP){if(index>0)quick.getChildAt(index-1).requestFocus();return true;}if(key==KeyEvent.KEYCODE_DPAD_DOWN){if(index+1<quick.getChildCount())quick.getChildAt(index+1).requestFocus();else focusBelow(3);return true;}if(key==KeyEvent.KEYCODE_DPAD_LEFT){focusUpper(Integer.MAX_VALUE);return true;}return key==KeyEvent.KEYCODE_DPAD_RIGHT;});action.setOnFocusChangeListener((v,focused)->{if(focused)host.launcherinChromeFocused();v.setBackground(LauncherinSurface.shortcut(host,focused));v.animate().scaleX(focused?1.04f:1).scaleY(focused?1.04f:1).setDuration(120).start();});}
 
   historyLabel=text("Continuar assistindo",18,0xffececf1);layer.addView(historyLabel);
   HorizontalScrollView scroll=new HorizontalScrollView(host);scroll.setId(View.generateViewId());scroll.setHorizontalScrollBarEnabled(false);scroll.setClipToPadding(false);scroll.setFillViewport(false);scroll.setClipChildren(false);scroll.setPadding(dp(14),dp(8),dp(14),dp(8));shelf=new LinearLayout(host);shelf.setOrientation(LinearLayout.HORIZONTAL);shelf.setClipChildren(false);scroll.addView(shelf,new HorizontalScrollView.LayoutParams(-2,-1));layer.addView(scroll);scroll.setTag("shelf");
@@ -89,7 +90,7 @@ final class LauncherinDashboard {
   appsDock.addView(grid,new FrameLayout.LayoutParams(-1,-1));LauncherinDockFocus.attach(appsDock,host.findViewById(R.id.glass));grid.setClipToPadding(true);grid.setClipChildren(false);grid.setPadding(dp(14),dp(10),dp(14),dp(10));
   if(preview){TextView badge=text("PRÉVIA · CONTEÚDOS DE EXEMPLO",9,0xff8e8e98);badge.setTag("preview");layer.addView(badge);}
   audio.navigation(()->focusNeighbor(audio,-1,0),()->focusNeighbor(audio,1,0),()->focusNeighbor(audio,0,1));
-  seasonOverlay=new LauncherinSeasonOverlay(host,widgets,history,grid,appsDock);layer.addView(seasonOverlay,new FrameLayout.LayoutParams(-1,-1));seasonOverlay.theme(LauncherinSeason.selected(host));applyWidgetLayout();
+  seasonOverlay=new LauncherinSeasonOverlay(host,widgets,history,grid,appsDock);layer.addView(seasonOverlay,new FrameLayout.LayoutParams(-1,-1));seasonOverlay.theme(LauncherinSeason.selected(host));applyWidgetLayout();restyle();
  }
  private void bounds(View view,int left,int top,int width,int height){ViewGroup.LayoutParams current=view.getLayoutParams();if(current instanceof FrameLayout.LayoutParams){FrameLayout.LayoutParams old=(FrameLayout.LayoutParams)current;if(old.width==width&&old.height==height&&old.leftMargin==left&&old.topMargin==top)return;}FrameLayout.LayoutParams p=new FrameLayout.LayoutParams(width,height);p.leftMargin=left;p.topMargin=top;view.setLayoutParams(p);}
  private void applyWidgetLayout(){
@@ -150,7 +151,7 @@ final class LauncherinDashboard {
    ImageView provider=new ImageView(host);provider.setScaleType(ImageView.ScaleType.FIT_CENTER);provider.setContentDescription(item.optString("provider"));android.graphics.drawable.Drawable brand=providerIcon(item);provider.setImageDrawable(brand);
    provider.setOutlineProvider(new ViewOutlineProvider(){@Override public void getOutline(View view,Outline outline){outline.setRoundRect(0,0,view.getWidth(),view.getHeight(),dp(7));}});provider.setClipToOutline(true);
    FrameLayout.LayoutParams pp=new FrameLayout.LayoutParams(dp(brand!=null&&brand.getIntrinsicWidth()>brand.getIntrinsicHeight()*1.3f?46:27),dp(27),Gravity.BOTTOM|Gravity.RIGHT);pp.rightMargin=dp(10);pp.bottomMargin=dp(9);card.addView(provider,pp);
-   long duration=item.optLong("duration"),position=item.optLong("position");if(duration>0&&position>=0){View progress=new View(host);progress.setBackgroundColor(0xffe4e4eb);FrameLayout.LayoutParams p=new FrameLayout.LayoutParams(dp(60),dp(3),Gravity.BOTTOM);card.addView(progress,p);card.addOnLayoutChangeListener((v,l,t,r,b,ol,ot,or,ob)->{int want=Math.round((r-l)*Math.min(1f,(float)position/duration));if(p.width!=want){p.width=want;progress.setLayoutParams(p);}});}
+   long duration=item.optLong("duration"),position=item.optLong("position");if(duration>0&&position>=0){View progress=new View(host);progress.setBackground(LauncherinSurface.progress(host));progress.setTag("watch-progress");FrameLayout.LayoutParams p=new FrameLayout.LayoutParams(dp(60),dp(3),Gravity.BOTTOM);card.addView(progress,p);card.addOnLayoutChangeListener((v,l,t,r,b,ol,ot,or,ob)->{int want=Math.round((r-l)*Math.min(1f,(float)position/duration));if(p.width!=want){p.width=want;progress.setLayoutParams(p);}});}
    final int index=history.size();card.setOnLongClickListener(v->{historyMenu(item,index);return true;});card.setOnClickListener(v->{if(preview)Toast.makeText(host,"Conteúdo de exemplo da prévia",Toast.LENGTH_SHORT).show();else LauncherinMediaService.open(host,item);});card.setContentDescription(item.optString("title")+" · "+item.optString("provider"));
    card.setOnKeyListener((v,key,event)->{if(event.getAction()!=KeyEvent.ACTION_DOWN)return false;lastHistory=index;if(key==KeyEvent.KEYCODE_MENU){historyMenu(item,index);return true;}if(key==KeyEvent.KEYCODE_DPAD_UP){if("below".equals(watchMode))closeBelowWatch();else focusUpper(index);return true;}if(key==KeyEvent.KEYCODE_DPAD_DOWN){if(LauncherinDockFocus.historyDownToApps(watchMode))host.launcherinFocusApps();return true;}return key==KeyEvent.KEYCODE_DPAD_LEFT&&index==0||key==KeyEvent.KEYCODE_DPAD_RIGHT&&index==history.size()-1;});
    LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(dp(198),-1);p.rightMargin=dp(14);shelf.addView(card,p);history.add(card);load(picture,item.optString("art"));
@@ -172,6 +173,12 @@ final class LauncherinDashboard {
   String pkg=item.optString("pkg"),provider=item.optString("provider");if(pkg.isEmpty()){switch(provider){case "Netflix":pkg="com.netflix.ninja";break;case "Prime Video":pkg="com.amazon.amazonvideo.livingroom";break;case "Disney+":pkg="com.disney.disneyplus";break;case "HBO Max":pkg="com.wbd.stream";break;case "YouTube":pkg="com.google.android.youtube.tv";break;}}
   try{android.graphics.drawable.Drawable banner=host.getPackageManager().getApplicationBanner(pkg);return banner!=null?banner:host.getPackageManager().getApplicationIcon(pkg);}catch(Exception ignored){return host.getDrawable(R.drawable.ic_apps);}
  }
+ void restyle(){
+  LauncherinAppearance.Style skin=LauncherinAppearance.get(host);applyWidgetTransparency(LauncherinWidgetAppearance.transparency(host));appsDock.setBackground(LauncherinSurface.card(host,72,false));historyLabel.setTextColor(skin.text);
+  for(View v:history){v.setBackground(background(v.hasFocus()));if(v.hasFocus())v.setForeground(LauncherinSurface.outline(host,true,18));tint(v);}
+  for(View v:allWidgets.values()){if(v!=audio)v.setBackground(LauncherinWidgetAppearance.glass(host,widgetTransparency,v.hasFocus()));tint(v);v.invalidate();}for(int i=0;i<quick.getChildCount();i++)quick.getChildAt(i).setBackground(LauncherinSurface.shortcut(host,quick.getChildAt(i).hasFocus()));audio.restyle();extraWidgets.restyle();if(weatherCard!=null)weatherCard.popup.restyle();if(sportsCard!=null)sportsCard.popup.restyle();
+ }
+ private void tint(View v){if(v instanceof TextView){TextView t=(TextView)v;boolean heading="appearance-heading".equals(t.getTag());t.setTypeface(host.getResources().getFont(heading?R.font.outfit_medium:R.font.outfit_regular));if(heading){t.setTextColor(LauncherinAppearance.get(host).muted);for(android.graphics.drawable.Drawable d:t.getCompoundDrawables())if(d instanceof LauncherinGlyph)((LauncherinGlyph)d).setTint(LauncherinAppearance.get(host).accent);}}if("watch-progress".equals(v.getTag()))v.setBackground(LauncherinSurface.progress(host));if(v instanceof ViewGroup)for(int i=0;i<((ViewGroup)v).getChildCount();i++)tint(((ViewGroup)v).getChildAt(i));v.invalidate();}
  private void applyWidgetTransparency(int value){widgetTransparency=LauncherinWidgetAppearance.clamp(value);for(View widget:widgets){if(widget==audio)audio.setTransparency(widgetTransparency);else widget.setBackground(LauncherinWidgetAppearance.glass(host,widgetTransparency,widget.hasFocus()));}}
  private void transparency(){LauncherinWidgetAppearance.choose(host,this::applyWidgetTransparency);}
  private void widgetSettings(){new AlertDialog.Builder(host).setTitle("Widgets").setItems(new String[]{"Tema decorativo","Times favoritos","Cidade da previsão","Transparência dos widgets","Escolher módulos","Acesso a mídias","Imagens e logos dos conteúdos · TMDB"},(d,which)->{if(which==0)LauncherinSeason.choose(host,()->seasonOverlay.theme(LauncherinSeason.selected(host)));else if(which==1)chooseTeams();else if(which==2)chooseCity();else if(which==3)transparency();else if(which==4)host.launcherinModules();else if(which==5)mediaAccess();else tmdbSettings();}).setNegativeButton("Voltar",null).show();}
@@ -228,30 +235,40 @@ final class LauncherinDashboard {
  private void chooseTeams(){LauncherinTeamsPicker.choose(host,()->{sportsSelection="";updateSports();});}
  private void expandSports(){
   List<LauncherinSports.Team> teams=LauncherinSports.selected(host);if(teams.isEmpty()){chooseTeams();return;}
-  dismissCards();updateSports();sportsCard=new LauncherinSportsCard(host,sportsWidget,teams,this::chooseTeams);sportsCard.popup.onDismiss(()->sportsCard=null);sportsCard.render(sportsData,sportsLoading);
+  dismissCards();updateSports();sportsCard=new LauncherinSportsCard(host,sportsWidget,teams,this::chooseTeams,io);sportsCard.popup.onDismiss(()->sportsCard=null);sportsCard.render(sportsData,sportsLoading);
  }
  private void showSports(List<LauncherinSports.Team> teams){
   updateCrests(teams);if(teams.isEmpty()){sportsTitle.setVisibility(View.VISIBLE);sportsTitle.setText("Próximos jogos");sportsDetail.setText("Escolha até 2 times  ›");return;}sportsTitle.setVisibility(View.GONE);
-  StringBuilder names=new StringBuilder();LauncherinSports.Match next=null;
-  for(LauncherinSports.Team team:teams){if(names.length()>0)names.append(" · ");names.append(team.name);LauncherinSports.Snapshot data=sportsData.get(team.id);if(data!=null&&!data.upcoming.isEmpty()){LauncherinSports.Match game=data.upcoming.get(0);if(next==null||game.time<next.time)next=game;}}
-  sportsDetail.setText(next==null?(sportsLoading?"Consultando jogos…":"Ver jogos e resultados  ›"):LauncherinSportsCard.date(next));
-  sportsWidget.setContentDescription(names+" · "+sportsDetail.getText()+" · Abra para os próximos dois jogos de cada time e o último resultado.");if(sportsCard!=null)sportsCard.render(sportsData,sportsLoading);
+  List<LauncherinSports.Match> next=LauncherinSports.nextGames(teams,sportsData);StringBuilder description=new StringBuilder();
+  for(LauncherinSports.Team team:teams){if(description.length()>0)description.append(" · ");description.append(team.name);}
+  for(LauncherinSports.Match game:next)description.append(" · ").append(game.pairing()).append(" · ").append(LauncherinSportsCard.date(game));
+  sportsDetail.setText(next.isEmpty()?(sportsLoading?"Consultando jogos…":"Nenhum jogo anunciado  ›"):"Próximos jogos  ›");
+  sportsWidget.setContentDescription(description+" · Abra para os próximos dois jogos de cada time, último resultado e tabela do Brasileirão Série A.");if(sportsCard!=null)sportsCard.render(sportsData,sportsLoading);
+ }
+ private View compactCrest(String id,String name){
+  ImageView badge=new ImageView(host);Bitmap image=id.matches("[0-9]{1,8}")?LauncherinTeamCrests.cached(host,id):null;
+  if(image!=null)badge.setImageBitmap(image);else badge.setImageDrawable(new LauncherinGlyph("sports",LauncherinAppearance.get(host).muted));badge.setScaleType(ImageView.ScaleType.FIT_CENTER);badge.setContentDescription(name);return badge;
  }
  private void updateCrests(List<LauncherinSports.Team> teams){
-  StringBuilder key=new StringBuilder();for(LauncherinSports.Team team:teams)key.append(team.id).append(':').append(LauncherinTeamCrests.stamp(host,team.id)).append(',');
+  List<LauncherinSports.Match> games=LauncherinSports.nextGames(teams,sportsData);StringBuilder key=new StringBuilder();for(LauncherinSports.Team team:teams)key.append(team.id).append(':').append(LauncherinTeamCrests.stamp(host,team.id)).append(',');
+  for(LauncherinSports.Match g:games){key.append(g.id).append(':').append(g.time).append(':').append(g.state);for(String id:new String[]{g.homeId,g.awayId})if(id.matches("[0-9]{1,8}"))key.append(':').append(LauncherinTeamCrests.stamp(host,id));}
   crests.setVisibility(teams.isEmpty()?View.GONE:View.VISIBLE);if(crestSignature.equals(key.toString()))return;crestSignature=key.toString();crests.removeAllViews();
-  for(LauncherinSports.Team team:teams){FrameLayout badge=new FrameLayout(host);Bitmap image=LauncherinTeamCrests.cached(host,team.id);
-   if(image!=null){ImageView logo=new ImageView(host);logo.setImageBitmap(image);logo.setScaleType(ImageView.ScaleType.FIT_CENTER);logo.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);badge.addView(logo,new FrameLayout.LayoutParams(-1,-1));}
-   else{TextView pending=text("⚽",30,0xffc3cad4);pending.setGravity(Gravity.CENTER);pending.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);badge.addView(pending,new FrameLayout.LayoutParams(-1,-1));}
-   LinearLayout.LayoutParams size=new LinearLayout.LayoutParams(dp(45),dp(45));size.leftMargin=dp(6);size.rightMargin=dp(6);crests.addView(badge,size);
+  if(!games.isEmpty()){
+   crests.setOrientation(LinearLayout.VERTICAL);
+   for(LauncherinSports.Match g:games){LinearLayout line=new LinearLayout(host);line.setGravity(Gravity.CENTER_VERTICAL);line.addView(compactCrest(g.homeId,g.home),new LinearLayout.LayoutParams(dp(19),dp(19)));TextView versus=text("×",10,LauncherinAppearance.get(host).muted);versus.setGravity(Gravity.CENTER);line.addView(versus,new LinearLayout.LayoutParams(dp(14),-1));line.addView(compactCrest(g.awayId,g.away),new LinearLayout.LayoutParams(dp(19),dp(19)));TextView when=text(g.state.equals("in")?"AO VIVO":new SimpleDateFormat("dd/MM · HH:mm",Locale.forLanguageTag("pt-BR")).format(new Date(g.time)),10,LauncherinAppearance.get(host).text);when.setSingleLine(true);when.setEllipsize(TextUtils.TruncateAt.END);when.setGravity(Gravity.CENTER_VERTICAL);LinearLayout.LayoutParams date=new LinearLayout.LayoutParams(0,-1,1);date.leftMargin=dp(9);line.addView(when,date);line.setContentDescription(g.pairing()+" · "+LauncherinSportsCard.date(g));crests.addView(line,new LinearLayout.LayoutParams(-1,dp(23)));}
+   return;
   }
+  crests.setOrientation(LinearLayout.HORIZONTAL);
+  for(LauncherinSports.Team team:teams){LinearLayout.LayoutParams size=new LinearLayout.LayoutParams(dp(45),dp(45));size.leftMargin=dp(6);size.rightMargin=dp(6);crests.addView(compactCrest(team.id,team.name),size);}
  }
  private void updateSports(){if(!widgets.contains(sportsWidget))return;
   if(!alive||!visible)return;List<LauncherinSports.Team> teams=LauncherinSports.selected(host);String signature="";for(LauncherinSports.Team t:teams)signature+=t.id+",";
   if(!signature.equals(sportsSelection)){sportsSelection=signature;sportsData.clear();if(sportsCard!=null)sportsCard.popup.dismiss();}
   boolean fresh=!teams.isEmpty(),needsCrests=false;for(LauncherinSports.Team team:teams){LauncherinSports.Snapshot cached=LauncherinSports.cached(host,team.id);if(cached!=null)sportsData.put(team.id,cached);if(cached==null||cached.old())fresh=false;if(LauncherinTeamCrests.needsLoad(host,team.id))needsCrests=true;}
+  for(LauncherinSports.Match game:LauncherinSports.nextGames(teams,sportsData))for(String id:new String[]{game.homeId,game.awayId})if(id.matches("[0-9]{1,8}")&&LauncherinTeamCrests.needsLoad(host,id))needsCrests=true;
   showSports(teams);if(teams.isEmpty()||fresh&&!needsCrests||sportsLoading)return;sportsLoading=true;showSports(teams);final String wanted=signature;
   io.execute(()->{Map<String,LauncherinSports.Snapshot> found=new HashMap<>();for(LauncherinSports.Team team:teams){LauncherinTeamCrests.load(host,team.id);try{found.put(team.id,LauncherinSports.load(host,team));}catch(Exception ignored){}}
+   for(LauncherinSports.Match game:LauncherinSports.nextGames(teams,found))for(String id:new String[]{game.homeId,game.awayId})if(id.matches("[0-9]{1,8}"))LauncherinTeamCrests.load(host,id);
    handler.post(()->{sportsLoading=false;if(!alive||!visible||!wanted.equals(sportsSelection))return;sportsData.putAll(found);showSports(teams);});});
  }
  private void renderPreviewWeather(){

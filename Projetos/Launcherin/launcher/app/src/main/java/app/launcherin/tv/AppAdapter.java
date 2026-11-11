@@ -568,6 +568,7 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             h.label.setText(e.label);
             h.label.setVisibility(uniformTiles ? View.GONE : View.VISIBLE);
         }
+        h.appearanceArt=h.banner.getDrawable();h.appearanceBackground=h.card.getBackground();h.appearanceKey=e.component.flattenToString()+":"+System.identityHashCode(e.banner==null?e.icon:e.banner);if(e.kind==Entry.APP)LauncherinAppFinish.apply(h);
         h.card.setOnClickListener(v -> launch(e));
         h.card.setOnLongClickListener(v -> {
             if (tileMenu) {
@@ -584,6 +585,8 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             return true;
         });
     }
+
+    void restyle(RecyclerView view){for(int i=0;i<view.getChildCount();i++){RecyclerView.ViewHolder holder=view.getChildViewHolder(view.getChildAt(i));if(holder instanceof Holder)LauncherinAppFinish.apply((Holder)holder);}}
 
     /** Opens the tile's activity by explicit component, with no extras: a card can name nothing else. */
     @SuppressWarnings("deprecation")
@@ -961,6 +964,7 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     static final class Holder extends RecyclerView.ViewHolder {
         final View card;
+        Drawable appearanceArt,appearanceBackground;String appearanceKey="";
         /** item_app.xml's tile_bg: the dark card behind an icon tile, or behind a banner that has transparent parts. */
         final Drawable cardBackground;
         final ImageView banner;
@@ -1064,6 +1068,7 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             .translationY(focused ? density * 4f : -density * 6f)
                             .setDuration(220).start();
                 }
+                if(appearanceArt!=null)LauncherinAppFinish.apply(this);
                 int pos = getBindingAdapterPosition();
                 if (focused && listener != null && pos != RecyclerView.NO_POSITION) {
                     listener.onTileFocused(pos, view);

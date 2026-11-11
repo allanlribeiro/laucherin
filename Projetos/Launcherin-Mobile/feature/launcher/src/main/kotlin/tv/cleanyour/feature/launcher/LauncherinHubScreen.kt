@@ -58,11 +58,12 @@ fun LauncherinHubScreen(
     var choosingTv by rememberSaveable { mutableStateOf(false) }
     var dockOpen by rememberSaveable { mutableStateOf(false) }
     var fullLook by rememberSaveable { mutableStateOf(false) }
+    var appearancePage by rememberSaveable { mutableStateOf<String?>(null) }
     var sendFailed by rememberSaveable { mutableStateOf(false) }
     var leaving by remember { mutableStateOf<(() -> Unit)?>(null) }
     val draft = state.look
     val pending = draft?.canSend == true || state.lookFailed
-    val busy = state.busy != null || state.testing != null || state.importingPhotos
+    val busy = state.busy != null || state.testing != null || state.importingPhotos || state.appearance.busy
     val ready = !loading && state.tvName.isNotBlank() && state.notOnTv == null && !busy
     LaunchedEffect(connected,state.launcherVersionCode) { if(connected)onIntent(HomeScreenIntent.SyncAgenda(false)) }
 
@@ -78,10 +79,8 @@ fun LauncherinHubScreen(
             HubSetting.REMOTE -> navigate { sectionName = item.name }
             HubSetting.UPDATE -> if (state.updateTo == null) { sectionName = item.name } else navigate { onIntent(HomeScreenIntent.PreviewUpdate) }
             HubSetting.APPS -> navigate { dockOpen = true }
-            HubSetting.WALLPAPER -> {
-                if (draft == null) onIntent(HomeScreenIntent.OpenLook)
-                fullLook = true
-            }
+            HubSetting.APPEARANCE -> appearancePage="appearance"
+            HubSetting.WALLPAPER -> appearancePage="wallpaper"
             else -> {
                 if ((item.panel() != null || item==HubSetting.PHOTOS) && draft == null) onIntent(HomeScreenIntent.OpenLook)
                 sectionName = item.name
@@ -168,6 +167,8 @@ fun LauncherinHubScreen(
         if (!busy && tab != HubTab.TV && query.isBlank()) TertiaryButton(stringResource(R.string.hub_tools), { navigate(onTools) }, Modifier.padding(top = 12.dp))
         Gap(16.dp)
     }
+
+    appearancePage?.let { page -> AppearancePanel(state,connected,page=="wallpaper",photos,onIntent,{appearancePage=null},{onIntent(HomeScreenIntent.PreviewUpdate)}) }
 
     if (choosingTv) CytBottomSheet({ choosingTv = false }) {
         SheetHeader(stringResource(R.string.hub_choose_tv))
@@ -295,6 +296,7 @@ private fun HubNavigation(selected: HubTab, onTab: (HubTab) -> Unit, enabled: Bo
 private fun HubTab.title() = when (this) { HubTab.HOME -> R.string.hub_home; HubTab.PERSONALIZE -> R.string.hub_personalize; HubTab.WIDGETS -> R.string.hub_widgets; HubTab.TV -> R.string.hub_tv }
 private fun HubTab.description() = when (this) { HubTab.HOME -> R.string.hub_home_desc; HubTab.PERSONALIZE -> R.string.hub_personalize_desc; HubTab.WIDGETS -> R.string.hub_widgets_desc; HubTab.TV -> R.string.hub_tv_desc }
 private fun HubSetting.icon() = when (this) {
+    HubSetting.APPEARANCE -> LauncherinIcons.Theme
     HubSetting.LAYOUT -> CytIcons.Reorder
     HubSetting.AGENDA -> CytIcons.Cards
     HubSetting.PHOTOS -> LauncherinIcons.Picture

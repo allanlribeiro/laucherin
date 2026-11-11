@@ -22,39 +22,40 @@ final class LauncherinWidgetFaces {
             c.translate(0,Math.max(0,(height-77)/2));render(c);c.restoreToCount(save);
         }
         abstract void render(Canvas c);
-        void text(Canvas c,String s,float x,float y,float size,int color,Typeface font){p.setStyle(Paint.Style.FILL);p.setShader(null);p.setTypeface(font);p.setTextSize(size);p.setColor(color);c.drawText(s,x,y,p);}
+        void text(Canvas c,String s,float x,float y,float size,int color,Typeface font){p.setStyle(Paint.Style.FILL);p.setShader(null);p.setTypeface(font);p.setTextSize(size);p.setColor(color==0xfff4f9f8?LauncherinAppearance.get(getContext()).text:color);c.drawText(s,x,y,p);}
         String fit(String text,float size,float available){p.setTypeface(regular);p.setTextSize(size);return TextUtils.ellipsize(text,new android.text.TextPaint(p),Math.max(0,available),TextUtils.TruncateAt.END).toString();}
-        void line(Canvas c,float x,float y,float end,float value,int color){p.setStyle(Paint.Style.STROKE);p.setStrokeCap(Paint.Cap.ROUND);p.setStrokeWidth(3);p.setColor(0x25ffffff);c.drawLine(x,y,end,y,p);if(value>0){p.setColor(color);c.drawLine(x,y,x+(end-x)*Math.min(1,value),y,p);}p.setStyle(Paint.Style.FILL);}
+        void line(Canvas c,float x,float y,float end,float value,int color){p.setStyle(Paint.Style.STROKE);p.setStrokeCap(Paint.Cap.ROUND);p.setStrokeWidth(3);p.setColor(0x25ffffff);c.drawLine(x,y,end,y,p);if(value>0){p.setShader(new LinearGradient(x,y,end,y,new int[]{LauncherinAppearance.blend(color,Color.WHITE,.25f),color},null,Shader.TileMode.CLAMP));c.drawLine(x,y,x+(end-x)*Math.min(1,value),y,p);p.setShader(null);}p.setStyle(Paint.Style.FILL);}
     }
     static final class Clock extends Face {
         private final Typeface clockNumbers,clockDate;
         private String time="—",date="",day="";
-        Clock(Context c){super(c);clockNumbers=c.getResources().getFont(R.font.outfit_light);clockDate=c.getResources().getFont(R.font.outfit_regular);}
+        Clock(Context c){super(c);clockNumbers=c.getResources().getFont(R.font.outfit_medium);clockDate=c.getResources().getFont(R.font.outfit_regular);}
         void update(String time,String day,String date){this.time=time;this.day=day;this.date=date;setContentDescription(day+", "+date+", "+time);invalidate();}
         @Override void render(Canvas c){
-            text(c,day.toUpperCase(Locale.forLanguageTag("pt-BR")),0,10,10,0xffb8e4df,medium);
+            text(c,day.toUpperCase(Locale.forLanguageTag("pt-BR")),0,10,10,LauncherinAppearance.get(getContext()).accent,medium);
             p.setTypeface(clockNumbers);p.setTextSize(48);float size=Math.min(48,48*(width-2)/Math.max(1,p.measureText(time)));
             text(c,time,-1,56,size,0xfff4f9f8,clockNumbers);
             text(c,fit(date,11,width),1,75,11,0xffd2deda,clockDate);
         }
     }
     static final class Weather extends Face {
-        private int code=-1;private boolean night;
+        private final Typeface temperatureFont;private int code=-1;private boolean night;private final RectF artwork=new RectF(0,0,61,56);
         private String temperature="—",city="Escolha sua cidade",condition="";
-        Weather(Context c){super(c);}
+        Weather(Context c){super(c);temperatureFont=c.getResources().getFont(R.font.outfit_medium);}
         void update(LauncherinWeather.Snapshot s,long now){code=s.code;night=s.night(now);temperature=s.temperature+"°";city=s.city;condition=s.old()?"Dados anteriores":s.conditions;describe();invalidate();}
         void empty(String label){code=-1;temperature="—";city=label;condition="";describe();invalidate();}
         private void describe(){setContentDescription(temperature+" · "+city+" · "+condition);}
         @Override void render(Canvas c){
             LauncherinWeatherScene.Sky kind=LauncherinWeatherScene.kind(code);
             int accent=accent(code,night);
-            text(c,temperature,0,45,42,accent,numbers);
-            int save=c.save();c.translate(width-61,3);icon(c,kind,night);c.restoreToCount(save);
+            text(c,temperature,65,45,39,0xfff4f9f8,temperatureFont);
+            int save=c.save();c.translate(0,3);icon(c,kind,night);c.restoreToCount(save);
             text(c,fit(city,10,width),0,61,10,0xfff1f4f8,medium);
             text(c,fit(condition,10,width),0,76,10,0xffc5d5df,regular);
         }
         static int accent(int code,boolean night){return night?0xffc1baff:LauncherinWeatherScene.kind(code)==LauncherinWeatherScene.Sky.CLEAR?0xffffd47c:0xff9cdeff;}
         private void icon(Canvas c,LauncherinWeatherScene.Sky sky,boolean night){
+            if(LauncherinWeatherArt.draw(getContext(),c,artwork,code,night))return;
             if(sky==LauncherinWeatherScene.Sky.UNKNOWN){text(c,"—",20,35,28,0xffb9c4d6,numbers);return;}
             if(sky==LauncherinWeatherScene.Sky.CLEAR||sky==LauncherinWeatherScene.Sky.PARTLY_CLOUDY){
                 p.setColor(night?0x25c8bdff:0x25ffd16b);c.drawCircle(31,21,21,p);
@@ -76,18 +77,19 @@ final class LauncherinWidgetFaces {
         private LauncherinSystemStats.Sample sample;private Double download;
         System(Context c){super(c);}
         void update(LauncherinSystemStats.Sample sample,Double download){this.sample=sample;this.download=download;setContentDescription(description());invalidate();}
-        String description(){return "Sistema. "+(sample==null?"Aguardando medição.":String.format(Locale.forLanguageTag("pt-BR"),"RAM %.1f de %.1f GB. ",sample.usedMemory()/1073741824d,sample.totalMemory/1073741824d)+(sample.wholeTv?"CPU da TV ":"CPU da launcher ")+(sample.cpu==null?"aguardando":Math.round(sample.cpu)+" por cento"))+". Download da TV "+(download==null?"indisponível ou aguardando amostra":LauncherinDownloadStats.format(download)+" megabits por segundo");}
+        String description(){return "Sistema. "+(sample==null?"Aguardando medição.":String.format(Locale.forLanguageTag("pt-BR"),"RAM %.1f de %.1f GB. ",sample.usedMemory()/1073741824d,sample.totalMemory/1073741824d)+(sample.wholeTv?"CPU da TV ":"CPU da launcher ")+(sample.cpu==null?"aguardando":Math.round(sample.cpu)+" por cento"))+(sample!=null&&sample.totalStorage>0?String.format(Locale.forLanguageTag("pt-BR"),". Armazenamento %.1f de %.1f GB em uso",(sample.totalStorage-sample.availableStorage)/1073741824d,sample.totalStorage/1073741824d):"")+". Download da TV "+(download==null?"indisponível ou aguardando amostra":LauncherinDownloadStats.format(download)+" megabits por segundo");}
         @Override void render(Canvas c){
             boolean ram=sample!=null&&sample.totalMemory>0;float memory=ram?(float)sample.usedMemory()/sample.totalMemory:0;
             Double cpu=sample==null?null:sample.cpu;
             text(c,"RAM",0,10,9,0xffa9c2d3,medium);
-            text(c,ram?String.format(Locale.forLanguageTag("pt-BR"),"%.1f / %.1f GB",sample.usedMemory()/1073741824d,sample.totalMemory/1073741824d):"—",width*.28f,10,11,0xff9bdcff,medium);
-            line(c,1,19,width-2,memory,0xff6fc9ff);
+            text(c,ram?String.format(Locale.forLanguageTag("pt-BR"),"%.1f / %.1f GB",sample.usedMemory()/1073741824d,sample.totalMemory/1073741824d):"—",width*.15f,10,10,LauncherinAppearance.get(getContext()).accent,medium);
+            line(c,1,19,width*.58f,memory,LauncherinAppearance.get(getContext()).accent);
+            boolean disk=sample!=null&&sample.totalStorage>0;float used=disk?(float)(sample.totalStorage-sample.availableStorage)/sample.totalStorage:0;text(c,"DISCO",width*.65f,10,8,0xffa9c2d3,medium);text(c,disk?Math.round(used*100)+"%":"—",width*.85f,10,10,0xffcbd9d5,medium);line(c,width*.65f,19,width-2,used,0xffa7d8ba);
             text(c,sample!=null&&!sample.wholeTv?"CPU · APP":"CPU · TV",0,35,9,0xffa9c2d3,medium);
-            text(c,cpu==null?"—":Math.round(cpu)+"%",width*.68f,35,12,0xffccb5ff,medium);
-            line(c,1,43,width-2,cpu==null?0:cpu.floatValue()/100,0xffb29bff);
+            text(c,cpu==null?"—":Math.round(cpu)+"%",width*.68f,35,12,LauncherinAppearance.get(getContext()).accent,medium);
+            line(c,1,43,width-2,cpu==null?0:cpu.floatValue()/100,LauncherinAppearance.get(getContext()).accent);
             text(c,"↓",0,70,23,0xff8fe3c6,numbers);
-            String speed=LauncherinDownloadStats.format(download);text(c,speed,21,70,24,0xffa4edcf,numbers);
+            String speed=LauncherinDownloadStats.format(download);text(c,speed,21,70,24,LauncherinAppearance.get(getContext()).accent,numbers);
             p.setTypeface(numbers);p.setTextSize(24);float end=21+p.measureText(speed);
             text(c,"Mb/s",Math.min(width-28,end+5),70,10,0xffd0e4dc,regular);
         }

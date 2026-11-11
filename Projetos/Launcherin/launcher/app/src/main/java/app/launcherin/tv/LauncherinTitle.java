@@ -17,7 +17,7 @@ final class LauncherinTitle extends FrameLayout {
     LauncherinTitle(Context context,String title){
         super(context);
         text=new TextView(context);text.setText(title);text.setTextColor(Color.WHITE);text.setTextSize(15);
-        text.setTypeface(Typeface.create("sans-serif",Typeface.NORMAL));text.setIncludeFontPadding(false);
+        text.setTypeface(context.getResources().getFont(R.font.outfit_medium));text.setIncludeFontPadding(false);
         text.setSingleLine(true);text.setEllipsize(TextUtils.TruncateAt.END);text.setGravity(Gravity.BOTTOM);
         addView(text,new LayoutParams(-1,-1));
         image=new ImageView(context);image.setScaleType(ImageView.ScaleType.FIT_START);image.setVisibility(View.GONE);

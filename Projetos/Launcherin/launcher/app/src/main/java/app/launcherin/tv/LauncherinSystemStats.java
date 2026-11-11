@@ -9,21 +9,23 @@ import java.io.*;
 /** Real counters only. Android may deny /proc/stat; the fallback is explicitly app-scoped. */
 final class LauncherinSystemStats {
     static final class Sample {
-        final long totalMemory,availableMemory;final Double cpu;final boolean wholeTv;
-        Sample(long total,long available,Double cpu,boolean wholeTv){totalMemory=total;availableMemory=available;this.cpu=cpu;this.wholeTv=wholeTv;}
+        final long totalMemory,availableMemory,totalStorage,availableStorage;final Double cpu;final boolean wholeTv;
+        Sample(long total,long available,Double cpu,boolean wholeTv){this(total,available,cpu,wholeTv,0,0);}
+        Sample(long total,long available,Double cpu,boolean wholeTv,long storage,long free){totalMemory=total;availableMemory=available;this.cpu=cpu;this.wholeTv=wholeTv;totalStorage=storage;availableStorage=free;}
         long usedMemory(){return Math.max(0,totalMemory-availableMemory);}
     }
     private long previousTotal=-1,previousIdle=-1,previousApp=-1,previousTime=-1;
     Sample sample(Context context){
         ActivityManager.MemoryInfo memory=new ActivityManager.MemoryInfo();ActivityManager manager=(ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
         if(manager!=null)manager.getMemoryInfo(memory);
+        long storage=0,free=0;try{android.os.StatFs disk=new android.os.StatFs(context.getFilesDir().getPath());storage=disk.getTotalBytes();free=disk.getAvailableBytes();}catch(RuntimeException ignored){}
         long app=Process.getElapsedCpuTime(),now=SystemClock.elapsedRealtime();Double local=percentage(app-previousApp,now-previousTime,Math.max(1,Runtime.getRuntime().availableProcessors()));
         if(previousApp<0||previousTime<0)local=null;previousApp=app;previousTime=now;
         try(BufferedReader reader=new BufferedReader(new FileReader("/proc/stat"))){
             long[] counters=parse(reader.readLine());Double global=null;
-            if(counters!=null){if(previousTotal>=0)global=busy(counters[0]-previousTotal,counters[1]-previousIdle);previousTotal=counters[0];previousIdle=counters[1];return new Sample(memory.totalMem,memory.availMem,global,true);}
+            if(counters!=null){if(previousTotal>=0)global=busy(counters[0]-previousTotal,counters[1]-previousIdle);previousTotal=counters[0];previousIdle=counters[1];return new Sample(memory.totalMem,memory.availMem,global,true,storage,free);}
         }catch(IOException|SecurityException ignored){previousTotal=previousIdle=-1;}
-        return new Sample(memory.totalMem,memory.availMem,local,false);
+        return new Sample(memory.totalMem,memory.availMem,local,false,storage,free);
     }
     static long[] parse(String line){
         if(line==null)return null;String[] fields=line.trim().split("\\s+");if(fields.length<5||!"cpu".equals(fields[0]))return null;

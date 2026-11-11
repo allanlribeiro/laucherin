@@ -28,8 +28,10 @@ final class LauncherinCardPopup {
         window.setOnDismissListener(()->{card.animate().cancel();if(dismissed!=null)dismissed.run();if(anchor.isAttachedToWindow())anchor.requestFocus();});
     }
     int dp(float n){return Math.round(n*host.getResources().getDisplayMetrics().density);}
-    TextView label(String text,float size,int color){TextView view=new TextView(host);view.setText(text);view.setTextSize(size);view.setTextColor(color);view.setIncludeFontPadding(false);view.setTypeface(Typeface.create("sans-serif",Typeface.NORMAL));view.setShadowLayer(dp(3),0,dp(1),0xaa000000);return view;}
+    TextView label(String text,float size,int color){TextView view=new TextView(host);view.setText(text);view.setTextSize(size);view.setTextColor(color);view.setIncludeFontPadding(false);view.setTypeface(host.getResources().getFont(R.font.outfit_regular));view.setShadowLayer(dp(1),0,dp(1),0x55000000);return view;}
     TextView button(String text,Runnable action){TextView v=label(text,13,Color.WHITE);v.setGravity(Gravity.CENTER);v.setPadding(dp(13),dp(7),dp(13),dp(7));v.setFocusable(true);v.setClickable(true);v.setBackground(LauncherinWidgetAppearance.glass(host,65,false));v.setOnClickListener(w->action.run());v.setOnFocusChangeListener((w,focused)->v.setBackground(LauncherinWidgetAppearance.glass(host,65,focused)));return v;}
+    void restyle(){card.setBackground(LauncherinSurface.card(host,LauncherinWidgetAppearance.transparency(host),true));styleText(content);card.invalidate();}
+    private void styleText(View view){if(view instanceof TextView){TextView t=(TextView)view;t.setTypeface(host.getResources().getFont(t.getTextSize()/host.getResources().getDisplayMetrics().scaledDensity>=16?R.font.outfit_medium:R.font.outfit_regular));}if("expanded-surface".equals(view.getTag()))view.setBackground(LauncherinSurface.card(host,65,false));if(view instanceof ViewGroup)for(int i=0;i<((ViewGroup)view).getChildCount();i++)styleText(((ViewGroup)view).getChildAt(i));}
     void onDismiss(Runnable listener){dismissed=listener;}
     boolean showing(){return window.isShowing();}
     void dismiss(){window.dismiss();}

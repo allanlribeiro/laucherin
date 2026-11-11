@@ -1,0 +1,27 @@
+{
+  "base": "6772a32bdb81659eca9503c1f7f04692fce5a96d",
+  "unchangedProtected": [
+    "HomeKeyService",
+    "InputKeyService",
+    "RemoteKeys",
+    "LauncherinIdle",
+    "LauncherinMusicIdlePolicy",
+    "LauncherinNativeSettings",
+    "LauncherinRemote",
+    "LauncherinDockFocus",
+    "LauncherinWatchMode"
+  ],
+  "geometry": [
+    "LauncherinDashboard.layout",
+    "LauncherinDashboard.bounds",
+    "LauncherinDashboard.applyWidgetLayout",
+    "LauncherinDashboard.focusNeighbor",
+    "LauncherinDashboard.focusHistory",
+    "LauncherinDashboard.closeBelowWatch",
+    "AppAdapter.fitDockHolder",
+    "AppAdapter.tileWidthPx",
+    "AppAdapter.tileHeightPx",
+    "AppAdapter.dockTileWidth",
+    "AppAdapter.cornerRadius"
+  ]
+}

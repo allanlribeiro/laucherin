@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="visual_title">Aparência</string>
+    <string name="visual_scope">Personalize o acabamento sem mudar a organização, os tamanhos ou a navegação da Home.</string>
+    <string name="visual_wallpaper">Papel de parede</string>
+    <string name="visual_theme">Tema visual</string>
+    <string name="visual_neutral">Paleta neutra da Launcherin</string>
+    <string name="visual_widget_style">Estilo dos widgets e painéis</string>
+    <string name="visual_glass">Glass Premium</string>
+    <string name="visual_minimal">Minimal Cinematic</string>
+    <string name="visual_ambient">Ambient Dynamic</string>
+    <string name="visual_apps">Acabamento dos aplicativos</string>
+    <string name="visual_original">Original</string>
+    <string name="visual_app_glass">Glass</string>
+    <string name="visual_app_minimal">Minimalista</string>
+    <string name="visual_app_premium">Premium</string>
+    <string name="visual_intensity">Intensidade dos efeitos: %1$d%%</string>
+    <string name="visual_palette">Adaptar cores ao papel de parede</string>
+    <string name="visual_palette_desc">Harmoniza detalhes com a imagem, mantendo o contraste. A imagem não é modificada.</string>
+    <string name="visual_reduce">Efeitos reduzidos</string>
+    <string name="visual_reduce_desc">Acabamento mais leve para aparelhos modestos.</string>
+    <string name="visual_on">Ativado</string>
+    <string name="visual_off">Desativado</string>
+    <string name="visual_reset">Restaurar acabamento padrão</string>
+    <string name="visual_keep_wall">Manter fundo atual</string>
+    <string name="visual_theme_wall">Original do tema</string>
+    <string name="visual_personal_wall">Imagem personalizada</string>
+    <string name="visual_dynamic_wall">Imagem dinâmica</string>
+    <string name="visual_wall_independent">A imagem é independente do tema visual. Sua foto permanece guardada ao trocar a aparência.</string>
+    <string name="visual_choose_photo">Escolher foto do celular</string>
+    <string name="visual_photo_saved">Foto preparada ou já salva na TV.</string>
+    <string name="visual_collection">Imagens da coleção</string>
+    <string name="visual_frequency">Frequência de troca</string>
+    <string name="visual_minutes">A cada %1$d min</string>
+    <string name="visual_dim">Escurecimento da imagem: %1$d%%</string>
+    <string name="visual_sending">Aplicando aparência na TV…</string>
+    <string name="visual_close">Fechar</string>
+    <string name="visual_update">Atualizar a tela inicial</string>
+    <string name="hub_appearance_desc">Temas visuais, widgets, aplicativos e paleta automática.</string>
+</resources>

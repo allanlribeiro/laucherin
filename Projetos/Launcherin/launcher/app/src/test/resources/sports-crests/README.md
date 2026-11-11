@@ -1,0 +1,1 @@
+Small public club crest fixtures from https://a.espncdn.com/i/teamlogos/soccer/500/819.png and /2029.png, retrieved 2026-11-11. Used only in the local widget preview test. Production crests are loaded through the bounded ESPN cache.

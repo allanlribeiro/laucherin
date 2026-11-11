@@ -12,9 +12,9 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/** Only the two selected clubs: public PNG badges, bounded decode and local cache. */
+/** Selected clubs and their nearest opponents: public PNG badges, bounded decode and local cache. */
 final class LauncherinTeamCrests {
-    private static final LruCache<String,Bitmap> memory=new LruCache<>(4);
+    private static final LruCache<String,Bitmap> memory=new LruCache<>(8);
     private static File file(Context context,String id) {
         if(!id.matches("[0-9]{1,8}"))throw new IllegalArgumentException("Time inválido");
         return new File(new File(context.getCacheDir(),"sports-crests"),id+".png");

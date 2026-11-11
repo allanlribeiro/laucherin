@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 public class ThemeProvider extends ContentProvider {
 
     private File file(Uri uri) throws FileNotFoundException {
+        if(uri.getPathSegments().size()==1&&LauncherinAppearance.pending(uri.getLastPathSegment()))try{return LauncherinAppearance.incoming(getContext(),uri.getLastPathSegment());}catch(java.io.IOException e){throw new FileNotFoundException("Arquivo visual indisponível");}
         String path = ThemeFiles.path(uri.getPathSegments());
         File dir = Config.dir(getContext());
         if (dir == null || path == null) throw new FileNotFoundException(String.valueOf(uri));
@@ -59,6 +60,7 @@ public class ThemeProvider extends ContentProvider {
 
     @Override public android.os.Bundle call(String method,String arg,android.os.Bundle extras) {
         if(android.os.Binder.getCallingUid()!=android.os.Process.myUid())getContext().enforceCallingPermission(android.Manifest.permission.WRITE_SECURE_SETTINGS,"Agenda access");
+        if("commitAppearance".equals(method)||"appearanceStatus".equals(method))return LauncherinAppearance.call(getContext(),method);
         android.os.Bundle result=new android.os.Bundle();
         if(!"commitAgenda".equals(method)){result.putBoolean("ok",false);return result;}
         try{LauncherinAgendaData.commit(getContext());result.putBoolean("ok",true);}catch(java.io.IOException error){result.putBoolean("ok",false);}

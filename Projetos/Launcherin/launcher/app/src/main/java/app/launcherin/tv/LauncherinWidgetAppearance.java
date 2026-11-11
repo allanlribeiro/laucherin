@@ -12,19 +12,13 @@ import java.util.function.IntConsumer;
 /** Widget tint only: labels, media controls and focus remain readable at every transparency. */
 final class LauncherinWidgetAppearance {
     static final String KEY = "widget_transparency";
-    static final int DEFAULT = 82;
+    static final int DEFAULT = 48;
     static int clamp(int value) { return Math.max(0, Math.min(100, value)); }
     static int transparency(android.content.Context context) {
         return clamp(LauncherinExtras.read(context).optInt(KEY, DEFAULT));
     }
     static GradientDrawable glass(android.content.Context context, int transparency, boolean focused) {
-        float density = context.getResources().getDisplayMetrics().density;
-        int alpha = Math.round(255 * (100 - clamp(transparency)) / 100f);
-        GradientDrawable background = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                new int[]{(alpha << 24) | 0x30323b, (alpha << 24) | 0x1a1b23});
-        background.setCornerRadius(18 * density);
-        background.setStroke(Math.max(1, Math.round(density)), focused ? 0xccffffff : 0x30ffffff);
-        return background;
+        return LauncherinSurface.card(context,transparency,focused);
     }
     static void choose(Activity activity, IntConsumer preview) {
         int original = transparency(activity);
