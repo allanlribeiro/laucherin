@@ -1,0 +1,45 @@
+{
+  "version": "0.1.0-preview19",
+  "base": "c9531a200ca525ea79f67fee7d56009a009f2713",
+  "date": "2026-11-11",
+  "tv": {
+    "file": "Launcherin-TV-0.1.0-preview19.apk",
+    "package": "app.launcherin.tv",
+    "versionCode": 27,
+    "size": 1582554,
+    "sha256": "0941fc79d8bd37b60be0fa4d37d17ac2c0e7ee68d00a36f74f46cf9ee5aeae6b",
+    "signerSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d"
+  },
+  "tests": {
+    "runtime": "JVM / Robolectric Android API35 / native graphics",
+    "count": 486,
+    "failures": 0,
+    "lintErrors": 0,
+    "strictDependencyVerification": true
+  },
+  "network": {
+    "soundcloud": {
+      "searchResults": 10,
+      "manifestHttp": 200,
+      "segmentHttp": 206,
+      "segmentMime": "audio/mp4",
+      "segmentBytesReceived": 4096,
+      "hardwarePlaybackTested": false
+    },
+    "youtube": {
+      "status": "blocked_by_cloud_proxy_CONNECT_403",
+      "liveSearchAndAudioValidated": false
+    },
+    "lrclib": {
+      "http": 200,
+      "lyricsRetrieved": true
+    }
+  },
+  "physicalTclTested": false,
+  "systemEmulatorTested": false,
+  "measuredRamOrFrameTimeOnTv": false,
+  "mobileChanged": false,
+  "mobileBundledTvRemains": "preview18",
+  "protectedHomeRemoteIdleFilesUnchanged": 9,
+  "combinedTvLicense": "GPL-3.0-or-later; existing MIT components retain notices"
+}

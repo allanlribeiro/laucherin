@@ -10,6 +10,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        exclusiveContent {
+            forRepository { maven { url 'https://jitpack.io' } }
+            filter { includeGroup 'com.github.teamnewpipe'; includeGroup 'com.github.TeamNewPipe' }
+        }
     }
 }
 rootProject.name = "tvhome"

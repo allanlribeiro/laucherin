@@ -1,3 +1,5 @@
+> **Teste do player integrado — preview19:** [APK da TV, telas e guia](Distribuicao/preview19/README.md). Pesquisa, fila, favoritos, artes e letras na Launcherin. YouTube e reprodução física ainda exigem teste na TCL. O celular permanece na preview18.
+
 # Candidata de teste: Launcherin preview18
 
 Nova aparência dos widgets e do Continuar Assistindo, personalização independente pelo celular e tabela do Brasileirão.
