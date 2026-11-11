@@ -95,7 +95,9 @@ public final class LauncherinPlayerService extends Service {
     private void pause(boolean keepFocus){
         ++generation;if(resolving!=null)resolving.cancel(true);main.removeCallbacks(timeout);main.removeCallbacks(checkpoint);save();if(player!=null&&prepared)try{player.pause();}catch(RuntimeException ignored){}else releasePlayer();
         state=PlaybackState.STATE_PAUSED;if(!keepFocus){resumeAfterFocus=false;if(focus!=null)audio.abandonAudioFocusRequest(focus);}changed();
-        if(foreground){stopForeground(STOP_FOREGROUND_DETACH);foreground=false;}
+        // A transient interruption retains the foreground lease, so audio-focus recovery does
+        // not attempt a forbidden background foreground-service start on Android 12+.
+        if(foreground&&!keepFocus){stopForeground(STOP_FOREGROUND_DETACH);foreground=false;}
         // Paused service is disposable: persisted queue allows resumption after Android reclaims it.
         if(!keepFocus)stopSelf();
     }

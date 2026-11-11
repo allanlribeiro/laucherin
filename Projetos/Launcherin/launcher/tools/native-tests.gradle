@@ -1,0 +1,8 @@
+// Local Android graphics tests on JDK 21; these settings never enter the APK.
+allprojects {
+    tasks.withType(Test).configureEach {
+        maxParallelForks = 1
+        maxHeapSize = '1400m'
+        jvmArgs '--add-opens=java.base/java.io=ALL-UNNAMED'
+    }
+}

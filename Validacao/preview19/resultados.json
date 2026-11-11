@@ -6,13 +6,13 @@
     "file": "Launcherin-TV-0.1.0-preview19.apk",
     "package": "app.launcherin.tv",
     "versionCode": 27,
-    "size": 1582554,
-    "sha256": "0941fc79d8bd37b60be0fa4d37d17ac2c0e7ee68d00a36f74f46cf9ee5aeae6b",
+    "size": 1582546,
+    "sha256": "a8e338d80b850df74444a5fce4dadf609de5396336303775b387c6b973fb54d0",
     "signerSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d"
   },
   "tests": {
     "runtime": "JVM / Robolectric Android API35 / native graphics",
-    "count": 486,
+    "count": 487,
     "failures": 0,
     "lintErrors": 0,
     "strictDependencyVerification": true

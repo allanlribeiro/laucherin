@@ -3,9 +3,9 @@
 Base: preview18, commit c9531a200ca525ea79f67fee7d56009a009f2713.
 
 - TV: código 27, mesma identidade, minSdk 26 e targetSdk 34; assinatura existente conferida.
-- 486 testes locais passaram (461 anteriores + 25 do player, interface e ícone).
+- 487 testes locais passaram (461 anteriores + 26 do player, interface e ícone).
 - Lint release: zero erros. Compilação release passou com verificação estrita dos checksums das dependências.
-- Casos do player: fila/favoritos persistentes e limitados, posição, cancelamento, pausa, troca para controles externos, preparação/reprodução simulada, avanço ao completar, fim de fila, proteção do standby sem acesso a notificações.
+- Casos do player: fila/favoritos persistentes e limitados, posição, cancelamento, pausa, troca para controles externos, preparação/reprodução simulada, manutenção do serviço em interrupção transitória de áudio, avanço ao completar, fim de fila, proteção do standby sem acesso a notificações.
 - Interface: foco em modo de controle, telas de biblioteca/artes/letras, Voltar, interrupção das atualizações ao sair, entrada pelo widget, execução do interpretador e pixels visíveis do ícone de TV após layout.
 - Os nove arquivos de Home, teclas, configurações nativas e política de ociosidade ficaram idênticos à preview18. MainActivity, AppAdapter, Config e Watch Next também ficaram idênticos.
 - Nenhuma alteração de produção no aplicativo do celular.

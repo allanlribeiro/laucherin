@@ -106,3 +106,21 @@ O ícone de TV aberta foi corrigido com um vetor de dimensões intrínsecas. As 
 TV aberta, HDMI, configurações e Home permanecem iguais às da preview18.
 
 Licenças, dependências e disponibilidade de fontes: [PLAYER-LICENSE.md](PLAYER-LICENSE.md).
+
+## Compilar e repetir os testes
+
+Use JDK 21, Android SDK plataforma 36 e build-tools 35.0.0. Preserve as chaves
+existentes ao preparar uma atualização para uma instalação já feita. Uma compilação
+com sua própria chave é possível seguindo PLAYER-LICENSE.md.
+
+Na pasta `launcher/`, com `ANDROID_HOME` apontando para seu SDK:
+
+```bash
+./gradlew --no-daemon --max-workers=1 -I tools/native-tests.gradle testReleaseUnitTest lintRelease assembleRelease
+```
+
+O script de teste configura memória e acesso de reflexão do JDK para os gráficos
+nativos do Robolectric; não é empacotado no APK. As dependências Gradle são fixadas
+e seus checksums ficam em `gradle/verification-metadata.xml`. Os testes de fontes ao
+vivo são separados dos testes locais; os resultados de rede desta entrega estão
+registrados em RESULTADOS.md.
