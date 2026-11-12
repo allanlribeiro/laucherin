@@ -1,14 +1,15 @@
-# Música na Launcherin — preview20 (teste)
+# Música na Launcherin — preview21 (teste)
 
-Esta atualização reorganiza a biblioteca conforme a proposta aprovada. O serviço de
-áudio é o mesmo código da preview19; fila, progresso e músicas favoritas são
-preservados. Foram acrescentados artistas/bandas favoritos e quatro opções de
-proteção durante o áudio.
+Esta atualização aproxima a tela de música da referência visual escolhida: vidro
+azul profundo, bordas ciano/violeta, player grande, trecho da letra ao lado e atalhos
+para favoritos. A Home da launcher não é redesenhada nesta versão. O serviço de áudio
+é idêntico ao da preview19 confirmada pelo usuário; fila, progresso, músicas e
+artistas favoritos são preservados.
 
 ## Instalar e abrir
 
-Instale `Launcherin-TV-0.1.0-preview20.apk` diretamente na TV, por cima da versão
-anterior. Pacote `app.launcherin.tv`, código 28, com a mesma assinatura existente.
+Instale `Launcherin-TV-0.1.0-preview21.apk` diretamente na TV, por cima da versão
+anterior. Pacote `app.launcherin.tv`, código 29, com a mesma assinatura existente.
 Não é necessário configurar tudo novamente. O aplicativo do celular permanece na
 preview18 nesta entrega: ele continua configurando a TV, mas seu botão de atualizar
 a tela inicial contém a TV preview18 e não instala esta nova versão experimental.
@@ -21,24 +22,38 @@ Se instalar pelo ADB no Windows, na pasta platform-tools, consulte o endereço a
 ```powershell
 .\adb.exe devices -l
 $tv = "IP:PORTA"
-.\adb.exe -s $tv install -r "$env:USERPROFILE\Downloads\Launcherin-TV-0.1.0-preview20.apk"
+.\adb.exe -s $tv install -r "$env:USERPROFILE\Downloads\Launcherin-TV-0.1.0-preview21.apk"
 ```
 
 A atualização real por cima da instalação física ainda precisa ser verificada na
 TCL; identidade, versão e assinatura do pacote foram conferidas localmente.
 
-## Navegação
+## Navegação e novo acabamento
 
-- **Início:** artistas/bandas favoritos e músicas favoritas.
-- **Buscar:** pesquise músicas, artistas ou bandas. A fonte pode ser YouTube ou
-  SoundCloud; as faixas já salvas mantêm sua própria origem.
-- **Favoritos:** escolha entre Músicas e Artistas e bandas.
-- **Fila:** veja a ordem da reprodução e abra as ações de cada faixa.
-- **Preferências:** escolha o protetor e o tempo; acesse controles externos e licenças.
+- **Início / Tocando agora:** capa, título, artista, origem real do áudio, progresso,
+  fila, anterior, Play/Pausa, próxima, protetor, favorito e opções da faixa atual.
+- **Letra:** trecho sincronizado no painel lateral e letra ampliada ao selecionar
+  a aba ou Abrir letra. Sem letra disponível, a interface informa isso.
+- **Artistas / Bandas / Sua coleção:** favoritos separados por categoria e músicas
+  favoritas. Os três atalhos inferiores abrem as mesmas coleções.
+- **Buscar:** pesquisa músicas, artistas ou bandas na fonte escolhida: YouTube ou
+  SoundCloud. As músicas salvas conservam sua própria origem.
+- **Fila:** mostra a ordem de reprodução e abre ações de cada faixa.
+- **Ajustes / engrenagem:** protetores, temporizadores, controles externos e licenças.
 
-Uma única barra inferior reúne a música atual, anterior, Play/Pausa, próxima,
-progresso, **Letra** e **Protetor**. Na biblioteca, Voltar retorna ao Início; no Início,
-Voltar fecha a tela e mantém o áudio tocando. As teclas de mídia seguem disponíveis.
+A barra compacta aparece nas páginas secundárias, sem duplicar os controles no
+Início. Ícones de letra e protetor têm descrições acessíveis. O D-pad permite navegar
+pela barra lateral, abas, player, busca e coleções. Voltar retorna ao Início; nele,
+Voltar fecha a tela mantendo o áudio. As teclas de mídia continuam disponíveis.
+
+Os gradientes, reflexos e contornos são desenhos nativos estáticos. Não há blur em
+tempo real, visualizador a 60 fps ou vídeo decorativo. O cache de miniaturas continua
+limitado a 2 MiB e descarta referências das imagens ocultas. As atualizações param ao
+sair da tela. Não foi medida a fluidez desta atualização na TCL física.
+
+A referência visual contém indicadores FLAC, Dolby e Lossless, rádio e recomendações.
+Eles não são exibidos como recursos inexistentes: esta versão mostra a origem real
+da música e oferece suas coleções salvas, busca e fila. Não há conta de perfil fictícia.
 
 ## Músicas e artistas favoritos
 
@@ -46,8 +61,10 @@ OK sobre uma música abre ações visíveis: **Tocar agora**, **Adicionar à fil
 **Favoritar música** e **Favoritar artista ou banda**. Na Fila, também há remoção de
 faixas que não sejam a música atual. Segurar OK continua abrindo as mesmas ações.
 
-**Adicionar artista** permite cadastrar o nome e a fonte preferida. Você pode
-ajustar esses dados antes de salvar. Ao selecionar um artista, a Launcherin busca
+**Adicionar artista** ou **Adicionar banda** permite cadastrar nome, categoria e
+fonte preferida. Você pode editar a categoria entre Artista e Banda ao salvar ou
+posteriormente nas opções. Favoritos antigos sem categoria permanecem em Artistas;
+eles não são inferidos, removidos nem duplicados. Mover de categoria não altera a fila. Ao selecionar um artista, a Launcherin busca
 as músicas disponíveis naquela fonte, sem abrir outro aplicativo. **Artista
 favorito · opções** permite editar ou remover. As imagens de artistas dependem do
 que a fonte fornece; quando não há imagem, o cartão usa iniciais.
@@ -58,7 +75,7 @@ não altera o progresso ou a fila.
 
 ## Protetores durante o áudio
 
-Em **Preferências**, escolha:
+Em **Ajustes**, escolha:
 
 | Opção | Comportamento |
 |---|---|
@@ -87,7 +104,7 @@ serviço de áudio e a política anterior de não desligar enquanto toca foram m
 
 ## Google Fotos: escolher o álbum
 
-1. Abra Música → **Preferências**.
+1. Abra Música → **Ajustes**.
 2. Selecione **Google Fotos**.
 3. Abra **Configurar álbum do Google Fotos**.
 4. No modo ambiente da TCL, escolha Google Fotos e seu álbum. A configuração também

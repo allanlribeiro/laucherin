@@ -1,4 +1,4 @@
-> **Teste da biblioteca de música — preview20:** [APK da TV, capturas e instruções](Distribuicao/preview20/README.md). Artistas favoritos, nova navegação e quatro opções de proteção, incluindo Google Fotos pelo modo ambiente da TV. Serviço de áudio da preview19 preservado; teste físico pendente.
+> **Música — preview21 em teste:** [APK da TV, capturas e instruções](Distribuicao/preview21/README.md). Player central com vidro azul, bordas ciano/violeta, letra lateral e coleções de artistas/bandas. Motor de áudio preservado; teste físico pendente.
 
 # Candidata de teste: Launcherin preview18
 

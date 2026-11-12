@@ -1,0 +1,88 @@
+{
+  "version": "0.1.0-preview21",
+  "base": "c104bbb97876ddcdb4d18e1ff2d40e534de2a11e",
+  "date": "2026-11-12",
+  "tv": {
+    "file": "Launcherin-TV-0.1.0-preview21.apk",
+    "package": "app.launcherin.tv",
+    "versionCode": 29,
+    "size": 1604290,
+    "sha256": "80c8a8051c21e586b2f520d6a0cd5d18771e30fc9da13adf165563544b107d47",
+    "signerSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d"
+  },
+  "tests": {
+    "runtime": "JVM / Robolectric Android API35 / native graphics",
+    "count": 521,
+    "failures": 0,
+    "lintErrors": 0,
+    "strictDependencyVerification": true
+  },
+  "physicalTclTested": false,
+  "systemEmulatorTested": false,
+  "measuredRamOrFrameTimeOnTv": false,
+  "mobileChanged": false,
+  "mobileBundledTvRemains": "preview18",
+  "protectedFilesUnchanged": [
+    "HomeKeyService",
+    "InputKeyService",
+    "RemoteKeys",
+    "LauncherinIdle",
+    "LauncherinMusicIdlePolicy",
+    "LauncherinNativeSettings",
+    "LauncherinRemote",
+    "LauncherinDockFocus",
+    "LauncherinWatchMode",
+    "MainActivity",
+    "AppAdapter",
+    "Config",
+    "LauncherinWatchNext",
+    "LauncherinPlayerService",
+    "LauncherinMediaService",
+    "LauncherinAudioWidget",
+    "LauncherinDreams",
+    "LauncherinDreamDeadline"
+  ],
+  "audioServiceIdenticalToUserTestedPreview19": true,
+  "googlePhotos": {
+    "implementation": "Native TCL/Google TV ambient mode using system album and timer",
+    "settingsIntent": "android.settings.DREAM_SETTINGS",
+    "immediateNativeDreamStartClaimed": false,
+    "privateAlbumApiOrCredentialsUsed": false,
+    "routingAndScreenLeaseTested": true,
+    "privateAlbumPlaybackTestedHere": false
+  },
+  "libraryMigration": {
+    "oldSongFavoritesQueueAndProgressPreservedInTests": true,
+    "artistsMax": 50,
+    "songFavoritesAndQueueMax": 100
+  },
+  "visualProtection": {
+    "localModes": [
+      "cover",
+      "photos",
+      "dark"
+    ],
+    "localEntrySeconds": [
+      30,
+      60,
+      120,
+      300,
+      0
+    ],
+    "movementAndPhotoIntervalSeconds": 20,
+    "homeAndOtherApps": "existing native TV saver unchanged",
+    "firstExitKeyConsumed": true
+  },
+  "renderedScreensUseIllustrativeFixtureData": true,
+  "musicUi": {
+    "nativeNowPlayingHero": true,
+    "sideLyricsPreview": true,
+    "artistAndBandTabs": true,
+    "editableCategory": true,
+    "legacyArtistCategory": "artist",
+    "colors": "deep navy, cyan, violet",
+    "staticGlassSurfacesWithoutLiveBlur": true,
+    "unsupportedCodecBadgesShown": false,
+    "fakeProfileOrRecommendationsShown": false
+  }
+}

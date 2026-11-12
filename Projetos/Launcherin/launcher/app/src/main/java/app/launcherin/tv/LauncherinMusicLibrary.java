@@ -24,12 +24,13 @@ final class LauncherinMusicLibrary {
     String artMode(){return prefs.getString("art_mode","album");}
     void artMode(String mode){prefs.edit().putString("art_mode","photos".equals(mode)?"photos":"album").apply();}
     static final class Artist {
-        final String name,source,art;
-        Artist(String name,String source,String art){this.name=LauncherinTrack.limit(name,120);if(this.name.isEmpty()||this.name.matches(".*[\\r\\n\\t].*"))throw new IllegalArgumentException("Informe o artista ou a banda.");this.source="soundcloud".equalsIgnoreCase(source)?"soundcloud":"youtube";this.art=art!=null&&art.startsWith("https://")?LauncherinTrack.limit(art,2000):"";}
+        final String name,source,art,kind;
+        Artist(String name,String source,String art){this(name,source,art,"artist");}
+        Artist(String name,String source,String art,String kind){this.kind="band".equals(kind)?"band":"artist";this.name=LauncherinTrack.limit(name,120);if(this.name.isEmpty()||this.name.matches(".*[\\r\\n\\t].*"))throw new IllegalArgumentException("Informe o artista ou a banda.");this.source="soundcloud".equalsIgnoreCase(source)?"soundcloud":"youtube";this.art=art!=null&&art.startsWith("https://")?LauncherinTrack.limit(art,2000):"";}
         String key(){return java.text.Normalizer.normalize(name,java.text.Normalizer.Form.NFKC).toLowerCase(Locale.ROOT).trim();}
-        JSONObject json(){JSONObject j=new JSONObject();try{j.put("name",name).put("source",source).put("art",art);}catch(JSONException ignored){}return j;}
+        JSONObject json(){JSONObject j=new JSONObject();try{j.put("name",name).put("source",source).put("art",art).put("kind",kind);}catch(JSONException ignored){}return j;}
     }
-    List<Artist> artists(){List<Artist> out=new ArrayList<>();Set<String> keys=new HashSet<>();try{JSONArray a=new JSONArray(prefs.getString("artists","[]"));for(int i=0;i<a.length()&&out.size()<50;i++)try{JSONObject j=a.getJSONObject(i);Artist artist=new Artist(j.getString("name"),j.optString("source"),j.optString("art"));if(keys.add(artist.key()))out.add(artist);}catch(Exception ignored){}}catch(Exception ignored){}return out;}
+    List<Artist> artists(){List<Artist> out=new ArrayList<>();Set<String> keys=new HashSet<>();try{JSONArray a=new JSONArray(prefs.getString("artists","[]"));for(int i=0;i<a.length()&&out.size()<50;i++)try{JSONObject j=a.getJSONObject(i);Artist artist=new Artist(j.getString("name"),j.optString("source"),j.optString("art"),j.optString("kind"));if(keys.add(artist.key()))out.add(artist);}catch(Exception ignored){}}catch(Exception ignored){}return out;}
     void saveArtist(Artist artist){List<Artist> a=artists();a.removeIf(x->x.key().equals(artist.key()));a.add(0,artist);JSONArray j=new JSONArray();for(int i=0;i<Math.min(50,a.size());i++)j.put(a.get(i).json());prefs.edit().putString("artists",j.toString()).apply();}
     void removeArtist(Artist artist){List<Artist> a=artists();a.removeIf(x->x.key().equals(artist.key()));JSONArray j=new JSONArray();for(Artist x:a)j.put(x.json());prefs.edit().putString("artists",j.toString()).apply();}
     String source(){return prefs.getString("source","youtube");}
