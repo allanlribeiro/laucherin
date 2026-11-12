@@ -10,6 +10,6 @@ As capas usam a maior versão compatível disponibilizada pelas fontes conhecida
 
 [Uso e limites](../../Validacao/preview25/LEIA-ME.md) · [Testes](../../Validacao/preview25/RESULTADOS.md) · [Integridade](../../Validacao/preview25/SHA256SUMS.txt) · [Licenças](../../Validacao/preview25/PLAYER-LICENSE.md)
 
-632 testes passaram, lint sem erros, mesma assinatura. Teste físico de qualidade e fluidez na TCL pendente.
+634 testes passaram, lint sem erros, mesma assinatura. Teste físico de qualidade e fluidez na TCL pendente.
 
 ![Foto desenhada no cabeçalho — componentes Android e imagem de exemplo](../../Midia/preview25/music-profile-header.png)

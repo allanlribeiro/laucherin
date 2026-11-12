@@ -5,7 +5,8 @@ Correções sobre a preview24:
 - Foto do perfil desenhada por uma ImageView circular dedicada no cabeçalho. Mantém nome, seleção por controle e imagens já salvas. O teste agora verifica pixels efetivamente desenhados, além da presença do arquivo/drawable.
 - Seleção das imagens do catálogo por resolução, sem depender da ordem da lista. Considera a qualidade estimada quando a fonte não informa dimensões.
 - Miniaturas de Google/YouTube Music, YouTube e SoundCloud usam variantes maiores dos respectivos CDNs, com limite de tamanho e retorno à URL original se a variante não estiver disponível.
-- Decodificação preserva resolução para o recorte do cartão/capa; descarta pequenos placeholders de versões HD que não existam. Limita o bitmap a1.048.576 pixels e mantém RGB565, cache RAM2MiB, cache de avatares512KiB, disco8MB e downloads em fila limitada.
+- Decodificação preserva resolução para o recorte do cartão/capa; descarta pequenos placeholders de versões HD que não existam. Limita o bitmap remoto a1.048.576 pixels e mantém RGB565, cache RAM2MiB, cache de avatares512KiB, disco8MB e downloads em fila limitada.
+- A decodificação das fotos locais do protetor mantém o comportamento anterior.
 - Novo namespace do cache de capas evita reutilizar as miniaturas ruins da versão anterior. Não limpa fotos dos perfis, biblioteca, histórico ou dados pessoais.
 
 ## Instalação

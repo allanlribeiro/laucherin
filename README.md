@@ -1,4 +1,4 @@
-> **Música — preview25 em teste:** [APK da TV e instruções](Distribuicao/preview25/README.md). Corrige a foto no cabeçalho e usa miniaturas maiores quando disponíveis. Mobile preview24 mantido; 632 testes locais, validação física na TCL pendente.
+> **Música — preview25 em teste:** [APK da TV e instruções](Distribuicao/preview25/README.md). Corrige a foto no cabeçalho e usa miniaturas maiores quando disponíveis. Mobile preview24 mantido; 634 testes locais, validação física na TCL pendente.
 
 # Candidata de teste: Launcherin preview18
 

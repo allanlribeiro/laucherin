@@ -7,18 +7,18 @@
     "file": "Launcherin-TV-0.1.0-preview25.apk",
     "package": "app.launcherin.tv",
     "versionCode": 33,
-    "size": 1663014,
-    "sha256": "315583c8ac4a3728fbe2c47220b9e7689f7fd795951cff25d4b0b039fc57d5c4",
+    "size": 1663046,
+    "sha256": "26d69f6b50bf0041ad027f2b0c18468dbc809153fdc176e4078c9187aee7ba19",
     "signerSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d"
   },
   "tests": {
-    "tests": 632,
+    "tests": 634,
     "failures": 0,
     "runtimes": [
       "Robolectric API34 / Android14",
       "Robolectric API35 / Android15"
     ],
-    "newArtworkTests": 16,
+    "newArtworkTests": 18,
     "avatarHeaderRealPixelsVerified": true
   },
   "lint": {
