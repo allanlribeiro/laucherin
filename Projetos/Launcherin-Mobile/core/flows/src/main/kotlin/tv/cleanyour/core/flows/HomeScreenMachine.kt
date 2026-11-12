@@ -124,6 +124,7 @@ data class HomeScreenState(
     val agendaSync: AgendaSync = AgendaSync.READY,
     val importingPhotos: Boolean = false,
     val appearance: AppearanceState = AppearanceState(),
+    val musicProfiles:MusicProfilesState=MusicProfilesState(),
     val musicVisual: MusicVisualState = MusicVisualState(),
 ) {
     val waiting: Int get() = waitingApps.size
@@ -131,6 +132,7 @@ data class HomeScreenState(
 
 sealed interface HomeScreenIntent {
     data class Appearance(val event:AppearanceIntent): HomeScreenIntent
+    data class MusicProfiles(val event:MusicProfilesIntent): HomeScreenIntent
     data class MusicVisual(val event:MusicVisualIntent): HomeScreenIntent
     data class UpsertAgenda(val entry: AgendaEntry) : HomeScreenIntent
     data class RemoveAgenda(val id: String) : HomeScreenIntent
@@ -177,6 +179,8 @@ class HomeScreenMachine(
     private data class TestFinished(val result: HomeTestResult)
     private data class AgendaChanged(val entries: List<AgendaEntry>, val sync: AgendaSync)
     private data class FramePhotosReady(val ids: List<String>?)
+    private data class MusicProfilesChanged(val profiles:MusicProfilesState)
+    private val musicProfiles=MusicProfilesRepository(d,scope,tvId){send(MusicProfilesChanged(it))}
     private data class MusicVisualChanged(val visual:MusicVisualState)
     private val musicVisual=MusicVisualRepository(d,scope,tvId){send(MusicVisualChanged(it))}
     private data class AppearanceChanged(val appearance:AppearanceState)
@@ -203,6 +207,7 @@ class HomeScreenMachine(
     init { agenda.load(); scope.launch { load(); checkDrift(); if (again && state.value.notOnTv == null) send(HomeScreenIntent.RestoreMine) } }
 
     override fun reduce(state: HomeScreenState, event: Any): HomeScreenState = when (event) {
+        is MusicProfilesChanged -> state.copy(musicProfiles=event.profiles)
         is MusicVisualChanged -> state.copy(musicVisual=event.visual)
         is AppearanceChanged -> state.copy(appearance=event.appearance)
         is AgendaChanged -> state.copy(agendaEntries=event.entries,agendaSync=event.sync)
@@ -215,7 +220,7 @@ class HomeScreenMachine(
         is TestFinished -> state.copy(testing = null, testResult = event.result)
         is Loaded -> event.s.copy(busy = state.busy, stockPreview = state.stockPreview, drift = state.drift, updatePreview = state.updatePreview,
             newPicture = state.newPicture, newDim = state.newDim, lookFailed = state.lookFailed, lookSending = state.lookSending, lookShot = state.lookShot,
-            musicVisual=state.musicVisual,appearance=state.appearance,testing = state.testing, testResult = state.testResult,agendaEntries=state.agendaEntries,agendaSync=state.agendaSync,importingPhotos=state.importingPhotos).let { s ->
+            musicProfiles=state.musicProfiles,musicVisual=state.musicVisual,appearance=state.appearance,testing = state.testing, testResult = state.testResult,agendaEntries=state.agendaEntries,agendaSync=state.agendaSync,importingPhotos=state.importingPhotos).let { s ->
             saved = event.saved; earlier = event.earlier; cards = event.cards; keyNames = event.keyNames
             s.copy(look = state.look?.let { drafts.refresh(it, lookContext(s)) })
         }
@@ -279,6 +284,7 @@ class HomeScreenMachine(
         if (after.notOnTv != null && (event is HomeScreenIntent.SetDock || event is HomeScreenIntent.SetTheme || event == HomeScreenIntent.RestoreMine ||
             event == HomeScreenIntent.UseLook)) return
         when (event) {
+            is HomeScreenIntent.MusicProfiles -> musicProfiles.event(event.event)
             is HomeScreenIntent.MusicVisual -> musicVisual.event(event.event)
             is HomeScreenIntent.Appearance -> appearance.event(event.event)
             HomeScreenIntent.Resumed -> { agenda.load(); if (before.tvName.isNotBlank()) scope.launch { load(); checkDrift() } }

@@ -1,0 +1,138 @@
+{
+  "version": "0.1.0-preview24",
+  "base": "8a2fab500aca38846ae213819fd4f85c773cd8b9",
+  "date": "2026-11-12",
+  "timezone": "America/Sao_Paulo",
+  "artifacts": {
+    "tv": {
+      "file": "Launcherin-TV-0.1.0-preview24.apk",
+      "package": "app.launcherin.tv",
+      "versionCode": 32,
+      "size": 1661518,
+      "sha256": "54db09a8ec11cab2a67fb17740dd6060b8d13f79c2dcb35ef1f361941e850766",
+      "signerSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d"
+    },
+    "mobile": {
+      "file": "Launcherin-Mobile-0.1.0-preview24.apk",
+      "package": "app.launcherin.mobile",
+      "versionCode": 24,
+      "size": 8101443,
+      "sha256": "eeb0d4825b47bd374de1abf34cfc512c7aca067a80f20553869c7ec88cb43cfb",
+      "signerSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d"
+    }
+  },
+  "tests": {
+    "tv": {
+      "tests": 616,
+      "failures": 0
+    },
+    "core_flows": {
+      "tests": 449,
+      "failures": 0
+    },
+    "core_ops": {
+      "tests": 58,
+      "failures": 0
+    },
+    "core_trust": {
+      "tests": 51,
+      "failures": 0
+    },
+    "feature_launcher": {
+      "tests": 284,
+      "failures": 0
+    }
+  },
+  "totalTests": 1458,
+  "lint": {
+    "tv": {
+      "errors": 0,
+      "warnings": 164
+    },
+    "mobile": {
+      "errors": 0,
+      "warnings": 7
+    },
+    "mobileFeature": {
+      "errors": 0,
+      "warnings": 9
+    }
+  },
+  "strictDependencyVerification": true,
+  "newDependencies": false,
+  "newPermissions": false,
+  "protectedFilesUnchanged": [
+    "HomeKeyService",
+    "InputKeyService",
+    "RemoteKeys",
+    "LauncherinIdle",
+    "LauncherinMusicIdlePolicy",
+    "LauncherinNativeSettings",
+    "LauncherinRemote",
+    "LauncherinDockFocus",
+    "LauncherinWatchMode",
+    "AppAdapter",
+    "Config",
+    "LauncherinWatchNext",
+    "LauncherinMediaService",
+    "LauncherinAudioWidget",
+    "LauncherinDreams",
+    "LauncherinDreamDeadline",
+    "LauncherinPlayerService",
+    "LauncherinMusicSource",
+    "LauncherinLyrics",
+    "LauncherinMusicTaste",
+    "LauncherinListeningSession"
+  ],
+  "mainActivityOnlyFourPopupStyleCalls": true,
+  "lyricMethodsByteIdenticalToPreview23": true,
+  "playbackServiceAndResolverAndLearningUnchanged": true,
+  "mobileBundledTv": "preview18; install TV24 directly",
+  "mobileTvPinUnchanged": true,
+  "mobileSizeLimitBytes": 8388608,
+  "physicalTclTested": false,
+  "systemEmulatorTested": false,
+  "measuredCpuGpuRamOnTv": false,
+  "graphicsRuntime": "Robolectric Native Graphics API34/35; phone Compose API35",
+  "profiles": {
+    "localOnly": true,
+    "maxProfiles": 8,
+    "defaultUsesLegacyLibrary": true,
+    "photoMaxBytes": 180000,
+    "photoMaxSide": 512,
+    "photoFormat": "fresh square JPEG; no original EXIF",
+    "tvAvatarCacheBytes": 524288,
+    "phonePickerUserSelectedOnly": true,
+    "photoAndNameUpdatesDoNotSwitchProfileOrPauseMusic": true,
+    "metadataCommitHashAndOptimisticProfileRevisionRequired": true,
+    "typedPathsAndPairedPermissionPreserved": true,
+    "activeProfileSelectionStillOnTv": true
+  },
+  "menus": {
+    "internalMusic": "MusicDesign shared glass",
+    "internalHome": "LauncherinSurface follows existing visual family and palette",
+    "existingActionsAndOnShowOnDismissCallbacksPreserved": true,
+    "systemDialogsAndTclPanelsUnchanged": true,
+    "noContinuousBlur": true
+  },
+  "fullscreen": {
+    "manualAlbumClick": true,
+    "manualTrackActionsAndSettings": true,
+    "ownAudioSessionFftOnly": true,
+    "firstBackRestoresInterfaceWithoutPausing": true,
+    "driftAndSmartProtectionPreserved": true,
+    "fixtureFftIsSyntheticAndLabeled": true,
+    "nativeHardwareCaptureTestedHere": false,
+    "reducedMotionArtworkAlphaFixed": true
+  },
+  "buildEnvironment": {
+    "initialConcurrentMobileR8InterruptedByEnvironmentMemoryLimit": true,
+    "finalMobileBuildUsesBoundedHeapAndActiveProcessorCount2": true
+  },
+  "sourceLimits": [
+    "No external service accounts or cloud avatar sync",
+    "Existing phone TV installer still embeds old TV18; both new APKs require direct installation",
+    "If avatar was set by another phone, this phone can show that a photo exists but lacks its local preview cache",
+    "Physical TCL installation, real spectrum access, remote and RAM/CPU/GPU/FPS remain pending"
+  ]
+}

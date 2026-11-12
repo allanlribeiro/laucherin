@@ -28,13 +28,13 @@ final class LauncherinControls {
                 "Tecla de configurações em outros apps: "+(LauncherinRemote.settingsGlobal(host)?"ativada":"desativada"),
                 "Testar painel de configurações da TV"
         };
-        new AlertDialog.Builder(host).setTitle("TV aberta, gols e inatividade")
+        new LauncherinDialogs.Builder(host).setTitle("TV aberta, gols e inatividade")
                 .setItems(labels,(d,index)->{
                     switch(index) {
                         case 0: open(host,new Intent(host,LauncherinRemoteActivity.class));break;
                         case 1:
                             if(LauncherinRemote.global(host))save(host,LauncherinRemote.FILTER,0,changed);
-                            else new AlertDialog.Builder(host).setTitle("Usar tecla de TV em outros apps?")
+                            else new LauncherinDialogs.Builder(host).setTitle("Usar tecla de TV em outros apps?")
                                 .setMessage("Requer a acessibilidade da Launcherin ativada. O Android exige a leitura global de teclas; em algumas TCL isso pode afetar o volume ao manter o botão pressionado. Se acontecer, desative esta opção. Aprender a tecla sozinho não ativa essa leitura.")
                                 .setPositiveButton("Ativar",(a,b)->save(host,LauncherinRemote.FILTER,1,changed))
                                 .setNegativeButton("Cancelar",null).show();break;
@@ -49,7 +49,7 @@ final class LauncherinControls {
                         case 11: LauncherinMusicActions.diagnostic(host);break;
                         case 12:
                             if(LauncherinRemote.settingsGlobal(host))save(host,LauncherinRemote.SETTINGS_FILTER,0,changed);
-                            else new AlertDialog.Builder(host).setTitle("Usar configurações em outros apps?")
+                            else new LauncherinDialogs.Builder(host).setTitle("Usar configurações em outros apps?")
                                 .setMessage("Ative a acessibilidade da Launcherin para usar a tecla de configurações dentro dos aplicativos. Na TCL compatível, ela abre o painel lateral de imagem e som. A leitura global de teclas pode afetar o volume ao manter o botão pressionado em algumas TCL; se acontecer, desative esta opção e a opção da tecla de TV em outros apps.")
                                 .setPositiveButton("Ativar",(a,b)->save(host,LauncherinRemote.SETTINGS_FILTER,1,changed))
                                 .setNegativeButton("Cancelar",null).show();break;
@@ -64,7 +64,7 @@ final class LauncherinControls {
     private static void minutes(Activity host, boolean saver, Runnable changed) {
         String[] labels=new String[TIMES.length];int selected=-1,current=saver?LauncherinIdle.saver(host):LauncherinIdle.sleep(host);
         for(int i=0;i<TIMES.length;i++){labels[i]=time(TIMES[i]);if(current==TIMES[i])selected=i;}
-        new AlertDialog.Builder(host).setTitle(saver?"Quando iniciar o protetor?":"Quando desligar a TV?")
+        new LauncherinDialogs.Builder(host).setTitle(saver?"Quando iniciar o protetor?":"Quando desligar a TV?")
                 .setSingleChoiceItems(labels,selected,(d,index)->{
                     int a=saver?TIMES[index]:LauncherinIdle.saver(host),b=saver?LauncherinIdle.sleep(host):TIMES[index];
                     if(!LauncherinIdle.valid(a,b)){Toast.makeText(host,"O desligamento deve ocorrer depois do protetor.",Toast.LENGTH_LONG).show();return;}
@@ -80,13 +80,13 @@ final class LauncherinControls {
     }
     private static void permissions(Activity host) {
         String command="adb shell pm grant app.launcherin.tv android.permission.WRITE_SECURE_SETTINGS\nadb shell appops set app.launcherin.tv WRITE_SETTINGS allow";
-        new AlertDialog.Builder(host).setTitle("Permissões dos temporizadores")
+        new LauncherinDialogs.Builder(host).setTitle("Permissões dos temporizadores")
                 .setMessage("A alteração dos tempos precisa de duas permissões na TV. Pelo computador já pareado, execute (no PowerShell use .\\adb.exe no lugar de adb):\n\n"+command+"\n\nDepois volte a esta tela. As configurações anteriores ficam salvas para restauração quando os dois tempos forem desativados.")
                 .setPositiveButton("Alterar configurações",(d,w)->open(host,new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS,Uri.parse("package:"+host.getPackageName()))))
                 .setNegativeButton("Fechar",null).show();
     }
     private static void photos(Activity host) {
-        new AlertDialog.Builder(host).setTitle("Álbum do Google Fotos")
+        new LauncherinDialogs.Builder(host).setTitle("Álbum do Google Fotos")
                 .setMessage("No modo ambiente da TV, escolha Google Fotos e selecione seu álbum. A conta e a autorização ficam com o Google. Se a tela abrir só a lista de protetores, escolha Modo ambiente. Na TCL, também pode estar em Configurações → Sistema → Modo ambiente.\n\nA Launcherin usa o protetor escolhido no sistema; não baixa seu álbum nem recebe sua senha.")
                 .setPositiveButton("Abrir modo ambiente",(d,w)->open(host,new Intent(Settings.ACTION_DREAM_SETTINGS)))
                 .setNegativeButton("Fechar",null).show();

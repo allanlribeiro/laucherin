@@ -161,7 +161,7 @@ final class LauncherinDashboard {
   layout(root.getWidth(),root.getHeight());
  }
  private void historyMenu(JSONObject item,int index){
-  new AlertDialog.Builder(host).setTitle(item.optString("title")).setItems(new String[]{"Remover da lista","Escolher imagem e logo · TMDB"},(dialog,which)->{
+  new LauncherinDialogs.Builder(host).setTitle(item.optString("title")).setItems(new String[]{"Remover da lista","Escolher imagem e logo · TMDB"},(dialog,which)->{
    if(which==1){tmdb.choose(host,item,()->{historySignature=null;forceHistory=true;update();focusHistory(index);});return;}
    io.execute(()->{try{LauncherinMediaService.dismiss(host,item);handler.post(()->{if(!alive)return;historySignature=null;forceHistory=true;update();focusHistory(index);Toast.makeText(host,"Conteúdo removido da lista",Toast.LENGTH_SHORT).show();});}
     catch(Exception error){handler.post(()->Toast.makeText(host,"Não foi possível remover este conteúdo.",Toast.LENGTH_LONG).show());}});
@@ -181,7 +181,7 @@ final class LauncherinDashboard {
  private void tint(View v){if(v instanceof TextView){TextView t=(TextView)v;boolean heading="appearance-heading".equals(t.getTag());t.setTypeface(host.getResources().getFont(heading?R.font.outfit_medium:R.font.outfit_regular));if(heading){t.setTextColor(LauncherinAppearance.get(host).muted);for(android.graphics.drawable.Drawable d:t.getCompoundDrawables())if(d instanceof LauncherinGlyph)((LauncherinGlyph)d).setTint(LauncherinAppearance.get(host).accent);}}if("watch-progress".equals(v.getTag()))v.setBackground(LauncherinSurface.progress(host));if(v instanceof ViewGroup)for(int i=0;i<((ViewGroup)v).getChildCount();i++)tint(((ViewGroup)v).getChildAt(i));v.invalidate();}
  private void applyWidgetTransparency(int value){widgetTransparency=LauncherinWidgetAppearance.clamp(value);for(View widget:widgets){if(widget==audio)audio.setTransparency(widgetTransparency);else widget.setBackground(LauncherinWidgetAppearance.glass(host,widgetTransparency,widget.hasFocus()));}}
  private void transparency(){LauncherinWidgetAppearance.choose(host,this::applyWidgetTransparency);}
- private void widgetSettings(){new AlertDialog.Builder(host).setTitle("Widgets").setItems(new String[]{"Tema decorativo","Times favoritos","Cidade da previsão","Transparência dos widgets","Escolher módulos","Acesso a mídias","Imagens e logos dos conteúdos · TMDB"},(d,which)->{if(which==0)LauncherinSeason.choose(host,()->seasonOverlay.theme(LauncherinSeason.selected(host)));else if(which==1)chooseTeams();else if(which==2)chooseCity();else if(which==3)transparency();else if(which==4)host.launcherinModules();else if(which==5)mediaAccess();else tmdbSettings();}).setNegativeButton("Voltar",null).show();}
+ private void widgetSettings(){new LauncherinDialogs.Builder(host).setTitle("Widgets").setItems(new String[]{"Tema decorativo","Times favoritos","Cidade da previsão","Transparência dos widgets","Escolher módulos","Acesso a mídias","Imagens e logos dos conteúdos · TMDB"},(d,which)->{if(which==0)LauncherinSeason.choose(host,()->seasonOverlay.theme(LauncherinSeason.selected(host)));else if(which==1)chooseTeams();else if(which==2)chooseCity();else if(which==3)transparency();else if(which==4)host.launcherinModules();else if(which==5)mediaAccess();else tmdbSettings();}).setNegativeButton("Voltar",null).show();}
  void resume(){LauncherinMediaService.refreshSessions(host);visible=true;extraWidgets.active(true);seasonOverlay.active(true);applyWidgetLayout();if("below".equals(watchMode)&&history.contains(host.getCurrentFocus()))host.launcherinFocusApps();update();updateWeather();updateSports();loadPrograms(false);handler.removeCallbacks(minute);handler.post(minute);handler.removeCallbacks(extrasTick);handler.post(extrasTick);}
  void pause(){visible=false;watchRevealed=false;layer.animate().cancel();layer.setTranslationY(0);extraWidgets.active(false);handler.removeCallbacks(extrasTick);seasonOverlay.active(false);handler.removeCallbacks(minute);audio.pause();dismissCards();}
  void close(){tmdb.close();extraWidgets.active(false);dismissCards();seasonOverlay.active(false);audio.close();alive=false;handler.removeCallbacksAndMessages(null);io.shutdownNow();if(registered)host.unregisterReceiver(changes);}
@@ -198,13 +198,13 @@ final class LauncherinDashboard {
  void tmdbSettings(){
   EditText key=new EditText(host);key.setSingleLine(true);key.setInputType(android.text.InputType.TYPE_CLASS_TEXT|android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);key.setText(LauncherinTmdb.settings(host).key);
   LinearLayout content=new LinearLayout(host);content.setOrientation(LinearLayout.VERTICAL);content.addView(key);ImageView credit=new ImageView(host);credit.setImageResource(R.drawable.tmdb_logo);credit.setContentDescription("TMDB");credit.setScaleType(ImageView.ScaleType.FIT_CENTER);content.addView(credit,new LinearLayout.LayoutParams(dp(220),dp(32)));
-  new AlertDialog.Builder(host).setTitle("Imagens e logos · TMDB").setMessage("Cole sua chave da API para usar imagens e logos. A logo substitui o nome escrito quando disponível. Apagar a chave desativa as consultas.\n\n"+LauncherinTmdb.CREDIT).setView(content)
+  new LauncherinDialogs.Builder(host).setTitle("Imagens e logos · TMDB").setMessage("Cole sua chave da API para usar imagens e logos. A logo substitui o nome escrito quando disponível. Apagar a chave desativa as consultas.\n\n"+LauncherinTmdb.CREDIT).setView(content)
    .setPositiveButton("Salvar",(d,w)->{String value=key.getText().toString().trim();if(!value.isEmpty()&&LauncherinTmdb.cleanKey(value).isEmpty()){Toast.makeText(host,"Confira a chave: são 32 caracteres.",Toast.LENGTH_LONG).show();return;}
     try{LauncherinExtras.setString(host,LauncherinTmdb.KEY,value);historySignature=null;forceHistory=true;update();}catch(Exception error){Toast.makeText(host,"Não foi possível salvar a chave.",Toast.LENGTH_LONG).show();}}).setNegativeButton("Voltar",null).show();
  }
  void mediaAccess(){
   String status="Histórico do Android TV: "+(LauncherinWatchNext.granted(host)?"autorizado":"não autorizado")+"\nControles de mídia: "+(LauncherinMediaService.granted(host)?"autorizados":"não autorizados");
-  new AlertDialog.Builder(host).setTitle("Continuar assistindo e ouvindo").setMessage(status+"\n\nA Launcherin combina a lista pública do Android TV com as informações de reprodução compartilhadas pelos apps. Alguns serviços podem limitar os títulos e as imagens disponíveis.")
+  new LauncherinDialogs.Builder(host).setTitle("Continuar assistindo e ouvindo").setMessage(status+"\n\nA Launcherin combina a lista pública do Android TV com as informações de reprodução compartilhadas pelos apps. Alguns serviços podem limitar os títulos e as imagens disponíveis.")
    .setPositiveButton("Histórico da TV",(d,w)->{if(!LauncherinWatchNext.granted(host))host.requestPermissions(new String[]{LauncherinWatchNext.PERMISSION},LauncherinWatchNext.REQUEST);else refreshPrograms();})
    .setNeutralButton("Controles de mídia",(d,w)->{try{host.startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));}catch(Exception error){Toast.makeText(host,"Abra o acesso a notificações nas configurações da TV.",Toast.LENGTH_LONG).show();}}).setNegativeButton("Voltar",null).show();
  }
@@ -276,13 +276,13 @@ final class LauncherinDashboard {
  }
  private void chooseCity(){
   EditText city=new EditText(host);city.setSingleLine(true);city.setHint("Ex.: Serra");city.setText(LauncherinWeather.query(host));
-  new AlertDialog.Builder(host).setTitle("Cidade da previsão do tempo").setMessage("Digite o nome e escolha a cidade na lista. Dados: Open-Meteo (CC BY 4.0).").setView(city)
+  new LauncherinDialogs.Builder(host).setTitle("Cidade da previsão do tempo").setMessage("Digite o nome e escolha a cidade na lista. Dados: Open-Meteo (CC BY 4.0).").setView(city)
    .setPositiveButton("Buscar",(d,w)->{String query=LauncherinWeather.clean(city.getText().toString());if(query.length()<2){Toast.makeText(host,"Digite pelo menos duas letras.",Toast.LENGTH_SHORT).show();return;}
     ProgressDialog progress=ProgressDialog.show(host,"Buscando cidades","Aguarde…",true,true);
     io.execute(()->{List<LauncherinWeather.City> found=new ArrayList<>();try{found=LauncherinWeather.search(query);}catch(Exception ignored){}final List<LauncherinWeather.City> choices=found;
      handler.post(()->{if(!alive||!progress.isShowing())return;progress.dismiss();if(choices.isEmpty()){Toast.makeText(host,"Não foi possível encontrar a cidade. Verifique a conexão e tente outra busca.",Toast.LENGTH_LONG).show();return;}
       String[] labels=new String[choices.size()];for(int i=0;i<labels.length;i++)labels[i]=choices.get(i).label();
-      new AlertDialog.Builder(host).setTitle("Escolha sua cidade").setItems(labels,(dialog,index)->{try{LauncherinWeather.select(host,choices.get(index));weatherLoading=false;updateWeather();}catch(Exception error){Toast.makeText(host,"Não foi possível salvar a cidade.",Toast.LENGTH_LONG).show();}}).setNegativeButton("Voltar",null).show();
+      new LauncherinDialogs.Builder(host).setTitle("Escolha sua cidade").setItems(labels,(dialog,index)->{try{LauncherinWeather.select(host,choices.get(index));weatherLoading=false;updateWeather();}catch(Exception error){Toast.makeText(host,"Não foi possível salvar a cidade.",Toast.LENGTH_LONG).show();}}).setNegativeButton("Voltar",null).show();
      });
     });
    }).setNegativeButton("Voltar",null).show();

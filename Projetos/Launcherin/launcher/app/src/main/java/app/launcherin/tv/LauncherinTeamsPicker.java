@@ -33,7 +33,7 @@ final class LauncherinTeamsPicker {
             if(!removed){if(picked.size()>=2){list.setItemChecked(index,false);Toast.makeText(host,"Escolha no máximo dois times. Desmarque um para trocar.",Toast.LENGTH_SHORT).show();}else picked.add(team);}summary.run();
         });
         search.addTextChangedListener(new TextWatcher(){public void beforeTextChanged(CharSequence s,int start,int count,int after){}public void onTextChanged(CharSequence s,int start,int before,int count){filter.run();}public void afterTextChanged(Editable s){}});
-        AlertDialog dialog=new AlertDialog.Builder(host).setTitle("Até 2 times favoritos").setView(content).setPositiveButton("Salvar",null).setNegativeButton("Cancelar",null).create();
+        AlertDialog dialog=new LauncherinDialogs.Builder(host).setTitle("Até 2 times favoritos").setView(content).setPositiveButton("Salvar",null).setNegativeButton("Cancelar",null).create();
         dialog.setOnShowListener(d->{filter.run();dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v->{try{LauncherinSports.select(host,picked);dialog.dismiss();saved.run();}catch(Exception error){Toast.makeText(host,"Não foi possível salvar os times.",Toast.LENGTH_LONG).show();}});list.requestFocus();});dialog.show();
     }
 }

@@ -6,6 +6,7 @@ import java.util.Locale
 enum class HubTab { HOME, PERSONALIZE, WIDGETS, TV }
 
 enum class HubSetting(val tab: HubTab, val title: Int, val description: Int, val keywords: String = "") {
+    MUSIC_PROFILES(HubTab.PERSONALIZE,R.string.music_profiles_title,R.string.music_profiles_scope,"perfil foto avatar nome música usuário esposa"),
     MUSIC_VISUAL(HubTab.WIDGETS,R.string.music_visual_title,R.string.music_visual_scope,"música visualizador circular áudio espectro proteção perfil"),
     APPEARANCE(HubTab.PERSONALIZE,R.string.visual_title,R.string.hub_appearance_desc,"cores paleta premium glass minimal tema efeitos acabamento"),
     LAYOUT(HubTab.WIDGETS,R.string.hub_layout,R.string.hub_layout_desc,"ordem posição tamanho mostrar ocultar widgets grade"),

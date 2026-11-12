@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 public class ThemeProvider extends ContentProvider {
 
     private File file(Uri uri) throws FileNotFoundException {
+        if(uri.getPathSegments().size()==1&&LauncherinProfilePhotos.incoming(uri.getLastPathSegment()))return LauncherinProfilePhotos.incoming(getContext(),uri.getLastPathSegment());
         if(uri.getPathSegments().size()==1&&LauncherinVisualOptions.PENDING.equals(uri.getLastPathSegment()))return LauncherinVisualOptions.pending(getContext());
         if(uri.getPathSegments().size()==1&&LauncherinAppearance.pending(uri.getLastPathSegment()))try{return LauncherinAppearance.incoming(getContext(),uri.getLastPathSegment());}catch(java.io.IOException e){throw new FileNotFoundException("Arquivo visual indisponível");}
         String path = ThemeFiles.path(uri.getPathSegments());
@@ -61,6 +62,7 @@ public class ThemeProvider extends ContentProvider {
 
     @Override public android.os.Bundle call(String method,String arg,android.os.Bundle extras) {
         if(android.os.Binder.getCallingUid()!=android.os.Process.myUid())getContext().enforceCallingPermission(android.Manifest.permission.WRITE_SECURE_SETTINGS,"Agenda access");
+        if("musicProfilesStatus".equals(method)||"commitMusicProfile".equals(method))return LauncherinProfilePhotos.call(getContext(),method,arg);
         if("musicVisualStatus".equals(method)||"commitMusicVisual".equals(method))return LauncherinVisualOptions.call(getContext(),method);
         if("commitAppearance".equals(method)||"appearanceStatus".equals(method))return LauncherinAppearance.call(getContext(),method);
         android.os.Bundle result=new android.os.Bundle();

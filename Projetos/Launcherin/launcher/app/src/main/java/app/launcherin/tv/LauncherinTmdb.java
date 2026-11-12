@@ -101,7 +101,7 @@ final class LauncherinTmdb implements AutoCloseable {
             main.post(()->{if(closed||host.isFinishing()||!progress.isShowing())return;progress.dismiss();
                 if(choices.isEmpty()){android.widget.Toast.makeText(host,"Nenhum resultado disponível. Confira a chave e a conexão.",android.widget.Toast.LENGTH_LONG).show();return;}
                 String[] labels=new String[choices.size()];for(int i=0;i<labels.length;i++){JSONObject row=choices.get(i);boolean tv="tv".equals(row.optString("media_type"));String date=row.optString(tv?"first_air_date":"release_date");labels[i]=row.optString(tv?"name":"title")+" · "+(tv?"Série":"Filme")+(date.length()>=4?" · "+date.substring(0,4):"");}
-                new android.app.AlertDialog.Builder(host).setTitle("Imagem e logo de "+item.optString("title")).setItems(labels,(d,index)->{
+                new LauncherinDialogs.Builder(host).setTitle("Imagem e logo de "+item.optString("title")).setItems(labels,(d,index)->{
                     JSONObject row=choices.get(index);context.getSharedPreferences("tmdb-matches",0).edit().putString(itemId(item),row.optString("media_type")+"/"+row.optLong("id")).apply();changed.run();
                 }).setNeutralButton("Identificar automaticamente",(d,w)->{context.getSharedPreferences("tmdb-matches",0).edit().remove(itemId(item)).apply();changed.run();}).setNegativeButton("Voltar",null).show();
             });

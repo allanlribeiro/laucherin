@@ -13,7 +13,7 @@ final class LauncherinSeason {
     static String selected(Context context){return clean(LauncherinExtras.read(context).optString(KEY,NONE));}
     static void choose(Activity activity,Runnable changed){
         String original=selected(activity);final int[] choice={CHRISTMAS.equals(original)?1:0};
-        AlertDialog dialog=new AlertDialog.Builder(activity).setTitle("Tema decorativo")
+        AlertDialog dialog=new LauncherinDialogs.Builder(activity).setTitle("Tema decorativo")
                 .setSingleChoiceItems(new String[]{"Padrão · sem enfeites","Natal · gorrinhos, luzes e presentes"},choice[0],(d,index)->choice[0]=index)
                 .setPositiveButton("Aplicar",null).setNegativeButton("Cancelar",null).create();
         dialog.setOnShowListener(d->dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v->{

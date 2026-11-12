@@ -24,7 +24,7 @@ public final class LauncherinRemoteActivity extends Activity {
         if (!awaiting || !LauncherinRemote.learnable(key)) return super.dispatchKeyEvent(event);
         if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
             awaiting = false;
-            new AlertDialog.Builder(this).setTitle("Usar esta tecla para TV aberta?")
+            new LauncherinDialogs.Builder(this).setTitle("Usar esta tecla para TV aberta?")
                     .setMessage(KeyEvent.keyCodeToString(key) + " · código " + key + "\nEla abrirá a mesma TV ao vivo do ícone que já funciona.")
                     .setPositiveButton("Salvar", (d,w) -> {
                         try { LauncherinExtras.setInt(this, LauncherinRemote.KEY, key); LauncherinRemote.refresh(this); HomeKeyService.applyTvRemote(); finish(); }

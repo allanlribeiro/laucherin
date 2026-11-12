@@ -1,0 +1,12 @@
+<resources>
+    <style name="LauncherinDialogTheme" parent="android:style/Theme.Material.Dialog.Alert">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorAccent">#AB75FF</item>
+        <item name="android:textColorPrimary">#F5F6FF</item>
+        <item name="android:textColorSecondary">#B8C4DF</item>
+        <item name="android:colorControlHighlight">#665E4A8E</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+</resources>

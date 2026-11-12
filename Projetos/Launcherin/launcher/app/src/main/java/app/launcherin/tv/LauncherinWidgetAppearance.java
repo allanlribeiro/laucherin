@@ -46,7 +46,7 @@ final class LauncherinWidgetAppearance {
             public void onStopTrackingTouch(SeekBar bar) { }
         });
         boolean[] saved = {false};
-        AlertDialog dialog = new AlertDialog.Builder(activity).setTitle("Transparência dos widgets")
+        AlertDialog dialog = new LauncherinDialogs.Builder(activity).setTitle("Transparência dos widgets")
                 .setView(panel).setPositiveButton("Salvar", null).setNegativeButton("Cancelar", null).create();
         dialog.setOnDismissListener(d -> { if (!saved[0]) preview.accept(original); });
         dialog.setOnShowListener(d -> {

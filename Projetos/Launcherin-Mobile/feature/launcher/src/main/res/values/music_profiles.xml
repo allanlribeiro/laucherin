@@ -1,0 +1,16 @@
+<resources>
+ <string name="music_profiles_title">Perfis da música</string>
+ <string name="music_profiles_scope">Escolha um perfil para editar nome e foto. Isso não troca o perfil ativo nem interrompe a música. Para ouvir em outro perfil, selecione-o na TV.</string>
+ <string name="music_profiles_install">Instale a Launcherin TV preview24 ou posterior e conecte o celular à TV.</string>
+ <string name="music_profiles_active">Ativo na TV</string>
+ <string name="music_profiles_new">Novo perfil</string>
+ <string name="music_profiles_edit">Editar perfil selecionado</string>
+ <string name="music_profiles_name">Nome do perfil</string>
+ <string name="music_profiles_photo">Prévia da foto do perfil</string>
+ <string name="music_profiles_photo_on_tv">Este perfil já tem foto na TV. Você pode escolher outra ou remover.</string>
+ <string name="music_profiles_initials">Sem foto: a TV mostra a inicial do nome.</string>
+ <string name="music_profiles_choose">Escolher foto no celular</string>
+ <string name="music_profiles_remove">Remover foto</string>
+ <string name="music_profiles_apply">Salvar perfil na TV</string>
+ <string name="music_profiles_add">Adicionar perfil</string>
+</resources>

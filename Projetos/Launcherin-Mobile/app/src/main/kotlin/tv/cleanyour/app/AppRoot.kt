@@ -257,6 +257,13 @@ fun AppRoot(graph: AppGraph, start: Dest, onExit: () -> Unit) {
         onFrames=callback;pickFrames.launch(androidx.activity.result.PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     } }
 
+    var onMusicProfilePhoto by remember {mutableStateOf<((ByteArray)->Unit)?>(null)}
+    val pickMusicProfilePhoto=rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()){uri ->
+        val callback=onMusicProfilePhoto;onMusicProfilePhoto=null
+        if(uri!=null&&callback!=null)scope.launch {runCatching {withContext(Dispatchers.IO){tv.cleanyour.ui.design.component.MusicProfilePhoto.read(context,uri)}}.onSuccess(callback).onFailure{snack.showSnackbar(frameImportError)}}
+    }
+    val musicProfilePicker=remember(pickMusicProfilePhoto){tv.cleanyour.ui.design.component.MusicProfilePhotoPicker{callback ->onMusicProfilePhoto=callback;pickMusicProfilePhoto.launch(androidx.activity.result.PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))}}
+
 
     suspend fun onSetupEffect(e: SetupEffect) = when (e) {
         SetupEffect.HapticLight -> haptic(HapticFeedbackConstants.CLOCK_TICK)
@@ -341,7 +348,7 @@ fun AppRoot(graph: AppGraph, start: Dest, onExit: () -> Unit) {
                             onAdvancedHome = { go("home/${tv.id.value}") },
                             onAppSettings = { go("appsettings") },
                             onExit = { if (backStack.size > 1) go("back") else onExit() },
-                            onIntent = home::dispatch, photos = photoPicker, thumbnail = tv.thumbnail, framePicker = framePicker)
+                            onIntent = home::dispatch, photos = photoPicker, thumbnail = tv.thumbnail, framePicker = framePicker, musicProfilePicker=musicProfilePicker)
                     }
                 }
                 entry<Dest.Tools> { key ->

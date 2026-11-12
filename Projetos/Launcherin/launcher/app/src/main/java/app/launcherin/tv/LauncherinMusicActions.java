@@ -73,7 +73,7 @@ final class LauncherinMusicActions {
         text.append("Receptor do Android: ").append(LauncherinSystemMedia.owner(host)).append("\n");
         text.append("Última rota: ").append(saved.getString("route","—")).append("\nResultado: ").append(saved.getString("result","—"));
         text.append("\n\n").append(LauncherinDreams.diagnostic(host));
-        String result=text.toString();new AlertDialog.Builder(host).setTitle("Diagnóstico · música e protetor").setMessage(result)
+        String result=text.toString();new LauncherinDialogs.Builder(host).setTitle("Diagnóstico · música e protetor").setMessage(result)
                 .setPositiveButton("Copiar",(d,w)->{host.getSystemService(ClipboardManager.class).setPrimaryClip(ClipData.newPlainText("Launcherin",result));Toast.makeText(host,"Diagnóstico copiado.",Toast.LENGTH_SHORT).show();})
                 .setNegativeButton("Fechar",null).show();
     }
