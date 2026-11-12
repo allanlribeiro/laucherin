@@ -9,7 +9,7 @@ import java.util.*;
 final class LauncherinMusicLibrary {
     static final int MAX=100;
     private final SharedPreferences prefs;
-    LauncherinMusicLibrary(Context c){prefs=c.getSharedPreferences("launcherin-player",0);}
+    LauncherinMusicLibrary(Context c){prefs=c.getSharedPreferences(new LauncherinMusicProfiles(c).libraryName(),0);}
     List<LauncherinTrack> read(String key){List<LauncherinTrack> out=new ArrayList<>();try{JSONArray a=new JSONArray(prefs.getString(key,"[]"));for(int i=0;i<a.length()&&out.size()<MAX;i++){LauncherinTrack t=LauncherinTrack.read(a.optJSONObject(i));if(t!=null)out.add(t);}}catch(Exception ignored){}return out;}
     void write(String key,List<LauncherinTrack> tracks){JSONArray a=new JSONArray();for(LauncherinTrack t:tracks){if(a.length()==MAX)break;a.put(t.json());}prefs.edit().putString(key,a.toString()).apply();}
     int index(List<LauncherinTrack> queue){return queue.isEmpty()?-1:Math.max(0,Math.min(queue.size()-1,prefs.getInt("index",0)));}
@@ -39,5 +39,9 @@ final class LauncherinMusicLibrary {
     void saverMode(String mode){prefs.edit().putString("saver_mode",LauncherinAudioSaverPolicy.mode(mode)).apply();}
     int saverSeconds(){return LauncherinAudioSaverPolicy.seconds(prefs.getInt("saver_seconds",60));}
     void saverSeconds(int seconds){prefs.edit().putInt("saver_seconds",LauncherinAudioSaverPolicy.seconds(seconds)).apply();}
+    boolean shuffle(){return prefs.getBoolean("shuffle",false);}void shuffle(boolean value){prefs.edit().putBoolean("shuffle",value).apply();}
+    int repeat(){return prefs.getInt("repeat",0);}void repeat(int value){prefs.edit().putInt("repeat",Math.floorMod(value,3)).apply();}
+    void recent(LauncherinTrack track){List<LauncherinTrack> all=read("recent");all.removeIf(t->t.url.equals(track.url));all.add(0,track);write("recent",all.subList(0,Math.min(30,all.size())));}
+    void updateArtistArt(Artist original,String art){List<Artist> all=artists();for(int i=0;i<all.size();i++){Artist a=all.get(i);if(a.key().equals(original.key())&&a.source.equals(original.source))all.set(i,new Artist(a.name,a.source,art,a.kind));}JSONArray data=new JSONArray();for(Artist a:all)data.put(a.json());prefs.edit().putString("artists",data.toString()).apply();}
     static String hash(byte[] bytes)throws Exception{StringBuilder s=new StringBuilder();for(byte b:java.security.MessageDigest.getInstance("SHA-256").digest(bytes))s.append(String.format(java.util.Locale.ROOT,"%02x",b&255));return s.toString();}
 }

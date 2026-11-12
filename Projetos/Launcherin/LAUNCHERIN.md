@@ -209,3 +209,20 @@ Foram reproduzidas cinco falhas em testes Android antes da alteração: ausênci
 Validação: 431 testes TV +51 de integridade (482), lint TV sem erros, 1500 recursos pt-BR sem erros de contrato; APK TV embarcado idêntico, limites de tamanho e assinaturas conferidos. Falta teste físico de desligamento sem música e proteção durante reprodução. Celular16 inclui TV24 para atualização pelo próprio app, sem computador.
 
 Referência da API de áudio: https://developer.android.com/reference/android/media/AudioManager#isMusicActive() .
+
+## Preview22 — música, perfis e visualizador
+
+A apresentação da música segue a nova referência sem a marca superior esquerda.
+Acrescenta teclado PC QWERTY com acentos por pressão longa, dois perfis locais
+(editáveis, até oito), histórico, playlists locais, busca pública por tipos,
+seleções por artista/gênero, aleatório sem repetição dentro do ciclo e repetição.
+O resolver de áudio e a implementação de letras são preservados; o serviço recebe
+apenas as extensões necessárias para perfis, histórico e ordem de reprodução.
+
+Fotos usam busca de artistas com correspondência única e opção de prévia manual.
+O visualizador se liga à sessão própria positiva via Visualizer/FFT, com permissão
+runtime de áudio, sem AudioRecord/microfone ou captura global. Inclui configurações
+independentes pelo celular e proteção5/15/30, modos anteriores preservados e tela
+preta explícita (painel LED não é desligado). Sem alteração de Home/acessibilidade,
+atalhos, apps, widgets, Watch Next ou política global de ociosidade. Detalhes e
+limitações estão em launcher/PLAYER-GUIDE.md e na validação da distribuição.

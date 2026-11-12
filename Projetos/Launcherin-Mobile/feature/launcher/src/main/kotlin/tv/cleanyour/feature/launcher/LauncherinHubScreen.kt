@@ -58,12 +58,13 @@ fun LauncherinHubScreen(
     var choosingTv by rememberSaveable { mutableStateOf(false) }
     var dockOpen by rememberSaveable { mutableStateOf(false) }
     var fullLook by rememberSaveable { mutableStateOf(false) }
+    var musicVisualPage by rememberSaveable {mutableStateOf(false)}
     var appearancePage by rememberSaveable { mutableStateOf<String?>(null) }
     var sendFailed by rememberSaveable { mutableStateOf(false) }
     var leaving by remember { mutableStateOf<(() -> Unit)?>(null) }
     val draft = state.look
     val pending = draft?.canSend == true || state.lookFailed
-    val busy = state.busy != null || state.testing != null || state.importingPhotos || state.appearance.busy
+    val busy = state.busy != null || state.testing != null || state.importingPhotos || state.appearance.busy || state.musicVisual.busy
     val ready = !loading && state.tvName.isNotBlank() && state.notOnTv == null && !busy
     LaunchedEffect(connected,state.launcherVersionCode) { if(connected)onIntent(HomeScreenIntent.SyncAgenda(false)) }
 
@@ -79,6 +80,7 @@ fun LauncherinHubScreen(
             HubSetting.REMOTE -> navigate { sectionName = item.name }
             HubSetting.UPDATE -> if (state.updateTo == null) { sectionName = item.name } else navigate { onIntent(HomeScreenIntent.PreviewUpdate) }
             HubSetting.APPS -> navigate { dockOpen = true }
+            HubSetting.MUSIC_VISUAL -> musicVisualPage=true
             HubSetting.APPEARANCE -> appearancePage="appearance"
             HubSetting.WALLPAPER -> appearancePage="wallpaper"
             else -> {
@@ -168,6 +170,7 @@ fun LauncherinHubScreen(
         Gap(16.dp)
     }
 
+    if(musicVisualPage)MusicVisualPanel(state,connected,onIntent,{musicVisualPage=false},{onIntent(HomeScreenIntent.PreviewUpdate)})
     appearancePage?.let { page -> AppearancePanel(state,connected,page=="wallpaper",photos,onIntent,{appearancePage=null},{onIntent(HomeScreenIntent.PreviewUpdate)}) }
 
     if (choosingTv) CytBottomSheet({ choosingTv = false }) {
@@ -304,7 +307,7 @@ private fun HubSetting.icon() = when (this) {
     HubSetting.WEATHER -> LauncherinIcons.Weather
     HubSetting.SPORTS -> LauncherinIcons.Sports
     HubSetting.WATCH -> LauncherinIcons.Watch
-    HubSetting.LISTEN -> LauncherinIcons.Music
+    HubSetting.LISTEN, HubSetting.MUSIC_VISUAL -> LauncherinIcons.Music
     HubSetting.WALLPAPER, HubSetting.SAVER -> LauncherinIcons.Picture
     HubSetting.POWER -> LauncherinIcons.Timer
     HubSetting.THEME -> LauncherinIcons.Theme

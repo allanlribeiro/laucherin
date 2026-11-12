@@ -1,0 +1,24 @@
+<resources>
+    <string name="music_visual_title">Visualizador e proteção musical</string>
+    <string name="music_visual_scope">Ajuste o visual da tela de música sem alterar a Home ou a reprodução.</string>
+    <string name="music_visual_profile">Perfil ativo na TV: %1$s</string>
+    <string name="music_visual_enable">Ativar visualizador circular</string>
+    <string name="music_visual_motion">Movimentação suave</string>
+    <string name="music_visual_ambient">Permitir modo ambiente sem espectro</string>
+    <string name="music_visual_ambient_note">Anel e capa em movimento lento, sem simular batidas.</string>
+    <string name="music_visual_colors">Cores do visualizador</string>
+    <string name="music_visual_electric">Azul, ciano e violeta</string>
+    <string name="music_visual_cyan">Ciano</string>
+    <string name="music_visual_violet">Violeta</string>
+    <string name="music_visual_blue">Azul</string>
+    <string name="music_visual_timers">Proteção por inatividade</string>
+    <string name="music_visual_timer_note">Diminuir a intensidade / ocultar controles / entrar no modo minimalista.</string>
+    <string name="music_visual_times">%1$d / %2$d / %3$d minutos</string>
+    <string name="music_visual_dark">Usar tela preta durante a proteção</string>
+    <string name="music_visual_dark_note">Mantém o áudio. O painel LED continua iluminado; não desliga a TV.</string>
+    <string name="music_visual_permission">Na TV, abra Música → Ajustes → Permitir análise do áudio. A API exige permissão de áudio; a Launcherin não grava o microfone. Se o firmware bloquear o espectro, ative o ambiente opcional.</string>
+    <string name="music_visual_refresh">Atualizar perfil e opções da TV</string>
+    <string name="music_visual_install">Instale o APK Launcherin TV preview22 ou posterior na televisão. O instalador antigo de tela inicial não inclui essa versão.</string>
+    <string name="music_visual_smart">Usar proteção inteligente da música</string>
+    <string name="music_visual_smart_note">Ativada: usa as etapas abaixo na tela de música. Para usar Google Fotos ou outro protetor anterior, desative e escolha o modo em Música → Ajustes na TV.</string>
+</resources>

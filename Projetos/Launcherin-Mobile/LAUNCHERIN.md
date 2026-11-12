@@ -189,3 +189,15 @@ Foram reproduzidas cinco falhas em testes Android antes da alteração: ausênci
 Validação: 431 testes TV +51 de integridade (482), lint TV sem erros, 1500 recursos pt-BR sem erros de contrato; APK TV embarcado idêntico, limites de tamanho e assinaturas conferidos. Falta teste físico de desligamento sem música e proteção durante reprodução. Celular16 inclui TV24 para atualização pelo próprio app, sem computador.
 
 Referência da API de áudio: https://developer.android.com/reference/android/media/AudioManager#isMusicActive() .
+
+## Preview22 — controles do visualizador da música
+
+Nova seção Widgets → Visualizador e proteção musical em português: habilitação,
+cores, intensidade, movimento, ambiente opcional, prioridade da proteção inteligente,
+tempos e tela preta. Usa o canal pareado, arquivo de nome fixo com SHA-256, provider
+protegido e compromisso por perfil ativo. Não refaz a configuração da Home. Corrigida
+a atualização do texto de erro de importação de fotos para recursos reativos do Compose.
+
+O Mobile22 configura a TV22, mas mantém o instalador embutido TV18 e seu pin existente:
+o gate de8 MiB não foi aumentado. A TV22 deve ser instalada diretamente com seu APK
+separado nesta candidata. Chaves e credenciais não fazem parte da distribuição.

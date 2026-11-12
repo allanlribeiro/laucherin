@@ -1,0 +1,135 @@
+{
+  "version": "0.1.0-preview22",
+  "base": "32f99f9db28134d2638d2b13732eb36b38e5dd84",
+  "date": "2026-11-12",
+  "timezone": "America/Sao_Paulo",
+  "artifacts": {
+    "tv": {
+      "file": "Launcherin-TV-0.1.0-preview22.apk",
+      "package": "app.launcherin.tv",
+      "versionCode": 30,
+      "size": 1649838,
+      "sha256": "0a3a63b4ab89132d625e21170106e62582212aa747bb2cd9dd64d2b79de0cc42",
+      "signerSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d"
+    },
+    "mobile": {
+      "file": "Launcherin-Mobile-0.1.0-preview22.apk",
+      "package": "app.launcherin.mobile",
+      "versionCode": 22,
+      "size": 8078751,
+      "sha256": "26a7cbfbc4f15ff492f4fc5675cd1fd42dcd14ca3b1be832e410983b115f6548",
+      "signerSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d"
+    }
+  },
+  "tests": {
+    "tv": {
+      "tests": 558,
+      "failures": 0
+    },
+    "core_flows": {
+      "tests": 443,
+      "failures": 0
+    },
+    "core_ops": {
+      "tests": 58,
+      "failures": 0
+    },
+    "core_trust": {
+      "tests": 51,
+      "failures": 0
+    },
+    "feature_launcher": {
+      "tests": 280,
+      "failures": 0
+    }
+  },
+  "totalTests": 1390,
+  "lint": {
+    "tv": {
+      "errors": 0,
+      "warnings": 160
+    },
+    "mobile": {
+      "errors": 0,
+      "warnings": 7
+    },
+    "mobileFeature": {
+      "errors": 0,
+      "warnings": 9
+    }
+  },
+  "strictDependencyVerification": true,
+  "newDependencies": false,
+  "protectedFilesUnchanged": [
+    "HomeKeyService",
+    "InputKeyService",
+    "RemoteKeys",
+    "LauncherinIdle",
+    "LauncherinMusicIdlePolicy",
+    "LauncherinNativeSettings",
+    "LauncherinRemote",
+    "LauncherinDockFocus",
+    "LauncherinWatchMode",
+    "MainActivity",
+    "AppAdapter",
+    "Config",
+    "LauncherinWatchNext",
+    "LauncherinMediaService",
+    "LauncherinAudioWidget",
+    "LauncherinDreams",
+    "LauncherinDreamDeadline"
+  ],
+  "lyricMethodsByteIdenticalToPreview21": true,
+  "audioResolverAndHttpByteIdenticalToPreview21": true,
+  "mobileBundledTv": "preview18",
+  "mobileTvPinUnchanged": true,
+  "mobileSizeLimitBytes": 8388608,
+  "installTv22Directly": true,
+  "physicalTclTested": false,
+  "systemEmulatorTested": false,
+  "measuredCpuGpuRamOnTv": false,
+  "graphicsRuntime": "Robolectric Native Graphics API35; visual and profile tests include API34 and35",
+  "spectrumCapture": {
+    "implementation": "android.media.audiofx.Visualizer attached only to positive own player session id",
+    "permission": "RECORD_AUDIO runtime; no AudioRecord or microphone recording",
+    "nativeHardwareCaptureTestedHere": false,
+    "fixtureFftIsSyntheticAndLabeled": true,
+    "globalAudioMixUsed": false,
+    "randomBeatAnimation": false,
+    "nominalMaxFps": 60,
+    "adaptiveLowerFps": [
+      30,
+      15
+    ],
+    "minimalFps": 4,
+    "minimalCaptureHz": 5
+  },
+  "profiles": {
+    "localOnly": true,
+    "defaultCount": 2,
+    "maxCount": 8,
+    "defaultUsesLegacyLibrary": true,
+    "switchPausesAndSavesOldProfile": true
+  },
+  "protection": {
+    "defaultMinutes": [
+      5,
+      15,
+      30
+    ],
+    "smartOptional": true,
+    "legacyModesPreserved": true,
+    "blackScreenPhysicallySwitchesPanelOff": false
+  },
+  "liveChecks": {
+    "soundcloudArtistResults": 8,
+    "soundcloudExactArtistMatch": true,
+    "youtubeMusicArtistProbe": "Proxy CONNECT HTTP403 in this cloud; TV availability remains unverified"
+  },
+  "sourceLimits": [
+    "Public catalog, not service-account login or personalized account recommendations",
+    "Local radio is an artist selection, not a live station",
+    "Album year shown only if actually provided; current sources commonly omit it",
+    "SoundCloud collections are not asserted to be albums"
+  ]
+}

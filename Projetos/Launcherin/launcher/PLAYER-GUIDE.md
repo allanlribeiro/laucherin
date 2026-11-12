@@ -1,157 +1,176 @@
-# Música na Launcherin — preview21 (teste)
+# Launcherin Música — preview22 (teste)
 
-Esta atualização aproxima a tela de música da referência visual escolhida: vidro
-azul profundo, bordas ciano/violeta, player grande, trecho da letra ao lado e atalhos
-para favoritos. A Home da launcher não é redesenhada nesta versão. O serviço de áudio
-é idêntico ao da preview19 confirmada pelo usuário; fila, progresso, músicas e
-artistas favoritos são preservados.
+A apresentação acompanha a nova referência: menu lateral sem a marca no canto,
+player principal com capa circular, abas de conteúdo, histórico, mixes, gêneros e
+player inferior persistente. A Home, seus widgets, apps, Continuar assistindo,
+atal/temas, atalhos, Home/acessibilidade e configurações rápidas não são redesenhados.
 
-## Instalar e abrir
+## Instalar
 
-Instale `Launcherin-TV-0.1.0-preview21.apk` diretamente na TV, por cima da versão
-anterior. Pacote `app.launcherin.tv`, código 29, com a mesma assinatura existente.
-Não é necessário configurar tudo novamente. O aplicativo do celular permanece na
-preview18 nesta entrega: ele continua configurando a TV, mas seu botão de atualizar
-a tela inicial contém a TV preview18 e não instala esta nova versão experimental.
+- TV: `Launcherin-TV-0.1.0-preview22.apk`, pacote `app.launcherin.tv`, código30.
+- Celular: `Launcherin-Mobile-0.1.0-preview22.apk`, pacote `app.launcherin.mobile`, código22.
 
-Na Home, segure OK sobre um dos controles do widget **Continuar ouvindo**, ou suba
-até o título “Continuar ouvindo ›” e aperte OK.
+Os dois usam o certificado já existente. Instale por cima, sem desinstalar ou apagar
+os dados. Para esta candidata, **instale o APK da TV diretamente**: o instalador
+embutido no Mobile continua sendo TV preview18. O limite existente de8 MiB do
+celular foi preservado; o player maior não foi incluído nesse instalador antigo.
+O Mobile22 configura a TV22 depois da instalação direta.
 
-Se instalar pelo ADB no Windows, na pasta platform-tools, consulte o endereço atual:
+Na Home, segure OK em um controle do widget Continuar ouvindo ou selecione seu título
+para abrir a música. Instalar apenas o celular não redesenha nem atualiza automaticamente
+esta tela na TV.
 
-```powershell
-.\adb.exe devices -l
-$tv = "IP:PORTA"
-.\adb.exe -s $tv install -r "$env:USERPROFILE\Downloads\Launcherin-TV-0.1.0-preview21.apk"
-```
+## Perfis locais
 
-A atualização real por cima da instalação física ainda precisa ser verificada na
-TCL; identidade, versão e assinatura do pacote foram conferidas localmente.
+O botão circular do cabeçalho abre **Perfil1** e **Perfil2**, com opção de renomear
+pelo teclado próprio e adicionar mais perfis (até8). Renomeie para vocês dois.
 
-## Navegação e novo acabamento
+O primeiro perfil usa a biblioteca antiga: músicas, artistas/bandas, fila, posição
+e preferências anteriores continuam nele. Os demais começam com biblioteca própria.
+Favoritos, artistas/bandas, histórico, playlists, fonte preferida, aleatório,
+repetição e opções do visualizador ficam separados por perfil.
 
-- **Início / Tocando agora:** capa, título, artista, origem real do áudio, progresso,
-  fila, anterior, Play/Pausa, próxima, protetor, favorito e opções da faixa atual.
-- **Letra:** trecho sincronizado no painel lateral e letra ampliada ao selecionar
-  a aba ou Abrir letra. Sem letra disponível, a interface informa isso.
-- **Artistas / Bandas / Sua coleção:** favoritos separados por categoria e músicas
-  favoritas. Os três atalhos inferiores abrem as mesmas coleções.
-- **Buscar:** pesquisa músicas, artistas ou bandas na fonte escolhida: YouTube ou
-  SoundCloud. As músicas salvas conservam sua própria origem.
-- **Fila:** mostra a ordem de reprodução e abre ações de cada faixa.
-- **Ajustes / engrenagem:** protetores, temporizadores, controles externos e licenças.
+Trocar de perfil pausa o player próprio, salva a fila/posição anterior e carrega o
+perfil escolhido. Não inicia outra música sozinho. São perfis locais da Launcherin,
+não contas ou logins de YouTube Music, SoundCloud ou Spotify. Não mudam contas de
+outros aplicativos nem o perfil da Home inteira.
 
-A barra compacta aparece nas páginas secundárias, sem duplicar os controles no
-Início. Ícones de letra e protetor têm descrições acessíveis. O D-pad permite navegar
-pela barra lateral, abas, player, busca e coleções. Voltar retorna ao Início; nele,
-Voltar fecha a tela mantendo o áudio. As teclas de mídia continuam disponíveis.
+## Teclado de PC
 
-Os gradientes, reflexos e contornos são desenhos nativos estáticos. Não há blur em
-tempo real, visualizador a 60 fps ou vídeo decorativo. O cache de miniaturas continua
-limitado a 2 MiB e descarta referências das imagens ocultas. As atualizações param ao
-sair da tela. Não foi medida a fluidez desta atualização na TCL física.
+A busca e os nomes usam um teclado QWERTY próprio, dentro da música. Números ficam
+na fileira superior; QWERTYUIOP, ASDFGHJKLÇ e ZXCVBNM seguem as posições usuais,
+com Shift, Enter/Buscar à direita, Apagar e Espaço largo.
 
-A referência visual contém indicadores FLAC, Dolby e Lossless, rádio e recomendações.
-Eles não são exibidos como recursos inexistentes: esta versão mostra a origem real
-da música e oferece suas coleções salvas, busca e fila. Não há conta de perfil fictícia.
+Setas movem o foco e OK digita. **Segure OK em uma letra** para escolher seus
+acentos, por exemplo A→á/à/â/ã. Não existe uma fileira de letras acentuadas. Shift
+alterna maiúsculas. O teclado Android/IME do sistema não é instalado, trocado nem
+desativado globalmente; somente os campos da música evitam abrir o teclado padrão.
 
-## Músicas e artistas favoritos
+## Menus e controles
 
-OK sobre uma música abre ações visíveis: **Tocar agora**, **Adicionar à fila**,
-**Favoritar música** e **Favoritar artista ou banda**. Na Fila, também há remoção de
-faixas que não sejam a música atual. Segurar OK continua abrindo as mesmas ações.
+- **Início:** Tocando agora, histórico real do perfil, mixes locais e gêneros.
+- **Buscar:** tipos Músicas, Artistas, Álbuns e Playlists no catálogo público selecionado.
+- **Sua Biblioteca / Favoritos:** músicas, artistas e bandas já salvos; os filtros anteriores continuam disponíveis.
+- **Playlists:** criar playlist local, adicionar músicas pelas opções de uma faixa,
+  consultar, reproduzir e remover uma playlist. Não altera playlists da conta do serviço.
+- **Rádios:** seleções da Launcherin por artista, construídas pela busca pública;
+  não são estações ao vivo nem a rádio personalizada oficial de uma conta.
+- **Explorar:** buscas por gêneros musicais.
+- **Ajustes:** existe apenas no menu lateral. A engrenagem duplicada foi removida.
 
-**Adicionar artista** ou **Adicionar banda** permite cadastrar nome, categoria e
-fonte preferida. Você pode editar a categoria entre Artista e Banda ao salvar ou
-posteriormente nas opções. Favoritos antigos sem categoria permanecem em Artistas;
-eles não são inferidos, removidos nem duplicados. Mover de categoria não altera a fila. Ao selecionar um artista, a Launcherin busca
-as músicas disponíveis naquela fonte, sem abrir outro aplicativo. **Artista
-favorito · opções** permite editar ou remover. As imagens de artistas dependem do
-que a fonte fornece; quando não há imagem, o cartão usa iniciais.
+As abas são Tocando agora, Letra, Artista, Álbum, Fila e Relacionadas. As letras usam
+o mesmo LRCLIB, cache, correspondência por música/artista/duração e sincronização
+anterior. Artista oferece busca, favorito e álbuns; Fila mantém suas ações. Relacionadas
+mostra os itens efetivamente compartilhados pela fonte, ou avisa a ausência.
 
-Limites: 50 artistas/bandas, 100 músicas favoritas e 100 itens na fila. Esses dados
-ficam separados das configurações da Home e dos widgets. Salvar ou editar um artista
-não altera o progresso ou a fila.
+Play/Pausa, anterior, próxima, aleatório, repetição e favorito funcionam no player
+principal. O player inferior continua acessível durante a navegação e oferece
+controles, progresso, letra, protetor e volume real do fluxo de mídia da TV.
+Aleatório visita os itens restantes sem repetir dentro do ciclo; repetição alterna
+Desativada / Uma música / Toda a fila. A fila salva não é embaralhada destrutivamente.
 
-## Protetores durante o áudio
+A notificação do cabeçalho mostra avisos locais do player. Não representa notificações
+privadas de uma conta musical. Álbum/ano são exibidos somente quando os metadados
+existem; ano de upload não é usado como ano do álbum. O catálogo atual normalmente
+não informa ano. Coleções do SoundCloud não são rotuladas como álbuns confirmados.
+Não há indicadores inventados de FLAC, Dolby, Lossless ou conta conectada.
 
-Em **Ajustes**, escolha:
+## Fotos de artistas e bandas
 
-| Opção | Comportamento |
+A aplicação consulta a busca específica de artistas da fonte e utiliza uma foto
+somente quando encontra uma correspondência única. O cadastro manual não fica
+limitado às iniciais. A imagem é guardada nos favoritos e reutiliza o cache limitado.
+Também há consulta para o retrato do artista atual, sem favoritar automaticamente.
+
+Se o nome for ambíguo ou a fonte não retornar foto, as iniciais permanecem como
+alternativa. No artista/banda, segure OK ou abra suas opções e escolha **Escolher foto
+do artista/banda**; confira a prévia antes de Usar foto. A atualização não reordena os
+favoritos nem refaz a Home.
+
+## Visualizador circular e acesso ao áudio
+
+Ative em Música → **Ajustes → Visualizador circular** ou pelo Mobile22 em
+**Widgets → Visualizador e proteção musical**. A opção começa desativada para
+preservar o comportamento da instalação anterior.
+
+Na TV, selecione **Permitir análise do áudio** e autorize a permissão de áudio.
+A API Android Visualizer exige `RECORD_AUDIO` mesmo para o efeito ligado ao player
+próprio. O código não cria AudioRecord, não grava o microfone e não captura o mix
+global: liga o efeito somente a um identificador positivo da sessão MediaPlayer
+própria. Não muda o Assistente ou o funcionamento de “Ok Google”.
+
+O anel usa48 faixas logarítmicas calculadas a partir do FFT recebido, com ataque
+suavizado. Não há amplitudes aleatórias ou batidas inventadas. Azul/ciano/violeta,
+intensidade e movimento são configuráveis. O limite é até60 FPS; a cadência reduz
+para30/15 quando há atrasos e respeita a redução de efeitos. O modo minimalista
+reduz para4 FPS e captura em5 Hz. A captura e os callbacks são liberados na pausa,
+saída ou ocultação da visualização.
+
+A permissão ou o firmware/serviço podem impedir o acesso. Nesse caso o player continua
+funcionando e informa a limitação. **Ambiente sem espectro** é opcional: anel/capa em
+movimento lento, sem fingir uma reação à música. A compatibilidade real da captura
+na TCL P7K ainda precisa ser confirmada. As capturas de demonstração do espectro
+usam um FFT sintético conhecido de teste, não áudio capturado de um streaming real.
+
+## Proteção inteligente e modos anteriores
+
+Com visualizador e **Proteção inteligente** ativados, enquanto o player próprio toca:
+
+| Inatividade | Resultado padrão |
 |---|---|
-| Capa flutuante | Capa e informações mudam de posição a cada 20 segundos |
-| Fotos em sequência | Alterna as fotos enviadas ao Porta-retratos; informações mudam de posição |
-| Modo escuro | Fundo preto com pequenas informações e capa em movimento por intervalos |
-| Google Fotos | Usa o álbum e o temporizador do modo ambiente da própria TV |
+|5 minutos | Diminui a intensidade da apresentação |
+|15 minutos | Oculta a interface existente e conserva somente o visualizador móvel |
+|30 minutos | Fundo preto, visual menor/discreto, menos barras e atualização de4 FPS |
 
-Para os três modos próprios, escolha 30 segundos, 1, 2 ou 5 minutos de inatividade,
-ou **Somente manual**. Eles entram a partir da biblioteca de música enquanto o
-player próprio está tocando; **Protetor** também permite iniciar manualmente.
-OK, Voltar ou uma seta retorna à biblioteca e consome essa primeira tecla, evitando
-pular uma faixa ou acionar um botão sem querer. Volume e teclas de mídia continuam
-com suas funções.
+Os conjuntos5/15/30,10/20/45 e15/30/60 podem ser escolhidos na TV e no celular.
+Qualquer tecla restaura a interface. A primeira seta/OK apenas retorna, sem trocar
+música acidentalmente; volume e teclas de mídia preservam suas funções. Pausar a
+música encerra a apresentação automática. A tela de letras não é reconstruída nem
+substituída pelas novas etapas.
 
-Os modos próprios não exibem a barra de controles ou logotipos fixos. Os elementos
-mudam em intervalos, sem visualizador contínuo, vídeo ou desfoque em tempo real.
-Sem fotos no Porta-retratos, Fotos em sequência usa a capa flutuante como alternativa.
-O modo escuro é uma apresentação com fundo preto; não é o desligamento físico da TV.
+Desative **Proteção inteligente** para continuar usando Capa flutuante, Fotos em
+sequência, Modo escuro ou **Google Fotos**, mantendo o anel na capa. Selecionar um
+desses modos nos Ajustes da TV também desativa a prioridade inteligente. Google
+Fotos conserva o álbum e o temporizador nativos; não há novo acesso à conta privada.
+Na TCL Android14, o álbum abre pelo tempo do modo ambiente, não por uma promessa de
+início imediato via Somnambulator. Os modos locais anteriores mantêm suas opções.
 
-A manutenção da tela ativa fica limitada à biblioteca/protetor próprio durante
-reprodução e com temporizador local ativo. A pausa ou saída libera essa condição.
-Letras, preferências e esperas de pesquisa continuam permitindo a proteção nativa.
-Na Home e em outros aplicativos, vale o protetor configurado na própria TV. O
-serviço de áudio e a política anterior de não desligar enquanto toca foram mantidos.
+O controle **Tela preta** mantém o áudio e não desliga a TV. **O painel LED continua
+iluminado.** Não foi usada uma API privada/factory para desligar fisicamente só o
+painel. Na Home e em outros apps, os protetores e regras anteriores continuam
+valendo. A regra de não desligar durante música permanece preservada.
 
-## Google Fotos: escolher o álbum
+## Aplicação pelo celular
 
-1. Abra Música → **Ajustes**.
-2. Selecione **Google Fotos**.
-3. Abra **Configurar álbum do Google Fotos**.
-4. No modo ambiente da TCL, escolha Google Fotos e seu álbum. A configuração também
-   costuma estar em Configurações → Sistema → Modo ambiente.
+O Mobile lê o perfil ativo e suas opções pelo canal pareado existente, verifica o
+hash do arquivo enviado e solicita uma gravação atômica protegida na TV. Não envia
+comandos livres, não reabre a Home e não reenvia apps, widgets, wallpapers ou agenda.
+Se o perfil na TV mudar durante a edição, a aplicação é recusada; use **Atualizar
+perfil e opções da TV** para evitar aplicar uma configuração ao perfil errado.
 
-O álbum que você já selecionou no modo ambiente continua sendo usado. Conta,
-autorização e acesso ao álbum privado ficam no sistema Google/TCL. A Launcherin
-não recebe senha nem usa uma API para baixar esse álbum.
+## Validação e limites
 
-**Na TCL com Android 14, Google Fotos inicia pelo tempo de inatividade da TV.**
-A opção não usa o antigo Somnambulator como se fosse um início imediato. O botão
-Protetor explica esse funcionamento e abre a configuração; Visualizar protetor
-imediatamente é oferecido para os três modos próprios. O tempo do Google Fotos
-não é substituído pelo temporizador local de 30 segundos/1/2/5 minutos.
+Veja RESULTADOS.md e resultados.json distribuídos com os APKs para contagens,
+hashes, certificado e testes. As renderizações são componentes Android reais em
+Robolectric, com dados e artes de exemplo. As imagens de gêneros são ilustrações
+vetoriais originais, não fotos de álbuns fictícios.
 
-## Letras e reprodução
-
-**Letra** abre uma tela própria com o título e as linhas sincronizadas destacadas,
-quando o LRCLIB possui uma gravação compatível por música, artista e duração. Letras
-comuns podem ser lidas; ausência e falhas são informadas. As fontes e suas restrições
-continuam sendo as da preview19. Play/Pausa/próxima/anterior/seek não foram reescritos.
-
-## Desempenho e testes
-
-Capas são carregadas somente quando visíveis. As referências de imagens fora da tela
-são liberadas; o cache de miniaturas é limitado a 2 MiB e as requisições pendentes
-são limitadas. O cache de arquivos continua com limite aproximado de 8 MB. Fotos
-maiores são decodificadas em resolução reduzida, sem acumular um álbum inteiro na
-memória. Ao sair da tela, as atualizações visuais param. O consumo total de RAM e a
-fluidez real ainda precisam de medição na TCL; o tamanho do APK não demonstra isso.
-
-As capturas desta entrega são de componentes Android executados localmente em
-Robolectric API 35, com músicas e artes de exemplo. Não são capturas da TCL nem de um
-álbum real do Google Fotos. Foi validado o encaminhamento para as configurações do
-sistema, não a reprodução do álbum privado dentro de um emulador.
-
-Na TCL, confira a navegação pelo controle, áudio, retomada, imagens dos artistas,
-letras, movimento dos três modos próprios e entrada do Google Fotos pelo temporizador.
-Confira também o retorno à Home, as teclas físicas e os tempos de desligamento.
+Testes locais não comprovam FPS, consumo de CPU/GPU/RAM, captura de áudio ou
+instalação sobre a versão anterior na TCL física. Catálogo, disponibilidade de
+músicas, imagens, álbuns/ano e relacionadas dependem da fonte. Os mixes são locais,
+montados dos favoritos/histórico ou buscas de gêneros, não recomendações privadas
+oficiais dos serviços. Não foi incorporado login de contas musicais.
 
 ## Compilar
 
-JDK 21, Android SDK plataforma 36 e build-tools 35.0.0. Na pasta `launcher/`:
+TV: JDK21, SDK36, build-tools35.0.0, na pasta `launcher/`:
 
 ```bash
 ./gradlew --no-daemon --max-workers=1 -I tools/native-tests.gradle testReleaseUnitTest lintRelease assembleRelease
 ```
 
-As dependências permanecem fixadas e verificadas por checksum. A chave existente
-não é publicada; para compilar com chave própria, veja [PLAYER-LICENSE.md](PLAYER-LICENSE.md).
+Mobile: siga o Gradle wrapper do projeto. Foram usados os testes de core:flows,
+core:ops, core:trust e feature:launcher, lint de feature:launcher/app fullRelease,
+assembleFullRelease e o gate de8 MiB. As dependências permanecem verificadas por
+checksum; nenhuma dependência nova foi adicionada. A chave privada não é publicada.
+A variante TV com NewPipe continua GPL-3.0-ou-posterior; avisos MIT da base preservados.

@@ -16,6 +16,7 @@ final class LauncherinMusicSource {
     static final String USER_AGENT="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
     private static boolean initialized;
     private static synchronized void init(){if(!initialized){NewPipe.init(new Http(),new Localization("pt","BR"),new ContentCountry("BR"));initialized=true;}}
+    static void ensureInit(){init();}
     static List<LauncherinTrack> search(String query,boolean soundcloud)throws Exception {
         init();String q=query.trim();if(q.isEmpty()||q.length()>160)throw new IOException("Digite o nome da música ou do artista.");
         StreamingService service=soundcloud?ServiceList.SoundCloud:ServiceList.YouTube;
@@ -27,6 +28,12 @@ final class LauncherinMusicSource {
             if(out.size()==30)break;
         }return out;
     }
+    static List<LauncherinArtistPhotos.Profile> artists(String query,boolean soundcloud)throws Exception {
+        init();String q=query.trim();if(q.isEmpty()||q.length()>120)throw new IOException("Nome inválido");StreamingService service=soundcloud?ServiceList.SoundCloud:ServiceList.YouTube;
+        org.schabi.newpipe.extractor.search.SearchExtractor extractor=service.getSearchExtractor(q,Collections.singletonList(soundcloud?"users":"music_artists"),"");extractor.fetchPage();SearchInfo info=SearchInfo.getInfo(extractor);List<LauncherinArtistPhotos.Profile> out=new ArrayList<>();
+        for(InfoItem item:info.getRelatedItems())if(item instanceof org.schabi.newpipe.extractor.channel.ChannelInfoItem){String art=image(item.getThumbnails());if(art.startsWith("https://"))out.add(new LauncherinArtistPhotos.Profile(item.getName(),item.getUrl(),art));if(out.size()>=8)break;}return out;
+    }
+    static List<LauncherinTrack> related(LauncherinTrack seed)throws Exception{init();StreamInfo info=StreamInfo.getInfo(NewPipe.getServiceByUrl(seed.url),seed.url);List<LauncherinTrack> out=new ArrayList<>();for(InfoItem item:info.getRelatedItems())if(item instanceof StreamInfoItem){StreamInfoItem t=(StreamInfoItem)item;if(t.getDuration()>0&&LauncherinTrack.validPage(t.getUrl()))out.add(new LauncherinTrack(t.getUrl(),t.getName(),t.getUploaderName(),image(t.getThumbnails()),t.getDuration()*1000,"SoundCloud".equals(seed.source)?"soundcloud":"youtube",image(t.getUploaderAvatars())));if(out.size()>=30)break;}return out;}
     static String image(List<Image> images){if(images==null||images.isEmpty())return "";Image best=images.get(0);for(Image i:images)if(i.getHeight()>=160&&i.getHeight()<=720)best=i;return best.getUrl();}
     static String resolve(LauncherinTrack track)throws Exception {
         init();StreamInfo info=StreamInfo.getInfo(NewPipe.getServiceByUrl(track.url),track.url);

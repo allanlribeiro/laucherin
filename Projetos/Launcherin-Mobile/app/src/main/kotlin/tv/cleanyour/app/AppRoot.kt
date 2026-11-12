@@ -23,6 +23,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.ui.res.stringResource
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -243,11 +245,12 @@ fun AppRoot(graph: AppGraph, start: Dest, onExit: () -> Unit) {
         }
     }
     var onFrames by remember { mutableStateOf<((List<ByteArray>) -> Unit)?>(null) }
+    val frameImportError by rememberUpdatedState(stringResource(R.string.frame_import_error))
     val pickFrames = rememberLauncherForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)) { uris ->
         val callback=onFrames;onFrames=null
         if(uris.isNotEmpty()&&callback!=null)scope.launch {
             runCatching { withContext(Dispatchers.IO) { uris.take(10).map { WidgetPhotoImport.read(context,it) } } }
-                .onSuccess(callback).onFailure { snack.showSnackbar(context.getString(R.string.frame_import_error)) }
+                .onSuccess(callback).onFailure { snack.showSnackbar(frameImportError) }
         }
     }
     val framePicker=remember(pickFrames) { tv.cleanyour.ui.design.component.WidgetPhotoPicker { callback ->

@@ -42,7 +42,7 @@ object ThemeProviderLines {
     }
 
     fun isThemeFile(path: RemotePath): Boolean = path.dir == RemoteDir.OVERLAY && path.segments.size == 1 &&
-        (path.segments[0] in FILES || path.segments[0] in setOf("agenda.json", "agenda.pending.json", "appearance.pending.json") || Regex("av-[a-f0-9]{40}\\.jpg").matches(path.segments[0]) || Regex("frame-[a-f0-9]{40}\\.jpg").matches(path.segments[0]))
+        (path.segments[0] in FILES || path.segments[0] in setOf("agenda.json", "agenda.pending.json", "appearance.pending.json", "music-visual.pending.json") || Regex("av-[a-f0-9]{40}\\.jpg").matches(path.segments[0]) || Regex("frame-[a-f0-9]{40}\\.jpg").matches(path.segments[0]))
 
     fun uri(path: RemotePath): String {
         require(isThemeFile(path)) { "the launcher's provider takes only ${FILES.joinToString()} in ${RemoteDir.OVERLAY.path}" }
