@@ -1,4 +1,4 @@
-> **Música — preview22 em teste:** [APKs da TV e celular, capturas e instruções](Distribuicao/preview22/README.md). Teclado PC com acentos por pressão longa, perfis locais, fotos de artistas, playlists e visualizador opcional. Teste físico da captura e desempenho na TCL pendente.
+> **Música — preview23 em teste:** [APK da TV, capturas e instruções](Distribuicao/preview23/README.md). Recomendações com aprendizado local por perfil, Gostei/Não recomendar e preservação da biblioteca. Apenas TV; Mobile preview22 continua compatível. Teste físico e desempenho na TCL pendentes.
 
 # Candidata de teste: Launcherin preview18
 

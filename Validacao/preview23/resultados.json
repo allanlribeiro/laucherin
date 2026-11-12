@@ -1,0 +1,66 @@
+{
+  "version": "0.1.0-preview23",
+  "base": "f6450f3b60853ccf89f492e6189fc58a67a1107f",
+  "date": "2026-11-12",
+  "timezone": "America/Sao_Paulo",
+  "artifact": {
+    "file": "Launcherin-TV-0.1.0-preview23.apk",
+    "package": "app.launcherin.tv",
+    "versionCode": 31,
+    "size": 1654782,
+    "sha256": "47fb17a16a91129fbed49c1a4446c1f5f17e9b461f34f343b478834d362db4ba",
+    "signerSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d"
+  },
+  "tests": {
+    "tests": 591,
+    "failures": 0,
+    "runtimes": [
+      "Robolectric API34 / Android14",
+      "Robolectric API35 / Android15"
+    ],
+    "newTasteTestsAcrossApiLevels": 26,
+    "newPlayerEventTests": 3,
+    "newUiRecommendationTests": 4
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 164
+  },
+  "protectedSourcesUnchanged": 278,
+  "lyricMethodsByteIdenticalToPreview22": true,
+  "resolverAndHttpUnchanged": true,
+  "newDependencies": false,
+  "newPermissions": false,
+  "mobileChanged": false,
+  "mobileCompatible": "preview22; direct TV APK installation required, its bundled TV remains preview18",
+  "learning": {
+    "scope": "Own Launcherin player; no external app or private service-account history",
+    "perLocalProfile": true,
+    "completedThreshold": 0.8,
+    "quickSkip": "Explicit next, audible >=2s and <30s and <20% duration",
+    "seeksPausesBufferingExcluded": true,
+    "explicitFeedback": [
+      "Gostei",
+      "Não recomendar",
+      "Remover avaliação"
+    ],
+    "maxSignalTracks": 200,
+    "candidateCacheTracks": 60,
+    "candidateCacheMinutes": 15,
+    "maxRelatedQueriesPerOpen": 2,
+    "genreSearchesPerClick": 1,
+    "backgroundPolling": false,
+    "resetKeepsFavoritesPlaylistsQueueHistoryAndPreferences": true
+  },
+  "physicalTclTested": false,
+  "systemEmulatorTested": false,
+  "cpuGpuRamMeasuredOnTv": false,
+  "serviceCatalogAvailabilityTestedHere": false,
+  "captures": "Native Android components with fixture music/art, not a photo of TCL",
+  "limitations": [
+    "Recommendation quality still needs real-use validation on TCL",
+    "Public providers may fail or omit related tracks; local suggestions remain available",
+    "New metadata is fetched only after opening a recommendation selection; source-account recommendations are not accessed",
+    "No dedicated new Mobile APK; existing Mobile22 settings and protocol are unchanged"
+  ]
+}

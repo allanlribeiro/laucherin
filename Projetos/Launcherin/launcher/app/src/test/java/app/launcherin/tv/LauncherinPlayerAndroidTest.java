@@ -45,4 +45,21 @@ public class LauncherinPlayerAndroidTest {
     @Test public void transientAudioInterruptionRetainsForegroundLeaseUntilExplicitPause(){engine(3000);ReflectionHelpers.callInstanceMethod(service,"ensureForeground");ReflectionHelpers.callInstanceMethod(service,"pause",ReflectionHelpers.ClassParameter.from(boolean.class,true));assertTrue((Boolean)ReflectionHelpers.getField(service,"foreground"));assertFalse(Shadows.shadowOf(service).isStoppedBySelf());assertFalse(LauncherinPlayerService.playing());ReflectionHelpers.callInstanceMethod(service,"pause",ReflectionHelpers.ClassParameter.from(boolean.class,false));assertFalse((Boolean)ReflectionHelpers.getField(service,"foreground"));assertTrue(Shadows.shadowOf(service).isStoppedBySelf());}
     @Test public void profileSwitchPausesAndSavesTheOldQueueBeforeLoadingTheNewProfile(){engine(19000);LauncherinMusicProfiles profiles=new LauncherinMusicProfiles(c);String second=profiles.list().get(1).id;LauncherinPlayerService.switchProfile(c,second);assertFalse(LauncherinPlayerService.playing());assertTrue(LauncherinPlayerService.tracks(c).isEmpty());assertEquals(0,new LauncherinMusicLibrary(c).position());LauncherinPlayerService.switchProfile(c,"default");assertEquals(3,LauncherinPlayerService.tracks(c).size());assertEquals(19000,LauncherinPlayerService.snapshot(c).optLong("position"));assertFalse(LauncherinPlayerService.playing());}
     @Test public void shuffleAndRepeatChangeOnlyMusicOrderPreferences(){List<LauncherinTrack> before=LauncherinPlayerService.tracks(c);long position=library.position();LauncherinPlayerService.shuffle(c);assertTrue(library.shuffle());LauncherinPlayerService.repeat(c);assertEquals(1,library.repeat());LauncherinPlayerService.repeat(c);assertEquals(2,library.repeat());LauncherinPlayerService.repeat(c);assertEquals(0,library.repeat());assertEquals(before.size(),LauncherinPlayerService.tracks(c).size());assertEquals(before.get(0).url,LauncherinPlayerService.tracks(c).get(0).url);assertEquals(position,library.position());}
+    @Test public void explicitNextRecordsOnlyARealQuickSkipAndDoesNotPenalizeTheNextSong(){
+        service.resolver=t->{throw new java.io.IOException("fixture offline");};MediaPlayer p=engine(0);ReflectionHelpers.callInstanceMethod(service,"changed");
+        org.robolectric.shadows.ShadowSystemClock.advanceBy(Duration.ofSeconds(10));Shadows.shadowOf(p).setCurrentPosition(10000);
+        service.onStartCommand(new Intent().putExtra("player_action","next"),0,1);
+        LauncherinMusicTaste taste=new LauncherinMusicTaste(c);assertEquals(1,taste.skips(t(2)));assertEquals(0,taste.skips(t(3)));assertEquals(0,taste.completed(t(2)));
+    }
+    @Test public void profileSwitchCreditsLongListeningToOnlyTheOldProfile(){
+        MediaPlayer p=engine(0);ReflectionHelpers.callInstanceMethod(service,"changed");org.robolectric.shadows.ShadowSystemClock.advanceBy(Duration.ofSeconds(150));Shadows.shadowOf(p).setCurrentPosition(150000);
+        LauncherinMusicTaste old=new LauncherinMusicTaste(c);LauncherinPlayerService.switchProfile(c,new LauncherinMusicProfiles(c).list().get(1).id);
+        assertEquals(1,old.completed(t(2)));assertEquals(0,new LauncherinMusicTaste(c).completed(t(2)));assertFalse(LauncherinPlayerService.playing());
+    }
+    @Test public void seekToTheEndDoesNotTeachACompleteListen(){
+        MediaPlayer p=engine(0);ReflectionHelpers.callInstanceMethod(service,"changed");LauncherinPlayerService.seek(c,175000);
+        org.robolectric.shadows.ShadowSystemClock.advanceBy(Duration.ofSeconds(5));Shadows.shadowOf(p).setCurrentPosition(180000);
+        LauncherinPlayerService.external(c);ReflectionHelpers.callInstanceMethod(service,"releasePlayer");assertEquals(0,new LauncherinMusicTaste(c).completed(t(2)));assertEquals(0,new LauncherinMusicTaste(c).skips(t(2)));
+    }
+
 }

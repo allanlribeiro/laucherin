@@ -14,8 +14,8 @@ android {
         applicationId providers.gradleProperty('launcherApplicationId').getOrElse('app.launcherin.tv')
         minSdk 26
         targetSdk 34
-        versionCode 30
-        versionName '0.1.0-preview22'
+        versionCode 31
+        versionName '0.1.0-preview23'
         testInstrumentationRunner 'app.launcherin.tv.PlaybackInstrumentation'
     }
 
