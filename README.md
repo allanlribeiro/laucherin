@@ -1,7 +1,5 @@
 > **Música e menus — preview24 em teste:** [APKs da TV e celular, capturas e instruções](Distribuicao/preview24/README.md). Menus com aparência das telas, foto de perfil pelo celular e visualizador circular em tela cheia. 1.458 testes automatizados; teste físico da TCL e desempenho pendentes.
 
-> **Música — preview23 em teste:** [APK da TV, capturas e instruções](Distribuicao/preview23/README.md). Recomendações com aprendizado local por perfil, Gostei/Não recomendar e preservação da biblioteca. Apenas TV; Mobile preview22 continua compatível. Teste físico e desempenho na TCL pendentes.
-
 # Candidata de teste: Launcherin preview18
 
 Nova aparência dos widgets e do Continuar Assistindo, personalização independente pelo celular e tabela do Brasileirão.
