@@ -34,7 +34,11 @@ final class LauncherinMusicSource {
         for(InfoItem item:info.getRelatedItems())if(item instanceof org.schabi.newpipe.extractor.channel.ChannelInfoItem){String art=image(item.getThumbnails());if(art.startsWith("https://"))out.add(new LauncherinArtistPhotos.Profile(item.getName(),item.getUrl(),art));if(out.size()>=8)break;}return out;
     }
     static List<LauncherinTrack> related(LauncherinTrack seed)throws Exception{init();StreamInfo info=StreamInfo.getInfo(NewPipe.getServiceByUrl(seed.url),seed.url);List<LauncherinTrack> out=new ArrayList<>();for(InfoItem item:info.getRelatedItems())if(item instanceof StreamInfoItem){StreamInfoItem t=(StreamInfoItem)item;if(t.getDuration()>0&&LauncherinTrack.validPage(t.getUrl()))out.add(new LauncherinTrack(t.getUrl(),t.getName(),t.getUploaderName(),image(t.getThumbnails()),t.getDuration()*1000,"SoundCloud".equals(seed.source)?"soundcloud":"youtube",image(t.getUploaderAvatars())));if(out.size()>=30)break;}return out;}
-    static String image(List<Image> images){if(images==null||images.isEmpty())return "";Image best=images.get(0);for(Image i:images)if(i.getHeight()>=160&&i.getHeight()<=720)best=i;return best.getUrl();}
+    static String image(List<Image> images){
+        if(images==null||images.isEmpty())return "";Image best=null;long score=-1;
+        for(Image image:images){if(image.getUrl()==null||!image.getUrl().startsWith("https://"))continue;long area=image.getWidth()>0&&image.getHeight()>0?(long)image.getWidth()*image.getHeight():0;long rank=area>0?area: image.getEstimatedResolutionLevel()==Image.ResolutionLevel.HIGH?720L*720: image.getEstimatedResolutionLevel()==Image.ResolutionLevel.MEDIUM?320L*320:64L*64;if(rank>score){score=rank;best=image;}}
+        return best==null?"":best.getUrl();
+    }
     static String resolve(LauncherinTrack track)throws Exception {
         init();StreamInfo info=StreamInfo.getInfo(NewPipe.getServiceByUrl(track.url),track.url);
         AudioStream best=null;int score=Integer.MIN_VALUE;

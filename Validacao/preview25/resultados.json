@@ -1,0 +1,55 @@
+{
+  "version": "0.1.0-preview25",
+  "base": "e13162f89c142d2f21481cd6470d58e2b9150de9",
+  "date": "2026-11-12",
+  "timezone": "America/Sao_Paulo",
+  "artifact": {
+    "file": "Launcherin-TV-0.1.0-preview25.apk",
+    "package": "app.launcherin.tv",
+    "versionCode": 33,
+    "size": 1663014,
+    "sha256": "315583c8ac4a3728fbe2c47220b9e7689f7fd795951cff25d4b0b039fc57d5c4",
+    "signerSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d"
+  },
+  "tests": {
+    "tests": 632,
+    "failures": 0,
+    "runtimes": [
+      "Robolectric API34 / Android14",
+      "Robolectric API35 / Android15"
+    ],
+    "newArtworkTests": 16,
+    "avatarHeaderRealPixelsVerified": true
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 164
+  },
+  "existingMainFilesUnchanged": 281,
+  "lyricMethodsUnchanged": true,
+  "audioResolverAndHttpUnchanged": true,
+  "profileProtocolAndSavedDataUnchanged": true,
+  "newDependencies": false,
+  "newPermissions": false,
+  "mobileChanged": false,
+  "mobileCompatible": "preview24",
+  "cache": {
+    "ramBytes": 2097152,
+    "avatarRamBytes": 524288,
+    "diskBytes": 8000000,
+    "downloadMaxBytes": 2000000,
+    "newDiskNamespace": "art-v2",
+    "knownCdnResizeMaxSide": 1024,
+    "originalUrlFallback": true
+  },
+  "physicalTclTested": false,
+  "systemEmulatorTested": false,
+  "cpuGpuRamMeasuredOnTv": false,
+  "liveCdnProbe": "Proxy CONNECT403 in the cloud; availability on TCL still requires a real test",
+  "captures": "Native Android components with fixture music/art",
+  "limits": [
+    "Improves resolution where the source exposes a larger thumbnail; no invented detail or unverified album replacement",
+    "Native rendering tested locally; physical TCL image quality and fluency pending",
+    "Only update TV; Mobile24 kept"
+  ]
+}

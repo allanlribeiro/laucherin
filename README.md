@@ -1,4 +1,4 @@
-> **Música e menus — preview24 em teste:** [APKs da TV e celular, capturas e instruções](Distribuicao/preview24/README.md). Menus com aparência das telas, foto de perfil pelo celular e visualizador circular em tela cheia. 1.458 testes automatizados; teste físico da TCL e desempenho pendentes.
+> **Música — preview25 em teste:** [APK da TV e instruções](Distribuicao/preview25/README.md). Corrige a foto no cabeçalho e usa miniaturas maiores quando disponíveis. Mobile preview24 mantido; 632 testes locais, validação física na TCL pendente.
 
 # Candidata de teste: Launcherin preview18
 
