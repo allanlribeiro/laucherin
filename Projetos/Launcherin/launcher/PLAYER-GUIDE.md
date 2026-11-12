@@ -1,126 +1,140 @@
-# Música integrada — Launcherin preview19 (teste)
+# Música na Launcherin — preview20 (teste)
 
-Esta versão acrescenta um player próprio da Launcherin. O aplicativo de Spotify e os
-controles externos continuam disponíveis; a nova biblioteca não exige instalar
-NewPipe ou SmartTube. Fontes implementadas: busca musical do YouTube e faixas do
-SoundCloud. A disponibilidade depende dos provedores, da região e de suas respostas.
+Esta atualização reorganiza a biblioteca conforme a proposta aprovada. O serviço de
+áudio é o mesmo código da preview19; fila, progresso e músicas favoritas são
+preservados. Foram acrescentados artistas/bandas favoritos e quatro opções de
+proteção durante o áudio.
 
-## Instalação
+## Instalar e abrir
 
-Atualize a TV com `Launcherin-TV-0.1.0-preview19.apk`, pacote `app.launcherin.tv`,
-código 27. O certificado é o mesmo das versões anteriores. A instalação por cima
-preserva configurações, pareamento, widgets e a organização dos aplicativos.
+Instale `Launcherin-TV-0.1.0-preview20.apk` diretamente na TV, por cima da versão
+anterior. Pacote `app.launcherin.tv`, código 28, com a mesma assinatura existente.
+Não é necessário configurar tudo novamente. O aplicativo do celular permanece na
+preview18 nesta entrega: ele continua configurando a TV, mas seu botão de atualizar
+a tela inicial contém a TV preview18 e não instala esta nova versão experimental.
 
-O celular permanece na preview18 nesta entrega. Seus comandos de configuração não
-mudaram. O APK da TV deve ser instalado diretamente: o botão “Atualizar a tela
-inicial” do celular preview18 contém a TV preview18, não esta versão experimental.
-Não há um novo APK do celular nesta distribuição.
+Na Home, segure OK sobre um dos controles do widget **Continuar ouvindo**, ou suba
+até o título “Continuar ouvindo ›” e aperte OK.
 
-Se usar ADB no Windows, na pasta platform-tools:
+Se instalar pelo ADB no Windows, na pasta platform-tools, consulte o endereço atual:
 
 ```powershell
 .\adb.exe devices -l
-```
-
-Use o endereço atual mostrado nessa lista e o arquivo baixado:
-
-```powershell
 $tv = "IP:PORTA"
-.\adb.exe -s $tv install -r "$env:USERPROFILE\Downloads\Launcherin-TV-0.1.0-preview19.apk"
+.\adb.exe -s $tv install -r "$env:USERPROFILE\Downloads\Launcherin-TV-0.1.0-preview20.apk"
 ```
 
-O comando instala uma atualização; não é necessário apagar os dados ou refazer a
-configuração da TV. A atualização real por cima de uma instalação existente ainda
-precisa ser conferida na TCL; identidade e assinatura do APK foram verificadas.
+A atualização real por cima da instalação física ainda precisa ser verificada na
+TCL; identidade, versão e assinatura do pacote foram conferidas localmente.
 
-## Abrir e escolher músicas
+## Navegação
 
-1. Na Home, vá ao widget **Continuar ouvindo**.
-2. Segure OK sobre Play, anterior ou próxima. Também é possível subir até o título
-   “Continuar ouvindo ›” e apertar OK.
-3. Pesquise uma música ou artista e selecione **Buscar**. **Fonte** alterna entre
-   YouTube e SoundCloud.
-4. Aperte OK em uma faixa. A lista exibida passa a ser a fila, começando na faixa
-   selecionada. A biblioteca e a reprodução permanecem dentro da Launcherin.
-5. Segure OK em um resultado para adicionar à fila ou favoritar. Na página Fila,
-   esse menu também permite remover itens que não sejam a faixa atual.
+- **Início:** artistas/bandas favoritos e músicas favoritas.
+- **Buscar:** pesquise músicas, artistas ou bandas. A fonte pode ser YouTube ou
+  SoundCloud; as faixas já salvas mantêm sua própria origem.
+- **Favoritos:** escolha entre Músicas e Artistas e bandas.
+- **Fila:** veja a ordem da reprodução e abra as ações de cada faixa.
+- **Preferências:** escolha o protetor e o tempo; acesse controles externos e licenças.
 
-A fila e os favoritos aceitam até 100 músicas cada. Progresso e fila são privados
-no armazenamento da TV. Os links de áudio temporários são resolvidos novamente ao
-retomar; não são gravados como se fossem endereços permanentes.
+Uma única barra inferior reúne a música atual, anterior, Play/Pausa, próxima,
+progresso, **Letra** e **Protetor**. Na biblioteca, Voltar retorna ao Início; no Início,
+Voltar fecha a tela e mantém o áudio tocando. As teclas de mídia seguem disponíveis.
 
-**Voltar à Home** mantém a música. **Apps externos** pausa o player próprio e
-retorna ao modo que controla os aplicativos externos. Um novo início de reprodução
-externa também pode devolver a seleção ao aplicativo correspondente.
+## Músicas e artistas favoritos
 
-## Artes e fotos
+OK sobre uma música abre ações visíveis: **Tocar agora**, **Adicionar à fila**,
+**Favoritar música** e **Favoritar artista ou banda**. Na Fila, também há remoção de
+faixas que não sejam a música atual. Segurar OK continua abrindo as mesmas ações.
 
-**Artes** amplia a apresentação do álbum dentro do player. **Fotos / Capa** alterna
-entre a capa da música e as fotos já enviadas ao widget Porta-retratos pelo celular.
-As fotos mudam a cada 20 segundos. Sem fotos enviadas, a capa permanece disponível.
-São imagens estáticas; o player não decodifica vídeos ou visualizadores contínuos.
-Pressione Voltar para retornar à biblioteca.
+**Adicionar artista** permite cadastrar o nome e a fonte preferida. Você pode
+ajustar esses dados antes de salvar. Ao selecionar um artista, a Launcherin busca
+as músicas disponíveis naquela fonte, sem abrir outro aplicativo. **Artista
+favorito · opções** permite editar ou remover. As imagens de artistas dependem do
+que a fonte fornece; quando não há imagem, o cartão usa iniciais.
 
-## Letras
+Limites: 50 artistas/bandas, 100 músicas favoritas e 100 itens na fila. Esses dados
+ficam separados das configurações da Home e dos widgets. Salvar ou editar um artista
+não altera o progresso ou a fila.
 
-**Letras** consulta o LRCLIB por música, artista e duração da gravação. Quando há
-letra sincronizada compatível, as linhas acompanham o tempo do player, destacando a
-linha atual com uma seta. Sem marcação de tempo, exibe a letra comum. Quando a letra
-não é encontrada ou a consulta falha, informa a indisponibilidade. Não há garantia
-de letras para todo o catálogo, versões ao vivo ou remixes.
+## Protetores durante o áudio
 
-## Protetor e desligamento
+Em **Preferências**, escolha:
 
-A regra anterior foi preservada: a música pode continuar com o protetor de tela,
-e o desligamento fica suspenso durante reprodução/buffering do player próprio.
-Ao pausar ou terminar a fila, a política de tempo de proteção já existente volta a
-ser aplicada. Não são adicionadas permissões de Home ou serviços de acessibilidade.
+| Opção | Comportamento |
+|---|---|
+| Capa flutuante | Capa e informações mudam de posição a cada 20 segundos |
+| Fotos em sequência | Alterna as fotos enviadas ao Porta-retratos; informações mudam de posição |
+| Modo escuro | Fundo preto com pequenas informações e capa em movimento por intervalos |
+| Google Fotos | Usa o álbum e o temporizador do modo ambiente da própria TV |
 
-## Desempenho e validação
+Para os três modos próprios, escolha 30 segundos, 1, 2 ou 5 minutos de inatividade,
+ou **Somente manual**. Eles entram a partir da biblioteca de música enquanto o
+player próprio está tocando; **Protetor** também permite iniciar manualmente.
+OK, Voltar ou uma seta retorna à biblioteca e consome essa primeira tecla, evitando
+pular uma faixa ou acionar um botão sem querer. Volume e teclas de mídia continuam
+com suas funções.
 
-O extrator é inicializado sob demanda. Pesquisa e resolução de áudio usam workers;
-as consultas e as imagens têm limites. O cache de artes em disco é limitado a
-aproximadamente 8 MB, mais um arquivo em gravação; as imagens são decodificadas em
-resolução reduzida. As letras têm cache de até 12 entradas. Ao sair da tela, os
-relógios visuais param e a imagem é liberada; ao pausar, o serviço pode ser encerrado
-com retomada pela fila salva. O serviço não mantém a tela acesa.
+Os modos próprios não exibem a barra de controles ou logotipos fixos. Os elementos
+mudam em intervalos, sem visualizador contínuo, vídeo ou desfoque em tempo real.
+Sem fotos no Porta-retratos, Fotos em sequência usa a capa flutuante como alternativa.
+O modo escuro é uma apresentação com fundo preto; não é o desligamento físico da TV.
 
-O tamanho do APK não representa consumo de RAM. Uso real de memória, tempos de
-quadro e fluidez na TCL P7K ainda precisam ser medidos. Não há alegação de melhoria
-de performance medida em uma TV física.
+A manutenção da tela ativa fica limitada à biblioteca/protetor próprio durante
+reprodução e com temporizador local ativo. A pausa ou saída libera essa condição.
+Letras, preferências e esperas de pesquisa continuam permitindo a proteção nativa.
+Na Home e em outros aplicativos, vale o protetor configurado na própria TV. O
+serviço de áudio e a política anterior de não desligar enquanto toca foram mantidos.
 
-Validações locais: testes JVM/Robolectric com gráficos nativos Android API 35, lint
-release e compilação release, assinatura e integridade. Não foi usado emulador de
-sistema nem TCL física neste ambiente. A busca e um segmento real de áudio do
-SoundCloud foram recebidos; a consulta de letras respondeu. O ambiente bloqueia
-YouTube com HTTP CONNECT 403, portanto não houve validação de reprodução dessa
-fonte nem de seu catálogo ao vivo aqui.
+## Google Fotos: escolher o álbum
 
-Teste recomendado na TCL: buscar e tocar em cada fonte; pausar/retomar na Home;
-próxima/anterior/seek; abrir outro streaming e verificar o foco de áudio; deixar o
-protetor entrar; confirmar a suspensão do desligamento enquanto toca; conferir a
-fluidez da barra de apps; testar fotos e letras; reiniciar e conferir favoritos e
-retomada. A reprodução por codecs reais e as teclas físicas exigem esse teste.
+1. Abra Música → **Preferências**.
+2. Selecione **Google Fotos**.
+3. Abra **Configurar álbum do Google Fotos**.
+4. No modo ambiente da TCL, escolha Google Fotos e seu álbum. A configuração também
+   costuma estar em Configurações → Sistema → Modo ambiente.
 
-O ícone de TV aberta foi corrigido com um vetor de dimensões intrínsecas. As ações
-TV aberta, HDMI, configurações e Home permanecem iguais às da preview18.
+O álbum que você já selecionou no modo ambiente continua sendo usado. Conta,
+autorização e acesso ao álbum privado ficam no sistema Google/TCL. A Launcherin
+não recebe senha nem usa uma API para baixar esse álbum.
 
-Licenças, dependências e disponibilidade de fontes: [PLAYER-LICENSE.md](PLAYER-LICENSE.md).
+**Na TCL com Android 14, Google Fotos inicia pelo tempo de inatividade da TV.**
+A opção não usa o antigo Somnambulator como se fosse um início imediato. O botão
+Protetor explica esse funcionamento e abre a configuração; Visualizar protetor
+imediatamente é oferecido para os três modos próprios. O tempo do Google Fotos
+não é substituído pelo temporizador local de 30 segundos/1/2/5 minutos.
 
-## Compilar e repetir os testes
+## Letras e reprodução
 
-Use JDK 21, Android SDK plataforma 36 e build-tools 35.0.0. Preserve as chaves
-existentes ao preparar uma atualização para uma instalação já feita. Uma compilação
-com sua própria chave é possível seguindo PLAYER-LICENSE.md.
+**Letra** abre uma tela própria com o título e as linhas sincronizadas destacadas,
+quando o LRCLIB possui uma gravação compatível por música, artista e duração. Letras
+comuns podem ser lidas; ausência e falhas são informadas. As fontes e suas restrições
+continuam sendo as da preview19. Play/Pausa/próxima/anterior/seek não foram reescritos.
 
-Na pasta `launcher/`, com `ANDROID_HOME` apontando para seu SDK:
+## Desempenho e testes
+
+Capas são carregadas somente quando visíveis. As referências de imagens fora da tela
+são liberadas; o cache de miniaturas é limitado a 2 MiB e as requisições pendentes
+são limitadas. O cache de arquivos continua com limite aproximado de 8 MB. Fotos
+maiores são decodificadas em resolução reduzida, sem acumular um álbum inteiro na
+memória. Ao sair da tela, as atualizações visuais param. O consumo total de RAM e a
+fluidez real ainda precisam de medição na TCL; o tamanho do APK não demonstra isso.
+
+As capturas desta entrega são de componentes Android executados localmente em
+Robolectric API 35, com músicas e artes de exemplo. Não são capturas da TCL nem de um
+álbum real do Google Fotos. Foi validado o encaminhamento para as configurações do
+sistema, não a reprodução do álbum privado dentro de um emulador.
+
+Na TCL, confira a navegação pelo controle, áudio, retomada, imagens dos artistas,
+letras, movimento dos três modos próprios e entrada do Google Fotos pelo temporizador.
+Confira também o retorno à Home, as teclas físicas e os tempos de desligamento.
+
+## Compilar
+
+JDK 21, Android SDK plataforma 36 e build-tools 35.0.0. Na pasta `launcher/`:
 
 ```bash
 ./gradlew --no-daemon --max-workers=1 -I tools/native-tests.gradle testReleaseUnitTest lintRelease assembleRelease
 ```
 
-O script de teste configura memória e acesso de reflexão do JDK para os gráficos
-nativos do Robolectric; não é empacotado no APK. As dependências Gradle são fixadas
-e seus checksums ficam em `gradle/verification-metadata.xml`. Os testes de fontes ao
-vivo são separados dos testes locais; os resultados de rede desta entrega estão
-registrados em RESULTADOS.md.
+As dependências permanecem fixadas e verificadas por checksum. A chave existente
+não é publicada; para compilar com chave própria, veja [PLAYER-LICENSE.md](PLAYER-LICENSE.md).

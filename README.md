@@ -1,4 +1,4 @@
-> **Teste do player integrado — preview19:** [APK da TV, telas e guia](Distribuicao/preview19/README.md). Pesquisa, fila, favoritos, artes e letras na Launcherin. YouTube e reprodução física ainda exigem teste na TCL. O celular permanece na preview18.
+> **Teste da biblioteca de música — preview20:** [APK da TV, capturas e instruções](Distribuicao/preview20/README.md). Artistas favoritos, nova navegação e quatro opções de proteção, incluindo Google Fotos pelo modo ambiente da TV. Serviço de áudio da preview19 preservado; teste físico pendente.
 
 # Candidata de teste: Launcherin preview18
 

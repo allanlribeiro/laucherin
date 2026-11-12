@@ -1,0 +1,13 @@
+package app.launcherin.tv;
+import android.content.*;import org.json.*;import org.junit.*;import org.junit.runner.RunWith;import org.robolectric.*;import org.robolectric.annotation.Config;import static org.junit.Assert.*;
+@RunWith(RobolectricTestRunner.class) @Config(sdk=35)
+public class LauncherinArtistLibraryTest {
+ private Context c;private LauncherinMusicLibrary l;
+ @Before public void setup(){c=RuntimeEnvironment.getApplication();l=new LauncherinMusicLibrary(c);}
+ @Test public void artistsAreSeparateFromExistingSongsQueueAndProgress(){LauncherinTrack t=LauncherinNativeMusicTest.track(1);l.write("queue",java.util.Arrays.asList(t));l.write("favorites",java.util.Arrays.asList(t));l.progress(0,37000);l.saveArtist(new LauncherinMusicLibrary.Artist("Skank","youtube",""));assertEquals(1,l.read("favorites").size());assertEquals(t.url,l.read("queue").get(0).url);assertEquals(37000,l.position());assertEquals("Skank",new LauncherinMusicLibrary(c).artists().get(0).name);}
+ @Test public void sameBandIsUpdatedWithoutCaseDuplicates(){l.saveArtist(new LauncherinMusicLibrary.Artist("SKANK","youtube",""));l.saveArtist(new LauncherinMusicLibrary.Artist("Skank","soundcloud",""));assertEquals(1,l.artists().size());assertEquals("soundcloud",l.artists().get(0).source);l.removeArtist(new LauncherinMusicLibrary.Artist("skank","youtube",""));assertTrue(l.artists().isEmpty());}
+ @Test public void libraryIsBoundedToFiftyArtists(){for(int i=0;i<65;i++)l.saveArtist(new LauncherinMusicLibrary.Artist("Banda "+i,"youtube",""));assertEquals(50,l.artists().size());assertEquals("Banda 64",l.artists().get(0).name);}
+ @Test public void invalidArtistRecordsAreSkippedWithoutResettingTheLibrary(){c.getSharedPreferences("launcherin-player",0).edit().putString("artists","[{\"name\":\"\"},{\"name\":\"Banda\",\"source\":\"bad\",\"art\":\"file:///bad\"}]").commit();assertEquals(1,l.artists().size());assertEquals("youtube",l.artists().get(0).source);assertEquals("",l.artists().get(0).art);}
+ @Test public void oldTrackJsonWithoutAvatarStillLoads()throws Exception{JSONObject j=LauncherinNativeMusicTest.track(1).json();j.remove("artist_art");assertEquals("",LauncherinTrack.read(j).artistArt);LauncherinTrack t=new LauncherinTrack(j.getString("url"),"Faixa","Artista","",180000,"youtube","https://example.org/artist.png");assertEquals(t.artistArt,LauncherinTrack.read(t.json()).artistArt);}
+ @Test public void priorPhotoModeMigratesAndNewChoicesPersist(){l.artMode("photos");assertEquals("photos",l.saverMode());l.saverMode("google");l.saverSeconds(120);assertEquals("google",new LauncherinMusicLibrary(c).saverMode());assertEquals(120,l.saverSeconds());l.saverSeconds(-1);assertEquals(60,l.saverSeconds());}
+}

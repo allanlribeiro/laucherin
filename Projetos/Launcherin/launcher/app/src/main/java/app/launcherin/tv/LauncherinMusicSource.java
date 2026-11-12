@@ -23,7 +23,7 @@ final class LauncherinMusicSource {
         extractor.fetchPage();SearchInfo info=SearchInfo.getInfo(extractor);
         if(info.getRelatedItems().isEmpty()&&!info.getErrors().isEmpty())throw new IOException("A fonte não retornou resultados utilizáveis",info.getErrors().get(0));
         List<LauncherinTrack> out=new ArrayList<>();for(InfoItem item:info.getRelatedItems())if(item instanceof StreamInfoItem){StreamInfoItem s=(StreamInfoItem)item;
-            if(s.getDuration()>0&&s.getDuration()<=86400&&LauncherinTrack.validPage(s.getUrl()))out.add(new LauncherinTrack(s.getUrl(),s.getName(),s.getUploaderName(),image(s.getThumbnails()),s.getDuration()*1000,soundcloud?"soundcloud":"youtube"));
+            if(s.getDuration()>0&&s.getDuration()<=86400&&LauncherinTrack.validPage(s.getUrl()))out.add(new LauncherinTrack(s.getUrl(),s.getName(),s.getUploaderName(),image(s.getThumbnails()),s.getDuration()*1000,soundcloud?"soundcloud":"youtube",image(s.getUploaderAvatars())));
             if(out.size()==30)break;
         }return out;
     }
