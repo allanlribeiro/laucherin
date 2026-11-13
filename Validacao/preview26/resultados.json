@@ -1,0 +1,72 @@
+{
+  "version": "0.1.0-preview26",
+  "base": "c4d4a452db979f0c3e3948c745da1a197c3757ef",
+  "date": "2026-11-13",
+  "timezone": "America/Sao_Paulo",
+  "artifact": {
+    "file": "Launcherin-TV-0.1.0-preview26.apk",
+    "package": "app.launcherin.tv",
+    "versionCode": 34,
+    "size": 1663142,
+    "sha256": "6268995453fd030f0fe2be97269debea881237309450eccdc762f3f4b5b07249",
+    "signerSha256": "874d2fbd801f80e4a78bc11e535aaa56990ffbbf616741312a6935bb256ea83d"
+  },
+  "tests": {
+    "tests": 646,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "runtimes": [
+      "Robolectric API34 / Android14",
+      "Robolectric API35 / Android15"
+    ],
+    "newExecutions": 12,
+    "searchHistory": 6,
+    "newPlayerUi": 6
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 163
+  },
+  "preservation": {
+    "unchangedMainFiles": 284,
+    "changedMainFiles": [
+      "launcher/app/src/main/java/app/launcherin/tv/LauncherinMusicArtwork.java",
+      "launcher/app/src/main/java/app/launcherin/tv/LauncherinPlayerActivity.java"
+    ],
+    "newMainFiles": [
+      "launcher/app/src/main/java/app/launcherin/tv/LauncherinSearchHistory.java"
+    ],
+    "lyricMethods": {
+      "openLyrics": true,
+      "loadLyrics": true,
+      "renderLyrics": true,
+      "closeLyrics": true
+    }
+  },
+  "audioResolverAndHttpUnchanged": true,
+  "profileProtocolAndSavedDataUnchanged": true,
+  "newDependencies": false,
+  "newPermissions": false,
+  "strictDependencyVerification": true,
+  "verifiedMissingMetadataChecksumsAdded": 4,
+  "mobileChanged": false,
+  "mobileCompatible": "preview24",
+  "searchHistory": {
+    "maxItems": 12,
+    "perProfile": true,
+    "manualQueriesOnly": true,
+    "longOkRemoves": true,
+    "clearIsHistoryOnly": true,
+    "providerAccountHistoryImported": false
+  },
+  "physicalTclTested": false,
+  "systemEmulatorTested": false,
+  "cpuGpuRamMeasuredOnTv": false,
+  "captures": "Native Android components with fixture music/art",
+  "limits": [
+    "On-device focus, playback, live search and fluency still need TCL validation",
+    "Existing explicit full-screen visualizer and protectors remain full screen; the upper player stays visible during normal page/lyrics navigation",
+    "Search history begins with searches made after this update; no external account history is imported"
+  ]
+}

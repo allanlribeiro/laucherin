@@ -1,0 +1,10 @@
+package app.launcherin.tv;
+import android.content.Context;import org.junit.*;import org.junit.runner.RunWith;import org.robolectric.*;import org.robolectric.annotation.Config;import static org.junit.Assert.*;
+@RunWith(RobolectricTestRunner.class) @Config(sdk={34,35})
+public class LauncherinSearchHistoryTest {
+ Context c;LauncherinSearchHistory history;
+ @Before public void setup(){c=RuntimeEnvironment.getApplication();history=new LauncherinSearchHistory(c);}
+ @Test public void explicitTermsAreRecentBoundedAndDeduplicated(){history.record(" Skank ","songs");history.record("Pagode","songs");history.record("SKANK","albums");assertEquals(2,history.read().size());assertEquals("SKANK",history.read().get(0).query);assertEquals("albums",history.read().get(0).kind);for(int i=0;i<20;i++)history.record("Pesquisa "+i,"songs");assertEquals(12,history.read().size());assertEquals("Pesquisa 19",history.read().get(0).query);}
+ @Test public void profilesDoNotShareSearchesAndClearingDoesNotClearTheLibrary(){LauncherinMusicLibrary lib=new LauncherinMusicLibrary(c);lib.toggle(LauncherinNativeMusicTest.track(1));lib.progress(0,12345);history.record("Meu artista","songs");new LauncherinMusicProfiles(c).select(new LauncherinMusicProfiles(c).list().get(1).id);LauncherinSearchHistory second=new LauncherinSearchHistory(c);assertTrue(second.read().isEmpty());second.record("Outro artista","artists");assertEquals("Meu artista",history.read().get(0).query);new LauncherinMusicProfiles(c).select("default");history.clear();assertTrue(history.read().isEmpty());assertEquals(1,lib.read("favorites").size());assertEquals(12345,lib.position());}
+ @Test public void malformedAndEmptyHistoryIsIgnored(){history.record("   ","songs");history.record("a".repeat(161),"songs");assertTrue(history.read().isEmpty());c.getSharedPreferences("launcherin-player",0).edit().putString("music_search_history_v1","not json").commit();assertTrue(history.read().isEmpty());history.record("Sorriso   Maroto","songs");assertEquals("Sorriso Maroto",history.read().get(0).query);history.remove(history.read().get(0));assertTrue(history.read().isEmpty());}
+}
